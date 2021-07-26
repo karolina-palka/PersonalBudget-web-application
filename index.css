@@ -1,0 +1,95 @@
+body
+{
+	margin: 0;
+	/* Background pattern from Toptal Subtle Patterns */
+	background-image:url("doodles/doodles/doodles.png");
+    font-family: 'Encode Sans SC', sans-serif;
+    font-size: 17px;
+}
+
+h1
+{
+	font-size: 42px;
+	font-family: 'Encode Sans SC', sans-serif;
+	font-weight: 400;
+	color: #FA7C00;
+	margin-bottom: 20px;
+	text-align: center;
+}
+#logo
+{
+	background-color: white;
+	
+	/* Background pattern from Toptal Subtle Patterns */
+	background-image:url("linedpaper/linedpaper/linedpaper.png");
+	width: 450px;
+	padding-bottom: 40px;
+	padding-left: 30px;
+	padding-right: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	transform: rotate(15deg); 
+	z-index: 100;
+	-webkit-box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
+	-moz-box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
+	box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
+	
+}
+#container
+{
+	background-color: white;
+	width: 300px;
+	padding: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	-webkit-box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
+	-moz-box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
+	box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
+	
+}
+h2
+{
+	font-size: 38px;
+	font-weight: 600;
+	color: #FA7C00;
+	margin-bottom: 20px;
+	text-align: center;
+	font-family: 'Zen Loop', cursive;
+}
+input[type=button]
+{
+	width: 300px;
+	background-color: #36b06c;
+	font-size: 20px;
+	color: white;
+	padding: 15px 15px;
+	margin-top: 20px;
+	border: none;
+	border-radius: 5px;
+	cursor:pointer;
+	letter-spacing: 2px;
+	outline: none;
+}
+input[type=button]:focus
+{
+	border: 2px solid #a5cda5;
+	background-color: #e9f3e9;
+	color: #428c42;
+}
+input[type=button]:hover
+{
+	background-color: #37b93d;
+	-webkit-box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
+	-moz-box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
+	box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
+}
+a.tilelink
+{
+	color: #ffffff;
+	text-decoration: none;
+	display: block;
+	width: 230px;
+	height: 100px;
+}
