@@ -10,7 +10,7 @@
 	
 	<meta http-equiv="X-Ua-Compatible" content="IE=edge">
 	
-	<link rel="stylesheet"  href="index.css" type="text/css">
+	<link rel="stylesheet"  href="register.css" type="text/css">
 	<link rel="stylesheet" href = "css/fontello.css" type="text/css"/>
 
 	<link href="https://fonts.googleapis.com/css2?family=Encode+Sans+SC&family=Zen+Loop:ital@1&display=swap" rel="stylesheet">
@@ -28,8 +28,7 @@
 		<div id="logo"> 
 		<i class="icon-pin"></i>
 		
-		<h1><i class="icon-lightbulb"></i></br>
-		Keep calm & </h1>
+		<h1><i class="icon-lightbulb"> Register &</i> </h1>
 		<h2>Take control of your personal budget</h2>
 		</div>
 	</header>
@@ -37,9 +36,24 @@
 	<main>
 		<div id="container">
 			<article>
+				<form action="register.php" method="post">
 				
-			<a href="register.html" class="link"><input type="button" value="Register"></a>
-			<a href="login.html" class="link"><input type="button" value="Log in"></a>		
+				
+					<div class="col">
+					
+						<label><div class="row">name:</div><input type="text"></label>	
+						<label><div class="row">surname:</div><input type="text"></label>	
+						<label><div class="row">e-mail:</div><input type="email"></label>
+					</div>
+					<div class="col">
+						<label><div class="row">phone number:</div><input type="number"></label>
+						<label><div class="row">login:</div><input type="text"></label>	
+						<label><div class="row">password:</div><input type="password"></label>
+					</div>
+						<div><input type="submit" value="Submit"></div>
+					
+					
+				</form>
 			</article>
 		</div>
 		
