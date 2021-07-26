@@ -16,6 +16,15 @@ h1
 	margin-bottom: 20px;
 	text-align: center;
 }
+h2
+{
+	font-size: 38px;
+	font-weight: 600;
+	color: #FA7C00;
+	margin-bottom: 20px;
+	text-align: center;
+	font-family: 'Zen Loop', cursive;
+}
 #logo
 {
 	background-color: white;
@@ -39,26 +48,32 @@ h1
 #container
 {
 	background-color: white;
-	width: 300px;
-	padding: 50px;
+	width: 50%;
+	padding: 30px;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 50px;
+	margin-top: 30px;
+	text-align:center;
 	-webkit-box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
 	-moz-box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
 	box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
 	
 }
-h2
+.col
 {
-	font-size: 38px;
-	font-weight: 600;
-	color: #FA7C00;
-	margin-bottom: 20px;
-	text-align: center;
-	font-family: 'Zen Loop', cursive;
+	margin-left: 10px;
+	margin-right: 10px;
+	padding: 5px;
+	display: inline-block;
 }
-input[type=button]
+.row
+{
+	text-align: left;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+input[type=submit]
 {
 	width: 300px;
 	background-color: #36b06c;
@@ -71,25 +86,45 @@ input[type=button]
 	cursor:pointer;
 	letter-spacing: 2px;
 	outline: none;
+	
 }
-input[type=button]:focus
+input[type=submit]:focus
 {
 	border: 2px solid #a5cda5;
 	background-color: #e9f3e9;
 	color: #428c42;
 }
-input[type=button]:hover
+
+input[type=submit]:hover
 {
 	background-color: #37b93d;
 	-webkit-box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
 	-moz-box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
 	box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
 }
-a.tilelink
+input[type=text],
+input[type=email],
+input[type=number],
+input[type=password]
 {
-	color: #ffffff;
-	text-decoration: none;
-	display: block;
-	width: 230px;
-	height: 100px;
+	width: 300px;
+	background-color: #efefef;
+	color: #666;
+	border: 2px solid #ddd;
+	border-radius: 5px;
+	font-size: 20px;
+	padding: 10px;
+	box-sizing: border-box;
+	outline: none;
+	margin-top: 10px;
+}
+input[type=text]:focus,
+input[type=password]:focus
+{
+	-webkit-box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
+	-moz-box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
+	box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
+	border: 2px solid #a5cda5;
+	background-color: #e9f3e9;
+	color: #428c42;
 }
