@@ -30,7 +30,7 @@
 	
 		<div class="paper" style="transform: rotate(15deg) translateX(-10px) translateY(15px);"> 
 			<i class="icon-pin"></i>
-			<h1><i class="icon-lightbulb"> KEEP CALM &</i> </h1>
+			<h1><i class="icon-lightbulb"> Add finance &</i> </h1>
 			<h2>Take control of your personal budget</h2>
 		</div>
 		<div id="airplane">
@@ -54,8 +54,8 @@
 	<div class="mainNav">
 			<ol>
 				<li><a href="mainMenu.html">Home</a></li>
-				<li><a href="addFinance.html"><i class="icon-lightbulb"></i>Add new income</a></li>
-				<li><a href="addFinance.html"><i class="icon-lightbulb"></i>Add new expense</a></li>
+				<li><a href="incomes.html"><i class="icon-lightbulb"></i>Add new income</a></li>
+				<li><a href="#"><i class="icon-lightbulb"></i>Add new expense</a></li>
 				<li><a href="#"><i class="icon-lightbulb"></i>Show balance</a>
 					<ul>
 						<li><a href="#"><i class="icon-lightbulb"></i>From the current month</a></li>
@@ -82,11 +82,21 @@
 			
 		</nav>
 	<main>
-		<div id="container" style="width: 60%;">
+		<div id="container" >
 			<article>
-				<h3>Welcome to the Personal Budget!</h3>
-				This app helps you deal with your personal budget. No longer need to use sticky notes because all the knowledge about your finances are at one place. You are logged in and so you can use the following functions: add new income, add new expense, show balance from the current month, previous month or the chosen period of time. You can also browse your records sorted by date.</br>
-				Have a nice visit!
+				<form action="addFinance.php" method="post">
+					<div class="col">
+						<label><div class="row"><input type="radio" value="1" name="finance" checked>Income</label></div>
+						<label><div class="row"><input type="radio" value="2" name="finance">Expense</label></div>
+						<label><div class="row">What is the name for that income/expense?</div><input type="text" name="name"></label>
+						<label><div class="row">How much does it cost?</div><input type="number" name="cost"></label>
+					</div>
+					<div class="col">
+						<label><div class="date_row">Enter the date:</div><input type="date" name="finance_date"></label>
+						<div class="row"><input type="submit" value="Submit"></div>
+
+					</div>
+				</form>
 			</article>
 		</div>
 		
