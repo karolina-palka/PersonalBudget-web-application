@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+
+	<meta charset="utf-8">
+	<title>Personal Budget</title>
+	<meta name="description" content="Take control of your personal budget!">
+	<meta name="keywords" content="budget, finances, savings ">
+	<meta name="author" content="Karolina Pałka">
+	
+	<meta http-equiv="X-Ua-Compatible" content="IE=edge">
+	
+	<link rel="stylesheet"  href="mainMenu.css" type="text/css">
+	<link rel="stylesheet" href = "css/fontello.css" type="text/css"/>
+
+	<link href="https://fonts.googleapis.com/css2?family=Encode+Sans+SC&family=Zen+Loop:ital@1&display=swap" rel="stylesheet">
+	
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+	
+	
+	<!--[if lt IE 9]>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<![endif]-->
+	
+</head>
+
+<body>
+
+	<header>
+	
+		<div class="paper" style="transform: rotate(15deg) translateX(-10px) translateY(15px);"> 
+			<i class="icon-pin"></i>
+			<h1><i class="icon-lightbulb"> KEEP CALM &</i> </h1>
+			<h2>Take control of your personal budget</h2>
+		</div>
+		<div id="airplane">
+				<i class="icon-airport"></i>
+		</div>
+		<div class="logo">
+				<div id="tree1"><i class="icon-tree-1"></i></div>
+				<div id="gift"><i class="icon-gift"></i></div>
+				<div id="person"><i class="icon-pitch"></i></div>
+				<div id="child"><i class="icon-child"></i></div>
+				<div id="bicycle"><i class="icon-bicycle"></i></div>
+				<div id="flower"><i class="icon-garden"></i></div>
+				<div id="tree2"><i class="icon-tree-2"></i></div>
+		</div>
+			
+	</header>
+	
+	
+	<nav>
+	
+	<div class="mainNav">
+			<ol>
+				<li><a href="mainMenu.html">Home</a></li>
+				<li><a href="incomes.html"><i class="icon-lightbulb"></i>Add new income</a></li>
+				<li><a href="#"><i class="icon-lightbulb"></i>Add new expense</a></li>
+				<li><a href="#"><i class="icon-lightbulb"></i>Show balance</a>
+					<ul>
+						<li><a href="#"><i class="icon-lightbulb"></i>From the current month</a></li>
+						<li><a href="#"><i class="icon-lightbulb"></i>From the previous month</a></li>
+						<li><a href="#"><i class="icon-lightbulb"></i>From the chosen period</a></li>
+					</ul></li>
+				<li><a href="#">Your profile</a>
+				<ul>
+						<li><a href="#"><i class="icon-lightbulb"></i>Edit your profile</a></li>
+						<li><a href="#"><i class="icon-lightbulb"></i>Change your password</a></li>
+						<li><a href="#"><i class="icon-lightbulb"></i>Log out</a></li>
+				</ul></li>
+				</li>
+			
+			</ol>
+		</div>
+	
+		<div id="nav">
+			<div class="optionL"><a href="mainMenu.html" class="link" target= "_blank">Home</div></a>
+			<div class="optionL"><a href="#" class="link" target= "_blank">Saved reports</div></a>
+			<div class="optionL"><a href="#" class="link" target= "_blank">Links</div></a>
+			<div class="optionL"><a href="#" class="link" target= "_blank">Contact</div></a>
+
+			
+		</nav>
+	<main>
+		<div id="container" style="width: 60%;">
+			<article>
+				<h3>Welcome to the Personal Budget!</h3>
+				This app helps you deal with your personal budget. No longer need to use sticky notes because all the knowledge about your finances are at one place. You are logged in and so you can use the following functions: add new income, add new expense, show balance from the current month, previous month or the chosen period of time. You can also browse your records sorted by date.</br>
+				Have a nice visit!
+			</article>
+		</div>
+		
+		
+		
+		<script src="jquery-3.6.0.min.js"></script>
+	
+	<script>
+
+	$(document).ready(function() {
+	var NavY = $('.mainNav').offset().top;
+	 
+	var stickyNav = function(){
+	var ScrollY = $(window).scrollTop();
+		  
+	if (ScrollY > NavY) { 
+		$('.mainNav').addClass('sticky');
+	} else {
+		$('.mainNav').removeClass('sticky'); 
+	}
+	};
+	 
+	stickyNav();
+	 
+	$(window).scroll(function() {
+		stickyNav();
+	});
+	});
+	
+    </script>
+	</main>
+	<div id="footer"> All rights reserved &copy 2021</div>
+
+</body>
+</html>
