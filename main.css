@@ -2,7 +2,7 @@ body
 {
 	margin: 0;
 	/* Background pattern from Toptal Subtle Patterns */
-	background-image:url("doodles/doodles/doodles.png");
+	background-image:url("wall4/wall4/wall4.png");
     font-family: 'Encode Sans SC', sans-serif;
     font-size: 17px;
 }
@@ -26,12 +26,38 @@ h1
 	padding-right: 30px;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 60px;
+	margin-top: 40px;
 	transform: rotate(-15deg); 
 	-webkit-box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
 	-moz-box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
 	box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
+	/*float:left;*/
 	
+}
+#nav
+{
+	float: left;
+	width: 280px;
+	margin-left:5%;
+	background-color: #00cccc;
+	text-align: center;
+	font-size: 18px;
+	border-right: 2px dotted #666666;
+	
+}
+.optionL
+{
+	font-size: 18px;
+	text-align:center;
+	height:75px;
+	padding:10px;
+	border-bottom: 2px dotted #ffffff;
+	
+}.optionL:hover
+{
+	background-color: #f36742;
+	color: white;
+	cursor: pointer;
 }
 #container
 {
@@ -42,10 +68,10 @@ h1
 	margin-right: auto;
 	text-align:center;
 	z-index: 100;
+	
 	-webkit-box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
 	-moz-box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
 	box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
-	
 }
 h2
 {
@@ -59,7 +85,7 @@ h2
 input[type=button]
 {
 	width: 300px;
-	background-color: #36b06c;
+	background-color: #00cccc;
 	font-size: 20px;
 	color: white;
 	padding: 15px 15px;
@@ -72,13 +98,13 @@ input[type=button]
 }
 input[type=button]:focus
 {
-	border: 2px solid #a5cda5;
-	background-color: #e9f3e9;
-	color: #428c42;
+	border: 2px solid #00cccc;
+	background-color: #f36742;
+	color:#004d4d;
 }
 input[type=button]:hover
 {
-	background-color: #37b93d;
+	background-color: #009999;
 	-webkit-box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
 	-moz-box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
 	box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
@@ -106,7 +132,7 @@ a.link
 input[type=submit]
 {
 	width: 300px;
-	background-color: #36b06c;
+	background-color: #00cccc;
 	font-size: 20px;
 	color: white;
 	padding: 15px 15px;
@@ -120,14 +146,14 @@ input[type=submit]
 }
 input[type=submit]:focus
 {
-	border: 2px solid #a5cda5;
-	background-color: #e9f3e9;
-	color: #428c42;
+	border: 2px solid #00cccc;
+	background-color: #e6ffff;
+	color: #004d4d;
 }
 
 input[type=submit]:hover
 {
-	background-color: #37b93d;
+	background-color: #009999;
 	-webkit-box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
 	-moz-box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
 	box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
@@ -156,7 +182,12 @@ input[type=number]:focus
 	-webkit-box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
 	-moz-box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
 	box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
-	border: 2px solid #a5cda5;
-	background-color: #e9f3e9;
-	color: #428c42;
+	border: 2px solid #00cccc;
+	background-color: #e6ffff;
+	color: #00cccc;
+}
+#bicycle
+{
+	margin-left:auto;
+	margin-right:auto;
 }
