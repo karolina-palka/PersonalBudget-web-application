@@ -17,6 +17,33 @@
 	
 	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 	
+	<!--<script type="text/javascript">
+		function checkDate()
+		{
+			var today= new Date();
+			var day = today.getDate();
+			var month = today.getMonth() + 1;
+			var year = today.getFullYear();
+			
+			document.querySelector("#today").valueAsDate = new Date();
+
+			let today = new Date().toISOString().substr(0, 10);
+			document.querySelector("#today").value = today;
+
+			document.querySelector("#today2").valueAsDate = new Date();
+			//return today;
+		
+			//var number = document.getElementById("month1").value;
+			var number=35;
+			document.getElementById("result").innerHTML = number;
+			return number;
+			
+			/*if (number==1) document.getElementById("result").innerHTML = "dodatnia";
+			else if (number<0) document.getElementById("result").innerHTML = "ujemna";
+			else if (number==0) document.getElementById("result").innerHTML = "zero";
+			else document.getElementById("result").innerHTML = "To nie jest liczba!";*/
+		}
+	</script>-->
 	
 	<!--[if lt IE 9]>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -30,7 +57,7 @@
 	
 		<div class="paper" style="transform: rotate(15deg) translateX(-10px) translateY(15px);"> 
 			<i class="icon-pin"></i>
-			<h1><i class="icon-lightbulb"> Add finance &</i> </h1>
+			<h1><i class="icon-lightbulb"> SHOW BALANCE &</i> </h1>
 			<h2>Take control of your personal budget</h2>
 		</div>
 		<div id="airplane">
@@ -55,7 +82,7 @@
 			<ol>
 				<li><a href="mainMenu.html">Home</a></li>
 				<li><a href="addFinance.html"><i class="icon-lightbulb"></i>Add new income</a></li>
-				<li><a href="addFinance.html"><i class="icon-lightbulb"></i>Add new expense</a></li>
+				<li><a href="addFinance"><i class="icon-lightbulb"></i>Add new expense</a></li>
 				<li><a href="showBalance.html"><i class="icon-lightbulb"></i>Show balance</a>
 					<ul>
 						<li><a href="#"><i class="icon-lightbulb"></i>From the current month</a></li>
@@ -84,23 +111,24 @@
 	<main>
 		<div id="container" >
 			<article>
-				<form action="addFinance.php" method="post">
-					<div class="col">
-						<label><div class="row"><input type="radio" value="1" name="finance" checked>Income</label></div>
-						<label><div class="row"><input type="radio" value="2" name="finance">Expense</label></div>
-						<label><div class="row">What is the name for that income/expense?</div><input type="text" name="name"></label>
-						<label><div class="row">How much does it cost?</div><input type="number" name="cost"></label>
+			<!--action="addFinance.php" method="post">-->
+				<form action="showBalance.php" method="post" >
+					<div class="col" >
+						<label><div id="current" class="pad_row"><input type="radio" value="1" name="time" checked>current month</label></div>
+						<label><div id="previous" class="pad_row"><input type="radio" value="2" name="time">previous month</label></div>
+						<label><div id="chosen" class="pad_row"><input type="radio" value="3" name="time">chosen period of time: </label></div>
 					</div>
 					<div class="col">
-						<label><div class="pad_row">Enter the date:</div><input type="date" name="finance_date"></label>
-						<div class="row"><input type="submit" value="Submit"></div>
-
+						<label><div id="month1" class="date">from:</div><input type="date" name="balance_date" /></label>
+						<label><div id="month2" class="date">to:</div><input type="date" name="balance_date" min="checkDate()"/></label>
+						
 					</div>
+					<div ><input type="submit" value="Browse"/></div>
 				</form>
 			</article>
+			<!--<input type="submit" value="Sprawdź" onclick="checkDate()"/>
+			<div  id="result">Tutaj wynik: </div>-->
 		</div>
-		
-		
 		
 		<script src="jquery-3.6.0.min.js"></script>
 	
