@@ -129,6 +129,14 @@ a.link
 	margin-left: 5px;
 	margin-right: 5px;
 }
+.pad_row
+{
+	text-align: left;
+	margin-left: 5px;
+	margin-right: 5px;
+	padding: 10px;
+	box-sizing: border-box;
+}
 
 input[type=submit]
 {
