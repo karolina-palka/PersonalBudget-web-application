@@ -52,7 +52,9 @@ h3
 	width: 230px;
 	margin-left:2%;
 	margin-top: 0;
-	background-color: #00cccc;
+	background-color: #5cd6d6;
+	opacity: 80%;
+	/*background-color: #00cccc;*/
 	text-align: center;
 	font-size: 18px;
 	/*border-right: 2px dotted #ffffff;*/
@@ -65,7 +67,6 @@ h3
 .optionL
 {
 	font-size: 18px;
-	
 	height:70px;
 	text-align:center;
 	padding:25px;
@@ -75,6 +76,7 @@ h3
 }.optionL:hover
 {
 	background-color: #f36742;
+
 	color: white;
 	font-weight: 700;
 	cursor: pointer;
@@ -155,12 +157,12 @@ a.link
 	box-sizing: border-box;
 
 }
-.date_row
+.pad_row
 {
 	text-align: left;
 	margin-left: 5px;
 	margin-right: 5px;
-	padding: 20px;
+	padding: 10px;
 	box-sizing: border-box;
 
 
@@ -197,7 +199,8 @@ input[type=submit]:hover
 input[type=text],
 input[type=email],
 input[type=number],
-input[type=password]
+input[type=password],
+input[type=date]
 {
 	width: 300px;
 	background-color: #efefef;
@@ -213,7 +216,8 @@ input[type=password]
 input[type=text]:focus,
 input[type=password]:focus,
 input[type=email]:focus,
-input[type=number]:focus
+input[type=number]:focus,
+input[type=date]:focus
 {
 	-webkit-box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
 	-moz-box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
@@ -334,6 +338,7 @@ ol > li
 	width: 100%;
 	padding: 10px 0;
 	background-color:#00cccc;
+	
 	text-align:center;
 	height: 50px;
 	border-top: 1px solid white;
@@ -354,7 +359,8 @@ ol > li > ul,
 ol > li > ul >li,
 .optionL > ul >li
 {
-	background-color: #00cccc;
+	background-color: #5cd6d6;
+	opacity: 90%;
 	position: relative;
 	z-index: 100;
 	font-weight: 400;
