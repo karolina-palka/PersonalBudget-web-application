@@ -17,33 +17,6 @@
 	
 	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 	
-	<!--<script type="text/javascript">
-		function checkDate()
-		{
-			var today= new Date();
-			var day = today.getDate();
-			var month = today.getMonth() + 1;
-			var year = today.getFullYear();
-			
-			document.querySelector("#today").valueAsDate = new Date();
-
-			let today = new Date().toISOString().substr(0, 10);
-			document.querySelector("#today").value = today;
-
-			document.querySelector("#today2").valueAsDate = new Date();
-			//return today;
-		
-			//var number = document.getElementById("month1").value;
-			var number=35;
-			document.getElementById("result").innerHTML = number;
-			return number;
-			
-			/*if (number==1) document.getElementById("result").innerHTML = "dodatnia";
-			else if (number<0) document.getElementById("result").innerHTML = "ujemna";
-			else if (number==0) document.getElementById("result").innerHTML = "zero";
-			else document.getElementById("result").innerHTML = "To nie jest liczba!";*/
-		}
-	</script>-->
 	
 	<!--[if lt IE 9]>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -110,23 +83,121 @@
 	<main>
 		<div id="container" >
 			<article>
-			<!--action="addFinance.php" method="post">-->
 				<form action="showBalance.php" method="post" >
-					<div class="col" >
-						<div id="current" class="pad_row"><label><input type="radio" value="1" name="time" checked>current month</label></div>
-						<div id="previous" class="pad_row"><label><input type="radio" value="2" name="time">previous month</label></div>
-						<div id="chosen" class="pad_row"><label><input type="radio" value="3" name="time">chosen period of time: </label></div>
+					<div class="col" id="month">
+						<div  class="pad_row"><label>
+						<input type="radio" id="current" value="1" name="time" onclick="checkDate()">current month</label>
+						</div>
+						<div  class="pad_row"><label>
+						<input type="radio" id="previous" value="2" name="time" onclick="checkDate()">previous month</label>
+						</div>
+						<div  class="pad_row"><label>
+						<input type="radio" id="chosen" value="3" name="time" checked onclick="checkDate()">chosen period of time: </label></div>
 					</div>
+					
 					<div class="col">
-						<div id="month1" class="date"><label>from:</div><input type="date" name="balance_date" ></label>
-						<div id="month2" class="date"><label>to:</div><input type="date" name="balance_date"></label>
+						<div  class="date"><label>
+						from:</div><input id="calendar1" type="date" name="balance_date" >
+						<span class="validity"></span></label>
+						<div  class="date"><label>
+						to:</div><input id="calendar2" type="date" name="balance_date" onchange="checkTimePeriod()">
+						<span class="validity"></span></label>
 						
 					</div>
-					<div ><input type="submit" value="Browse"/></div>
+	
+					<div ><input id="browse" type="submit" value="Browse" onclick="checkTimePeriod()"/></div>
 				</form>
 			</article>
-			<!--<input type="submit" value="Sprawdź" onclick="checkDate()"/>
-			<div  id="result">Tutaj wynik: </div>-->
+			
+			<script>	
+
+				function getEndDayOfActualMonth(month, year)
+				{
+					var days;
+					 if (month <= 7 && month%2 != 0)
+					{
+						days = 31;
+					}
+					else if (month <= 7 && month%2 == 0)
+					{
+						if (month ==2)
+						{
+							if(year%4==0 && year%100!=0)
+							{
+								days = 29;
+							}
+							else
+							{
+								days = 28;
+							}
+						}
+						else
+						{
+						   days = 30;
+						}
+					}
+					else if (month >7 && month%2 == 0)
+					{
+						days = 31;
+					}
+					else if (month >7 && month%2 != 0)
+					{
+						days = 30;
+					}
+					return days;
+				}
+				
+				function setDatePeriod(month, day)
+				{
+					var pad = "-";
+					if (month < 10) pad = pad + "0";
+						
+					var startDate = "2021" + pad + month + "-01";
+					var endDate = "2021" + pad + month + "-"+ day;
+					
+					document.getElementById('calendar1').value = startDate;
+					document.getElementById('calendar2').value = endDate;
+					
+					document.getElementById('calendar1').disabled = true;
+					document.getElementById('calendar2').disabled = true;
+				}
+
+				function checkDate()
+				{
+					var today= new Date();
+					var year = today.getFullYear();
+					
+					if (document.getElementById('current').checked)
+					{
+						var month = today.getMonth() + 1;
+						var day = today.getDate();
+						setDatePeriod(month, day);
+					}
+
+					else if (document.getElementById('previous').checked)
+					{
+						var month = today.getMonth();
+						var days = getEndDayOfActualMonth(month, year);
+						setDatePeriod(month, days);
+					}
+					else 
+					{
+						document.getElementById('calendar1').disabled = false;
+						document.getElementById('calendar2').disabled = false;
+					}
+				}
+				
+				function checkTimePeriod()
+				{
+					if(document.getElementById('chosen').checked)
+					{
+						var period1 = document.getElementById("calendar1").value;
+						document.getElementById('calendar2').min = period1;
+						
+					}
+				}
+			
+			</script>
 		</div>
 		
 		<script src="jquery-3.6.0.min.js"></script>
