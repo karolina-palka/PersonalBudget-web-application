@@ -78,35 +78,33 @@
 	
 	<nav>
 	
-	<div class="mainNav">
-			<ol>
-				<li><a href="mainMenu.html">Home</a></li>
-				<li><a href="addFinance.html"><i class="icon-lightbulb"></i>Add new income</a></li>
-				<li><a href="addFinance"><i class="icon-lightbulb"></i>Add new expense</a></li>
-				<li><a href="showBalance.html"><i class="icon-lightbulb"></i>Show balance</a>
+		<div class="mainNav">
+				<ol>
+					<li><a href="mainMenu.html">Home</a></li>
+					<li><a href="addFinance.html"><i class="icon-lightbulb"></i>Add new income</a></li>
+					<li><a href="addFinance"><i class="icon-lightbulb"></i>Add new expense</a></li>
+					<li><a href="showBalance.html"><i class="icon-lightbulb"></i>Show balance</a>
+						<ul>
+							<li><a href="#"><i class="icon-lightbulb"></i>From the current month</a></li>
+							<li><a href="#"><i class="icon-lightbulb"></i>From the previous month</a></li>
+							<li><a href="#"><i class="icon-lightbulb"></i>From the chosen period</a></li>
+						</ul></li>
+					<li><a href="#">Your profile</a>
 					<ul>
-						<li><a href="#"><i class="icon-lightbulb"></i>From the current month</a></li>
-						<li><a href="#"><i class="icon-lightbulb"></i>From the previous month</a></li>
-						<li><a href="#"><i class="icon-lightbulb"></i>From the chosen period</a></li>
+							<li><a href="#"><i class="icon-lightbulb"></i>Edit your profile</a></li>
+							<li><a href="#"><i class="icon-lightbulb"></i>Change your password</a></li>
+							<li><a href="#"><i class="icon-lightbulb"></i>Log out</a></li>
 					</ul></li>
-				<li><a href="#">Your profile</a>
-				<ul>
-						<li><a href="#"><i class="icon-lightbulb"></i>Edit your profile</a></li>
-						<li><a href="#"><i class="icon-lightbulb"></i>Change your password</a></li>
-						<li><a href="#"><i class="icon-lightbulb"></i>Log out</a></li>
-				</ul></li>
-				</li>
-			
-			</ol>
-		</div>
-	
-		<div id="nav">
-			<div class="optionL"><a href="mainMenu.html" class="link" target= "_blank">Home</div></a>
-			<div class="optionL"><a href="#" class="link" target= "_blank">Saved reports</div></a>
-			<div class="optionL"><a href="#" class="link" target= "_blank">Links</div></a>
-			<div class="optionL"><a href="#" class="link" target= "_blank">Contact</div></a>
-
-			
+				
+				</ol>
+		
+			<div id="nav">
+			</div>
+				<div class="optionL"><a href="mainMenu.html" class="link" target= "_blank">Home</a></div>
+				<div class="optionL"><a href="#" class="link" target= "_blank">Saved reports></a></div>
+				<div class="optionL"><a href="#" class="link" target= "_blank">Links</a></div>
+				<div class="optionL"><a href="#" class="link" target= "_blank">Contact</a></div>
+			</div>
 		</nav>
 	<main>
 		<div id="container" >
@@ -114,13 +112,13 @@
 			<!--action="addFinance.php" method="post">-->
 				<form action="showBalance.php" method="post" >
 					<div class="col" >
-						<label><div id="current" class="pad_row"><input type="radio" value="1" name="time" checked>current month</label></div>
-						<label><div id="previous" class="pad_row"><input type="radio" value="2" name="time">previous month</label></div>
-						<label><div id="chosen" class="pad_row"><input type="radio" value="3" name="time">chosen period of time: </label></div>
+						<div id="current" class="pad_row"><label><input type="radio" value="1" name="time" checked>current month</label></div>
+						<div id="previous" class="pad_row"><label><input type="radio" value="2" name="time">previous month</label></div>
+						<div id="chosen" class="pad_row"><label><input type="radio" value="3" name="time">chosen period of time: </label></div>
 					</div>
 					<div class="col">
-						<label><div id="month1" class="date">from:</div><input type="date" name="balance_date" /></label>
-						<label><div id="month2" class="date">to:</div><input type="date" name="balance_date" min="checkDate()"/></label>
+						<div id="month1" class="date"><label>from:</div><input type="date" name="balance_date" ></label>
+						<div id="month2" class="date"><label>to:</div><input type="date" name="balance_date"></label>
 						
 					</div>
 					<div ><input type="submit" value="Browse"/></div>
@@ -156,7 +154,7 @@
 	
     </script>
 	</main>
-	<div id="footer"> All rights reserved &copy 2021</div>
+	<div id="footer"> All rights reserved &copy; 2021</div>
 
 </body>
 </html>
