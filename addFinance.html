@@ -30,7 +30,7 @@
 	
 		<div class="paper" style="transform: rotate(15deg) translateX(-10px) translateY(15px);"> 
 			<i class="icon-pin"></i>
-			<h1><i class="icon-lightbulb"> Add finance &</i> </h1>
+			<h1><i class="icon-lightbulb"> Add finance & </i> </h1>
 			<h2>Take control of your personal budget</h2>
 		</div>
 		<div id="airplane">
@@ -47,7 +47,6 @@
 		</div>
 			
 	</header>
-	
 	
 	<nav>
 	
@@ -70,28 +69,28 @@
 				</ul></li>
 			
 			</ol>
-		</div>
+	</div>
 	
-		<div id="nav">
-			<div class="optionL"><a href="mainMenu.html" class="link" target= "_blank">Home</div></a>
-			<div class="optionL"><a href="#" class="link" target= "_blank">Saved reports</div></a>
-			<div class="optionL"><a href="#" class="link" target= "_blank">Links</div></a>
-			<div class="optionL"><a href="#" class="link" target= "_blank">Contact</div></a>
+		<div id="sideNav">
+			<div class="optionL"><a href="mainMenu.html" class="link" target= "_blank">Home</a></div>
+			<div class="optionL"><a href="#" class="link" target= "_blank">Saved reports</a></div>
+			<div class="optionL"><a href="#" class="link" target= "_blank">Links</a></div>
+			<div class="optionL"><a href="#" class="link" target= "_blank">Contact></a></div>
 
 		</div>
-		</nav>
+	</nav>
 	<main>
 		<div id="container" >
 			<article>
 				<form action="addFinance.php" method="post">
 					<div class="col">
-						<label><div class="row"><input type="radio" value="1" name="finance" checked>Income</label></div>
-						<label><div class="row"><input type="radio" value="2" name="finance">Expense</label></div>
-						<label><div class="row">What is the name for that income/expense?</div><input type="text" name="name"></label>
-						<label><div class="row">How much does it cost?</div><input type="number" name="cost"></label>
+						<div class="row"><label><input type="radio" value="1" name="finance" checked>Income</label></div>
+						<div class="row"><label><input type="radio" value="2" name="finance">Expense</label></div>
+						<div class="row"><label>What is the name for that income/expense?</label></div><input type="text" name="name">
+						<div class="row"><label>How much does it cost?</label></div><input type="number" name="cost">
 					</div>
 					<div class="col">
-						<label><div class="pad_row">Enter the date:</div><input type="date" name="finance_date"></label>
+						<div class="row"><label>Enter the date:</label></div><input type="date" name="finance_date">
 						<div class="row"><input type="submit" value="Submit"></div>
 
 					</div>

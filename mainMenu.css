@@ -43,10 +43,9 @@ h3
 	-webkit-box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
 	-moz-box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
 	box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
-	/*float:left;*/
 	
 }
-#nav
+#sideNav
 {
 	float: left;
 	width: 230px;
@@ -54,7 +53,6 @@ h3
 	margin-top: 0;
 	background-color: #5cd6d6;
 	opacity: 80%;
-	/*background-color: #00cccc;*/
 	text-align: center;
 	font-size: 18px;
 	/*border-right: 2px dotted #ffffff;*/
@@ -147,23 +145,26 @@ a.link
 	margin-right: 10px;
 	padding: 5px;
 	display: inline-block;
+	flex-direction: column;
 }
 .row
 {
 	text-align: left;
 	margin-left: 5px;
 	margin-right: 5px;
-	padding: 5px;
+	padding: 10px;
 	box-sizing: border-box;
 
 }
 .pad_row
 {
-	text-align: left;
+	text-align: right;
 	margin-left: 5px;
 	margin-right: 5px;
 	padding: 10px;
 	box-sizing: border-box;
+	/*justify-content: space-between;*/
+	
 }
 input[type=submit]
 {
@@ -210,6 +211,13 @@ input[type=date]
 	box-sizing: border-box;
 	outline: none;
 	margin-top: 10px;
+	/*display:flex;*/
+	/*display: list-item;*/
+}
+input[type=radio]
+{
+	/*display:inline-block;*/
+	margin-top: 10px;
 }
 input[type=text]:focus,
 input[type=password]:focus,
@@ -223,13 +231,12 @@ input[type=date]:focus
 	border: 2px solid #00cccc;
 	background-color: #e6ffff;
 	color: #00cccc;
+	
 }
 .logo
 {
-	text-align: bottom;
 	width:100%;
 	color: #00cccc;
-	text-align: bottom;
 	/*margin-left:5%;*/
 	margin-top: -215px;
 	margin-bottom: -2.8%;
@@ -240,7 +247,6 @@ input[type=date]:focus
 	
 	display:inline-block;
 	color: #00cccc;
-	text-align: bottom;
 	margin-left:5%;
 	font-size: 120px;
 
@@ -252,7 +258,6 @@ input[type=date]:focus
 	font-size:30px; 
 	margin-left:-3.5%;
 	font-size:30px;
-    text-align: bottom;	
 }
 #person
 {
@@ -268,7 +273,6 @@ input[type=date]:focus
 {
 	display:inline-block;
 	color: #00cccc;
-    text-align: bottom;
 	font-size:50px;	
 	margin-left:20%
 	
@@ -277,17 +281,14 @@ input[type=date]:focus
 {
 	display:inline-block;
 	color: #00cccc;
-	text-align: bottom;
 	font-size: 60px;
 	margin-bottom: -2.9%;
-	
 }
 #flower
 {
 	display:inline-block;
 	color: #00cccc;
 	font-size:30px;
-	text-align: bottom;
 	font-size:30px;
 }
 #airplane
@@ -296,15 +297,13 @@ input[type=date]:focus
 	color: #00cccc;
 	font-size:30px;
 	font-size: 30px; 
-	margin-left:75%;
-    text-align: bottom;	
+	margin-left:75%; 	
 	transform: translateY(-210px)
 }
 #tree2
 {
 	display:inline-block;
 	color: #00cccc;
-	text-align: bottom;
 	font-size:200px;
 }
 ol
@@ -400,13 +399,16 @@ ol > li:hover > ul,
 	display: block;
 	
 }
-/*label {
-  display: flex;
+label {
+  /*display: flex;*/
   align-items: center;
-}*/
+}
+
 
 span::after {
   padding-left: 5px;
+  /*display: inline-block;*/
+  /*display: block;*/
 }
 
 input:invalid + span::after {

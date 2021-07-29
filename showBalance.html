@@ -30,7 +30,7 @@
 	
 		<div class="paper" style="transform: rotate(15deg) translateX(-10px) translateY(15px);"> 
 			<i class="icon-pin"></i>
-			<h1><i class="icon-lightbulb"> SHOW BALANCE &</i> </h1>
+			<h1><i class="icon-lightbulb"> SHOW BALANCE & </i> </h1>
 			<h2>Take control of your personal budget</h2>
 		</div>
 		<div id="airplane">
@@ -72,36 +72,37 @@
 			</ol>
 		</div>
 	
-		<div id="nav">
-			<div class="optionL"><a href="mainMenu.html" class="link" target= "_blank">Home</div></a>
-			<div class="optionL"><a href="#" class="link" target= "_blank">Saved reports</div></a>
-			<div class="optionL"><a href="#" class="link" target= "_blank">Links</div></a>
-			<div class="optionL"><a href="#" class="link" target= "_blank">Contact</div></a>
+		<div id="sideNav">
+			<div class="optionL"><a href="mainMenu.html" class="link" target= "_blank">Home</a></div>
+			<div class="optionL"><a href="#" class="link" target= "_blank">Saved reports</a></div>
+			<div class="optionL"><a href="#" class="link" target= "_blank">Links</a></div>
+			<div class="optionL"><a href="#" class="link" target= "_blank">Contact</a></div>
 
 		</div>	
-		</nav>
+	</nav>
 	<main>
-		<div id="container" >
+		<div id="container" style="width:60%;">
 			<article>
 				<form action="showBalance.php" method="post" >
 					<div class="col" id="month">
-						<div  class="pad_row"><label>
+						<div  class="row"><label>
 						<input type="radio" id="current" value="1" name="time" onclick="checkDate()">current month</label>
 						</div>
-						<div  class="pad_row"><label>
+						<div  class="row"><label>
 						<input type="radio" id="previous" value="2" name="time" onclick="checkDate()">previous month</label>
 						</div>
-						<div  class="pad_row"><label>
+						<div  class="row"><label>
 						<input type="radio" id="chosen" value="3" name="time" checked onclick="checkDate()">chosen period of time: </label></div>
 					</div>
 					
 					<div class="col">
-						<div  class="date"><label>
-						from:</div><input id="calendar1" type="date" name="balance_date" >
-						<span class="validity"></span></label>
-						<div  class="date"><label>
-						to:</div><input id="calendar2" type="date" name="balance_date" onchange="checkTimePeriod()">
-						<span class="validity"></span></label>
+						<div  class="pad_row"><label>
+						from:<input id="calendar1" type="date" name="balance_date" >
+						<span class="validity"></span></label></div>
+						
+						<div  class="pad_row"><label>
+						to:<input id="calendar2" type="date" name="balance_date" onchange="checkTimePeriod()">
+						<span class="validity"></span></label></div>
 						
 					</div>
 	
