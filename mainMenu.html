@@ -3,6 +3,8 @@
 <head>
 
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<title>Personal Budget</title>
 	<meta name="description" content="Take control of your personal budget!">
 	<meta name="keywords" content="budget, finances, savings ">
@@ -10,6 +12,12 @@
 	
 	<meta http-equiv="X-Ua-Compatible" content="IE=edge">
 	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
+	<!--<link rel="stylesheet"  href="css/bootstrap.min.css" type="text/css">-->
 	<link rel="stylesheet"  href="mainMenu.css" type="text/css">
 	<link rel="stylesheet" href = "css/fontello.css" type="text/css"/>
 
@@ -27,97 +35,107 @@
 
 	<header>
 	
-		<div class="paper" style="transform: rotate(15deg) translateX(-10px) translateY(15px);"> 
-			<i class="icon-pin"></i>
-			<h1><i class="icon-lightbulb"> KEEP CALM & </i> </h1>
-			<h2>Take control of your personal budget</h2>
-		</div>
-		<div id="airplane">
-				<i class="icon-airport"></i>
-		</div>
-		<div class="logo">
-				<div id="tree1"><i class="icon-tree-1"></i></div>
-				<div id="gift"><i class="icon-gift"></i></div>
-				<div id="person"><i class="icon-pitch"></i></div>
-				<div id="child"><i class="icon-child"></i></div>
-				<div id="bicycle"><i class="icon-bicycle"></i></div>
-				<div id="flower"><i class="icon-garden"></i></div>
-				<div id="tree2"><i class="icon-tree-2"></i></div>
-		</div>
-			
+				<div class="paper" style="transform: rotate(15deg) translateX(-10px) translateY(15px);"> 
+					<i class="icon-pin"></i>
+					<h1><i class="icon-lightbulb"> KEEP CALM & </i> </h1>
+					<h2>Take control of your personal budget</h2>
+					<div id="person" ><i class="icon-pitch"></i></div>
+				</div>
+					
+		<div class="container">
+				<div class="row">
+					<div class="col-12">
+
+						<div id="airplane" class="d-none d-md-inline-block">
+								<i class="icon-airport"></i>
+						</div>
+						
+						<div class="logo">
+								<div id="tree1" class="d-none d-md-inline-block #47d1d1"><i class="icon-tree-1"></i></div>
+								<div id="gift" class="d-none d-md-inline-block"><i class="icon-gift"></i></div>
+								
+								<div id="child" class="d-none d-md-inline-block "><i class="icon-child"></i></div>
+								<div id="bicycle" class="d-none d-md-inline-block"><i class="icon-bicycle"></i></div>
+								<div id="flower" class="d-none d-md-inline-block"><i class="icon-garden"></i></div>
+								<div id="tree2" class="d-none  d-md-none d-xl-inline-block"><i class="icon-tree-2"></i></div>
+						</div>
+					</div>
+				</div>
+		</div>	
+
 	</header>
-	
-	
-	<nav>
-	
-	<div class="mainNav">
-			<ol>
-				<li><a href="mainMenu.html">Home</a></li>
-				<li><a href="addFinance.html"><i class="icon-lightbulb"></i>Add new income</a></li>
-				<li><a href="addFinance.html"><i class="icon-lightbulb"></i>Add new expense</a></li>
-				<li><a href="showBalance.html"><i class="icon-lightbulb"></i>Show balance</a>
-					<ul>
-						<li><a href="showBalance.html"><i class="icon-lightbulb"></i>From the current month</a></li>
-						<li><a href="#"><i class="icon-lightbulb"></i>From the previous month</a></li>
-						<li><a href="#"><i class="icon-lightbulb"></i>From the chosen period</a></li>
-					</ul></li>
-				<li><a href="#">Your profile</a>
-				<ul>
-						<li><a href="#"><i class="icon-lightbulb"></i>Edit your profile</a></li>
-						<li><a href="#"><i class="icon-lightbulb"></i>Change your password</a></li>
-						<li><a href="#"><i class="icon-lightbulb"></i>Log out</a></li>
-				</ul></li>
-			
-			</ol>
-		</div>
-	
-		<div id="sideNav">
+	<main>
+		<nav class="navbar sticky-top navbar-expand-lg bg-budget navbar-dark ">
+			<a class="navbar-brand ml-3" href="mainMenu.html"><i class="icon-lightbulb"></i>Home </a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+				<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
+					<div class="btn-group btn-group-lg text-center navbar-nav">
+					
+					  <button type="button" class="btn btn-lg bg-budget nav-link shadow-none ">Add new income</button>
+					  <button type="button" class="btn btn-lg bg-budget nav-link shadow-none active">Add new expense</button>
+					  
+					 <div class="btn-group btn-group-lg text-center navbar-nav" >
+					  <button id="btnGroupDrop1" type="button" class="btn btn-lg bg-budget nav-link dropdown-toggle shadow-none active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Show balance</button>
+						<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+						  <a class="dropdown-item" href="#">From the current month</a>
+						  <a class="dropdown-item" href="#">From the previous month</a>
+						  <a class="dropdown-item" href="#">From the chosen period</a>
+						</div>
+						</div>
+					<div class="btn-group btn-group-lg text-center navbar-nav" >
+					  <button id="btnGroupDrop1" type="button" class="btn btn-lg bg-budget nav-link dropdown-toggle shadow-none active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Your profile</button>
+						<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+						  <a class="dropdown-item" href="#">Edit your profile</a>
+						  <a class="dropdown-item" href="#">Change your password</a>
+						  <a class="dropdown-item" href="#">Log out</a>
+						</div>
+						</div>
+					  
+					
+				</div>
+					
+  </div> 
+</nav>
+
+<div class="container-fluid "><header>
+<div class="row mt-1">
+<!--<div class="col-lg-4">-->
+<div id="sideNav" class="smallSize">
+
 			<div class="optionL"><a href="mainMenu.html" class="link" target= "_blank">Home</a></div>
 			<div class="optionL"><a href="#" class="link" target= "_blank">Saved reports</a></div>
 			<div class="optionL"><a href="#" class="link" target= "_blank">Links</a></div>
 			<div class="optionL"><a href="#" class="link" target= "_blank">Contact</a></div>
-
-		</div>
-	</nav>
-	<main>
-		<div id="container">
+			
+			</div>
+			
+			<div id="container" class=" bg-white smallSize" >
 			<article>
 				<h3>Welcome to the Personal Budget!</h3>
 				
 				This app helps you deal with your personal budget. No longer need to use sticky notes because all the knowledge about your finances are at one place. As a logged in user you can use the following functions: add new income, add new expense, show balance from the current month, previous month or the chosen period of time. You can also browse your records sorted by date.</br>
 				Have a nice visit!
 			</article>
+		
 		</div>
 		
-		
-		
-		<script src="jquery-3.6.0.min.js"></script>
-	
-	<script>
+		</div>
+		<!--</div>-->
 
-	$(document).ready(function() {
-	var NavY = $('.mainNav').offset().top;
-	 
-	var stickyNav = function(){
-	var ScrollY = $(window).scrollTop();
-		  
-	if (ScrollY > NavY) { 
-		$('.mainNav').addClass('sticky');
-	} else {
-		$('.mainNav').removeClass('sticky'); 
-	}
-	};
-	 
-	stickyNav();
-	 
-	$(window).scroll(function() {
-		stickyNav();
-	});
-	});
-	
-    </script>
+	<!--</div>-->
 	</main>
-	<div id="footer"> All rights reserved &copy; 2021</div>
+		
+		
 
+	<!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>-->
+	
+	<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="js/bootstrap.min.js"></script>-->
+	<div id="footer"> All rights reserved &copy; 2021</div>
+	
 </body>
 </html>
