@@ -43,7 +43,7 @@ h3
 	margin-right: auto;
 	margin-top:40px;
 	margin-bottom: -45px;*/
-	margin: 40px auto -45px auto;
+	margin: 10px auto -45px auto;
 	transform: rotate(-13deg); 
 	z-index: 1000;
 	position:relative;
@@ -399,11 +399,15 @@ ol > li:hover > ul,
 	
 }
 
+/*label {
+  /*display: flex;
+  align-items: center;
+/*}*/
 
 
 span::after {
   padding-left: 5px;
-  
+ 
 }
 
 input:invalid + span::after {
@@ -412,7 +416,10 @@ input:invalid + span::after {
 
 input:valid+span::after {
   content: '✓';
+  
 }
+
+
 .row
 {
 	min-height: 50px;
