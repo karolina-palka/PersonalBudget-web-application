@@ -3,6 +3,8 @@
 <head>
 
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<title>Personal Budget</title>
 	<meta name="description" content="Take control of your personal budget!">
 	<meta name="keywords" content="budget, finances, savings ">
@@ -10,13 +12,19 @@
 	
 	<meta http-equiv="X-Ua-Compatible" content="IE=edge">
 	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
+	<!--<link rel="stylesheet"  href="css/bootstrap.min.css" type="text/css">-->
 	<link rel="stylesheet"  href="mainMenu.css" type="text/css">
 	<link rel="stylesheet" href = "css/fontello.css" type="text/css"/>
 
 	<link href="https://fonts.googleapis.com/css2?family=Encode+Sans+SC&family=Zen+Loop:ital@1&display=swap" rel="stylesheet">
 	
 	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
-	
 	
 	<!--[if lt IE 9]>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -28,101 +36,118 @@
 
 	<header>
 	
-		<div class="paper" style="transform: rotate(15deg) translateX(-10px) translateY(15px);"> 
-			<i class="icon-pin"></i>
-			<h1><i class="icon-lightbulb"> Add finance & </i> </h1>
-			<h2>Take control of your personal budget</h2>
-		</div>
-		<div id="airplane">
-				<i class="icon-airport"></i>
-		</div>
-		<div class="logo">
-				<div id="tree1"><i class="icon-tree-1"></i></div>
-				<div id="gift"><i class="icon-gift"></i></div>
-				<div id="person"><i class="icon-pitch"></i></div>
-				<div id="child"><i class="icon-child"></i></div>
-				<div id="bicycle"><i class="icon-bicycle"></i></div>
-				<div id="flower"><i class="icon-garden"></i></div>
-				<div id="tree2"><i class="icon-tree-2"></i></div>
-		</div>
-			
-	</header>
+				<div class="paper" style="transform: rotate(15deg) translateX(-10px) translateY(15px);"> 
+					<i class="icon-pin"></i>
+					<h1><i class="icon-lightbulb"> KEEP CALM & </i> </h1>
+					<h2>Take control of your personal budget</h2>
+					<div id="person" ><i class="icon-pitch"></i></div>
+				</div>
+					
+		<div class="container">
+				<div class="row">
+					<div class="col-12">
+
+						<div id="airplane" class="d-none d-md-inline-block">
+								<i class="icon-airport"></i>
+						</div>
+						
+						<!--<div class="logo">
+								<div id="tree1" class="d-none d-md-inline-block "><i class="icon-tree-1"></i></div>
+								<div id="gift" class="d-none d-md-inline-block"><i class="icon-gift"></i></div>
+								
+								<div id="child" class="d-none d-md-inline-block "><i class="icon-child"></i></div>
+								<div id="bicycle" class="d-none d-md-inline-block"><i class="icon-bicycle"></i></div>
+								<div id="flower" class="d-none d-md-inline-block"><i class="icon-garden"></i></div>
+								<div id="tree2" class="d-none  d-md-none d-xl-inline-block"><i class="icon-tree-2"></i></div>
+						</div>-->
+						
+						<div class="logo d-flex ">
+								<div id="tree1" class="d-none d-md-block align-self-end"><i class="icon-tree-1"></i></div>
+								<div id="gift" class="d-none d-md-block align-self-end"><i class="icon-gift"></i></div>
+								
+								<div id="child" class="d-none d-md-block align-self-end"><i class="icon-child"></i></div>
+								<div id="bicycle" class="d-none d-md-block align-self-end"><i class="icon-bicycle"></i></div>
+								<div id="flower" class="d-none d-md-block align-self-end"><i class="icon-garden"></i></div>
+								<div id="tree2" class="d-none d-xl-block align-self-end"><i class="icon-tree-2"></i></div>
+						</div>
+					</div>
+			</div>
+		</div>	
+
 	
-	<nav>
 	
-	<div class="mainNav">
-			<ol>
-				<li><a href="mainMenu.html">Home</a></li>
-				<li><a href="addFinance.html"><i class="icon-lightbulb"></i>Add new income</a></li>
-				<li><a href="addFinance.html"><i class="icon-lightbulb"></i>Add new expense</a></li>
-				<li><a href="showBalance.html"><i class="icon-lightbulb"></i>Show balance</a>
-					<ul>
-						<li><a href="#"><i class="icon-lightbulb"></i>From the current month</a></li>
-						<li><a href="#"><i class="icon-lightbulb"></i>From the previous month</a></li>
-						<li><a href="#"><i class="icon-lightbulb"></i>From the chosen period</a></li>
-					</ul></li>
-				<li><a href="#">Your profile</a>
-				<ul>
-						<li><a href="#"><i class="icon-lightbulb"></i>Edit your profile</a></li>
-						<li><a href="#"><i class="icon-lightbulb"></i>Change your password</a></li>
-						<li><a href="#"><i class="icon-lightbulb"></i>Log out</a></li>
-				</ul></li>
-			
-			</ol>
-	</div>
-	
-		<div id="sideNav">
+		<nav class="navbar sticky-top navbar-expand-lg bg-custom navbar-dark ">
+			<a class="navbar-brand ml-3" href="mainMenu.html"><i class="icon-lightbulb"></i>Home </a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+				<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
+					<div class="btn-group btn-group-lg text-center navbar-nav">
+					
+					  <button type="button" class="btn btn-lg bg-custom nav-link shadow-none ">Add new income</button>
+					  <button type="button" class="btn btn-lg bg-custom nav-link shadow-none ">Add new expense</button>
+					  
+					 <div class="btn-group btn-group-lg text-center navbar-nav" >
+					  <button id="btnGroupDrop1" type="button" class="btn btn-lg bg-custom nav-link dropdown-toggle shadow-none active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Show balance</button>
+						<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+						  <a class="dropdown-item" href="#"><i class="icon-ok"></i>From the current month</a>
+						  <a class="dropdown-item" href="#"><i class="icon-ok"></i>From the previous month</a>
+						  <a class="dropdown-item" href="#"><i class="icon-ok"></i>From the chosen period</a>
+						</div>
+						</div>
+					<div class="btn-group btn-group-lg text-center navbar-nav" >
+					  <button id="btnGroupDrop1" type="button" class="btn btn-lg bg-custom nav-link dropdown-toggle shadow-none active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Your profile</button>
+						<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+						  <a class="dropdown-item" href="#"><i class="icon-user"></i>Edit your profile</a>
+						  <a class="dropdown-item" href="#"><i class="icon-cog"></i>Change your password</a>
+						  <a class="dropdown-item" href="#"><span class="glyphicon glyphicon-log-in"></span><i class="icon-logout"></i>Log out</a>
+						</div>
+						</div>
+				</div>
+			</div>
+		</nav>
+		
+		
+</header>
+		<main>
+
+<div class="container-fluid">
+<div class="row mt-1 no-gutters">
+<div class="col-12 col-md-3 ">
+<div id="sideNav" class="smallSize">
+
 			<div class="optionL"><a href="mainMenu.html" class="link" target= "_blank">Home</a></div>
 			<div class="optionL"><a href="#" class="link" target= "_blank">Saved reports</a></div>
 			<div class="optionL"><a href="#" class="link" target= "_blank">Links</a></div>
-			<div class="optionL"><a href="#" class="link" target= "_blank">Contact></a></div>
-
-		</div>
-	</nav>
-	<main>
-		<div id="container" >
-			<article>
+			<div class="optionL"><a href="#" class="link" target= "_blank">Contact</a></div>
+			
+			</div>
+			</div>
+		<div  id="custom-container" class="col-12 col-md-6">
+	
+				
 				<form action="addFinance.php" method="post">
-					<div class="col">
-						<div class="row"><label><input type="radio" value="1" name="finance" checked>Income</label></div>
-						<div class="row"><label><input type="radio" value="2" name="finance">Expense</label></div>
-						<div class="row"><label>What is the name for that income/expense?</label></div><input type="text" name="name">
-						<div class="row"><label>How much does it cost?</label></div><input type="number" name="cost">
-					</div>
-					<div class="col">
-						<div class="row"><label>Enter the date:</label></div><input type="date" name="finance_date">
-						<div class="row"><input type="submit" value="Submit"></div>
-
+					<div class ="d-sm-inline-block d-md-block d-xl-inline-block mr-3">
+						<div class="radio d-flex justify-content-between" >
+							<label><input type="radio"  name="finance1" checked>Income</label>
+						</div>
+						<div class="radio d-flex justify-content-between"  >
+							<label><input type="radio" name="finance1">Expense</label>
+						</div >
+					</div>	
+					<div class ="d-sm-inline-block d-md-block d-xl-inline-block pl-3">	
+						<div class="d-flex flex-column">
+							<label>Enter the date:</label>
+							<div class=" d-flex justify-content-center"><input type="date" name="finance_date"></div>
+						</div>
+						<div class="d-flex justify-content-center"><input type="submit" value="Submit"></div>
 					</div>
 				</form>
-			</article>
-		</div>
-		
-		<script src="jquery-3.6.0.min.js"></script>
+					
+	</div>
+	</div>
+</div>
 	
-	<script>
-
-	$(document).ready(function() {
-	var NavY = $('.mainNav').offset().top;
-	 
-	var stickyNav = function(){
-	var ScrollY = $(window).scrollTop();
-		  
-	if (ScrollY > NavY) { 
-		$('.mainNav').addClass('sticky');
-	} else {
-		$('.mainNav').removeClass('sticky'); 
-	}
-	};
-	 
-	stickyNav();
-	 
-	$(window).scroll(function() {
-		stickyNav();
-	});
-	});
-	
-    </script>
 	</main>
 	<div id="footer"> All rights reserved &copy; 2021</div>
 

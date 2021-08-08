@@ -3,6 +3,7 @@ body
 	margin: 0;
 	/* Background pattern from Toptal Subtle Patterns */
 	background-image:url("wall4/wall4/wall4.png");
+	/*background-image:url("grunge_wall/grunge_wall/grunge_wall.png");*/
     /*font-family: 'Encode Sans SC', sans-serif;*/
 	font-family: 'Lato', sans-serif;
 	letter-spacing: 2px;
@@ -57,7 +58,8 @@ h3
 	/*float: left;*/
 	
 	/*margin-left: -15px;*/
-	
+	/*min-width: 200px;
+	max-width: 230px;*/
 	margin-top: -4px;
 	background-color: #5cd6d6;
 	opacity: 80%;
@@ -73,7 +75,7 @@ h3
 .optionL
 {
 	font-size: 18px;
-	width: 230px;
+	/*max-width: 230px;*/
 	height:70px;
 	padding:25px;
 	text-align:center;
@@ -120,15 +122,16 @@ button:focus
 	outline: none;
 	box-shadow: none;
 }
-#container
+#custom-container
 {
 	background-color: white;
-	width: 70%;
+	/*width: 100%;*/
 	/*padding-bottom: 50px;
 	padding-top: 20px;*/
 	padding: 20px 50px 50px 50px;
 	text-align:center;
-	min-height: 800px;
+	/*min-height: 800px;*/
+	margin-top: -4px;
 	-webkit-box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
 	-moz-box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
 	box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
@@ -176,13 +179,13 @@ a.link
 	text-align: center;
 	display: block;
 }
-.col
+/*.col
 {
 	margin-left: 10px;
 	margin-right: 10px;
 	padding: 5px;
 	display: inline-block;
-}
+}*/
 
 .pad_row
 {
@@ -227,6 +230,7 @@ input[type=email],
 input[type=number],
 input[type=password],
 input[type=date]
+
 {
 	width: 300px;
 	background-color: #efefef;
@@ -238,6 +242,7 @@ input[type=date]
 	box-sizing: border-box;
 	outline: none;
 	margin-top: 10px;
+	
 	/*display:flex;*/
 	/*display: list-item;*/
 }
@@ -245,6 +250,7 @@ input[type=radio]
 {
 	/*display:inline-block;*/
 	margin-top: 10px;
+	/*box-sizing: content-box !important;*/
 }
 input[type=text]:focus,
 input[type=password]:focus,
@@ -268,18 +274,21 @@ input[type=date]:focus
 	/*color: #47d1d1;*/
 	margin-top: -200px;
 	/*margin-top: -255px;*/
-	margin-bottom: -4.8%;
+	/*margin-bottom: -4.8%;*/
+	margin-bottom: -6px;
 	
 }
 #tree1
 {
 	font-size: 450%;
+	margin-bottom: -8px;
 }
 #gift
 {
 	
 	margin-left: -46px;
 	font-size:30px;
+	margin-bottom:3px;
 }
 #person
 {
@@ -296,26 +305,24 @@ input[type=date]:focus
 {
 	font-size:350%;	
 	margin-left:53%;
-	/*margin-bottom:-100px;*/
+
 }
 #bicycle
 {
 	font-size: 350%;
-	margin-left:-2%;
-	margin-bottom: -3.9%;
+	margin-left:40px;
+	margin-bottom: -8px;
 }
 #flower
 {
 	font-size:200%;
-	margin-left:-2%;
+	margin-left:40px;
 	font-size:30px;
-
+	margin-bottom: 3px;
 }
 #airplane
 {
-	/*display:inline-block;
-	color: #00cccc;*/
-	/*color: #47d1d1;*/
+	
 	color: #00bbbb;
 	color: #00cccc;
 	font-size:30px;
@@ -326,12 +333,13 @@ input[type=date]:focus
 #tree2
 {
 	margin-left:-3%;
-	font-size:1000%;
+	font-size:168px;
+	margin-left:-80px;
+	margin-bottom: -40px;
 }
 ol
 {
 	padding: 0;
-	/*margin: 0;*/
 	margin-top: 150px;
 	list-style-type: none;
 	font-size: 18px;
@@ -448,17 +456,7 @@ span::after {
 
 input:invalid + span::after {
   content: '✖';
-}<!--<button class="navbar-toggler bg-primary" type="button" data-toggle="collapse" data-target="#mainmenu" aria-controls="mainmenu" aria-expanded="false" aria-label="Przełącznik nawigacji">
-		<span class="navbar-toggler-icon"></span>
-		</button>
-	
-		<div class="collapse navbar-collapse bg-primary" id="mainmenu">
-			
-						<ul class="navbar-nav mr-auto">
-						
-						<!--<li class="nav-item">
-							<a class="navbar-brand nav-link" href="#"> Start </a>
-						</li>-->
+}
 
 input:valid+span::after {
   content: '✓';
@@ -467,11 +465,14 @@ input:valid+span::after {
 {
 	min-height: 50px;
 	margin-top: 30px;
-	margin-left:-30px;
+	text-align: center;
+	margin-bottom: -8px;
+	/*margin-left:-30px;*/
 }
 .container-fluid
 {
 	/*min-height: 50px;*/
+	/*margin-top:-40px;*/
 	
 }
 @media (max-width: 767px)
@@ -485,6 +486,10 @@ input:valid+span::after {
 	{
 		margin: auto;
 		
+	}
+	.row
+	{
+		margin-bottom: 0;
 	}
 	/*#container
 	{
@@ -500,29 +505,25 @@ input:valid+span::after {
 		
 	}
 }*/
+
 @media(min-width: 768px)
 {
 	.logo
 	{
-		margin-top: -87px;
+		margin-top: -93px;
 		
 	}
-	
+	/*	.row
+	{
+		margin-bottom: -7px;
+	}*/
 /*.paper
 	{
 		margin-bottom: -85px;
 	}*/
 }
 	
-@media(min-width: 992px) 
-{
-.logo
-	{
-		
 
-	}
-	
-}
 @media(min-width: 1200px) 
 {
 .logo
@@ -537,10 +538,10 @@ input:valid+span::after {
 		/*margin-bottom: -85px;*/
 		margin-top: 40px;
 	}
-	.row
+	/*.row
 	{
 		margin-bottom: -7px;
-	}
+	}*/
 }
 
 /*.dropdown-toggle
@@ -548,7 +549,7 @@ input:valid+span::after {
 	z-index:1000;
 	position:relative;
 }*/
-.bg-budget
+.bg-custom
 {
 	background-color:#00bbbb;
 	background-color: #00cccc;
@@ -562,7 +563,11 @@ input:valid+span::after {
 {
 	background-color: #aeeaea;
 }
-.btn
+.custom_row
 {
-	/*min-width:225px;*/
+	min-height: 50px;
+	margin-top: 30px;
+	text-align: center;
+	margin-left:10px;
+	/*margin-left:-30px;*/
 }
