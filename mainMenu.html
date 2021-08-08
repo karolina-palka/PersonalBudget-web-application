@@ -13,6 +13,7 @@
 	<meta http-equiv="X-Ua-Compatible" content="IE=edge">
 	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -43,75 +44,74 @@
 				</div>
 					
 		<div class="container">
-				<div class="row">
+				<div class="row mb-md-n2 ">
 					<div class="col-12">
-
 						<div id="airplane" class="d-none d-md-inline-block">
 								<i class="icon-airport"></i>
 						</div>
-						
-						<div class="logo">
-								<div id="tree1" class="d-none d-md-inline-block #47d1d1"><i class="icon-tree-1"></i></div>
-								<div id="gift" class="d-none d-md-inline-block"><i class="icon-gift"></i></div>
+						<div class="logo d-flex ">
+								<div id="tree1" class="d-none d-md-block align-self-end"><i class="icon-tree-1"></i></div>
+								<div id="gift" class="d-none d-md-block align-self-end"><i class="icon-gift"></i></div>
 								
-								<div id="child" class="d-none d-md-inline-block "><i class="icon-child"></i></div>
-								<div id="bicycle" class="d-none d-md-inline-block"><i class="icon-bicycle"></i></div>
-								<div id="flower" class="d-none d-md-inline-block"><i class="icon-garden"></i></div>
-								<div id="tree2" class="d-none  d-md-none d-xl-inline-block"><i class="icon-tree-2"></i></div>
+								<div id="child" class="d-none d-md-block align-self-end"><i class="icon-child"></i></div>
+								<div id="bicycle" class="d-none d-md-block align-self-end"><i class="icon-bicycle"></i></div>
+								<div id="flower" class="d-none d-md-block align-self-end"><i class="icon-garden"></i></div>
+								<div id="tree2" class="d-none d-xl-block align-self-end"><i class="icon-tree-2"></i></div>
 						</div>
 					</div>
-				</div>
+			</div>
 		</div>	
 
-	</header>
-	<main>
-		<nav class="navbar sticky-top navbar-expand-lg bg-budget navbar-dark ">
+	
+	
+		<nav class="navbar sticky-top navbar-expand-lg bg-custom navbar-dark ">
 			<a class="navbar-brand ml-3" href="mainMenu.html"><i class="icon-lightbulb"></i>Home </a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 				<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
 					<div class="btn-group btn-group-lg text-center navbar-nav">
-					
-					  <button type="button" class="btn btn-lg bg-budget nav-link shadow-none ">Add new income</button>
-					  <button type="button" class="btn btn-lg bg-budget nav-link shadow-none active">Add new expense</button>
-					  
+						
+						  <a class="btn btn-lg nav-link shadow-none" href="addFinance.html" role="button">Add new income</a>
+						 
+						   <a class="btn btn-lg nav-link shadow-none" href="addFinance.html" role="button">Add new expense</a>
+						
 					 <div class="btn-group btn-group-lg text-center navbar-nav" >
-					  <button id="btnGroupDrop1" type="button" class="btn btn-lg bg-budget nav-link dropdown-toggle shadow-none active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Show balance</button>
+					  <button id="btnGroupDrop1" type="submit" class="btn btn-lg bg-custom nav-link dropdown-toggle shadow-none active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Show balance</button>
 						<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-						  <a class="dropdown-item" href="#">From the current month</a>
-						  <a class="dropdown-item" href="#">From the previous month</a>
-						  <a class="dropdown-item" href="#">From the chosen period</a>
+						  <a class="dropdown-item" href="showBalance.html"><i class="icon-ok"></i>From the current month</a>
+						  <a class="dropdown-item" href="showBalance.html"><i class="icon-ok"></i>From the previous month</a>
+						  <a class="dropdown-item" href="showBalance.html"><i class="icon-ok"></i>From the chosen period</a>
 						</div>
 						</div>
 					<div class="btn-group btn-group-lg text-center navbar-nav" >
-					  <button id="btnGroupDrop1" type="button" class="btn btn-lg bg-budget nav-link dropdown-toggle shadow-none active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Your profile</button>
+					  <button id="btnGroupDrop1" type="submit" class="btn btn-lg bg-custom nav-link dropdown-toggle shadow-none active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Your profile</button>
 						<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-						  <a class="dropdown-item" href="#">Edit your profile</a>
-						  <a class="dropdown-item" href="#">Change your password</a>
-						  <a class="dropdown-item" href="#">Log out</a>
+						  <a class="dropdown-item" href="showBalance.html"><i class="icon-user"></i>Edit your profile</a>
+						  <a class="dropdown-item" href="#"><i class="icon-cog"></i>Change your password</a>
+						  <a class="dropdown-item" href="#"><i class="icon-logout"></i>Log out</a>
 						</div>
 						</div>
-					  
-					
 				</div>
-					
-  </div> 
-</nav>
-
-<div class="container-fluid "><header>
-<div class="row mt-1 ">
-<!--<div class="col-lg-4">-->
-<div id="sideNav" class="smallSize">
-
-			<div class="optionL"><a href="mainMenu.html" class="link" target= "_blank">Home</a></div>
-			<div class="optionL"><a href="#" class="link" target= "_blank">Saved reports</a></div>
-			<div class="optionL"><a href="#" class="link" target= "_blank">Links</a></div>
-			<div class="optionL"><a href="#" class="link" target= "_blank">Contact</a></div>
-			
 			</div>
-			
-			<div id="container" class=" bg-white smallSize" >
+		</nav>
+		
+		
+	</header>
+	<main>
+		<div class="container-fluid">
+			<div class="row mt-1 no-gutters">
+				<div class="col-12 col-md-3 ml-md-n3 mx-sm-auto mx-md-0" >
+					<div id="sideNav">
+
+						<div class="optionL"><a href="mainMenu.html" class="link" target= "_blank">Home</a></div>
+						<div class="optionL"><a href="#" class="link" target= "_blank">Saved reports</a></div>
+						<div class="optionL"><a href="#" class="link" target= "_blank">Links</a></div>
+						<div class="optionL"><a href="#" class="link" target= "_blank">Contact</a></div>
+				
+					</div>
+				</div>
+				<div  id="custom-container" class="col-12 col-md-8">
 			<article>
 				<h3>Welcome to the Personal Budget!</h3>
 				
@@ -122,7 +122,7 @@
 		</div>
 		
 		</div>
-		<!--</div>-->
+		</div>
 
 	<!--</div>-->
 	</main>
