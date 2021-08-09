@@ -175,6 +175,7 @@ input[type=email],
 input[type=number],
 input[type=password]
 {
+
 	width: 300px;
 	background-color: #efefef;
 	color: #666;
@@ -240,10 +241,18 @@ input[type=number]:focus
 	}
 	input[type=submit],
 	input[type=text],
-	input[type=password]
+	input[type=password],
+	input[type=email],
+	input[type=number]
+	
 	{
-		font-size:15px;
-		padding: 10px;
+		font-size:12px;
+		padding: 5px;
 		max-width:300px;
+	}
+	#container
+	{
+		font-size: 12px;
+		margin-top: -35px;
 	}
 }
