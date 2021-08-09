@@ -57,8 +57,9 @@ h3
 {
 	min-width: 185px;
 	margin-top: -4px;
+	margin-left: -12px;
 	background-color: #5cd6d6;
-	opacity: 80%;
+	opacity: 0.7;
 	text-align: center;
 	font-size: 18px;
 
@@ -124,6 +125,7 @@ button:focus,
 	text-align:center;
 	/*min-height: 800px;*/
 	margin-top: -4px;
+	margin-left: -12px;
 	-webkit-box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
 	-moz-box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
 	box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
@@ -189,6 +191,12 @@ a.link
 	padding: 10px;
 	box-sizing: border-box;
 	
+}
+.custom_row
+{
+	margin-left:10px;
+	padding-right: 20px;
+	text-align: right;
 }
 /*
 {
@@ -400,43 +408,51 @@ ol > li:hover > ul,
 }
 
 /*label {
-  /*display: flex;
+  display: flex;
   align-items: center;
-/*}*/
+}*/
 
+span
+{
+	margin-left: 5px;
+}
 
 span::after {
   padding-left: 5px;
- 
+  
+  
 }
 
-input:invalid + span::after {
+input[type=date]:invalid + span::after {
   content: '✖';
 }
 
-input:valid+span::after {
+input[type=date]:valid+span::after {
   content: '✓';
   
 }
 
-
 .row
 {
-	min-height: 50px;
+	min-height: 60px;
+	/*min-height: 50px;*/
 	margin-top: 30px;
-
+	margin-bottom: -12px;
+	/*margin-bottom: -8px;*/
 }
 
-@media (max-width: 767px)
-{
-	
-}
+
+
 /*@media(min-width: 576x)
 {
 .smallSize
 	{
 		margin: auto;
 		
+	}
+	.custom-row
+	{
+		text-align: center;
 	}
 }*/
 
@@ -456,7 +472,13 @@ input:valid+span::after {
 		margin-bottom: -85px;
 	}*/
 }
-	
+/*@media(max-width: 1200px)
+{
+	.custom-row
+	{
+		text-align: center;
+	}
+}*/	
 
 @media(min-width: 1200px) 
 {
