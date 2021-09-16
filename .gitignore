@@ -7,7 +7,6 @@ paper/*
 font/*
 css/*
 demo*
-config*
 LICENSE.txt
 README.txt
 fontello*/*
@@ -17,3 +16,4 @@ fontello*/*
 wall4/*
 js/*
 bootstrap-5.1.0-dist/*
+*.sql
