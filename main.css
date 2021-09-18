@@ -3,8 +3,8 @@ body
 	margin: 0;
 	/* Background pattern from Toptal Subtle Patterns */
 	background-image:url("wall4/wall4/wall4.png");
-    font-family: 'Encode Sans SC', sans-serif;
-    font-size: 17px;
+    /*font-family: 'Encode Sans SC', sans-serif;
+    font-size: 17px;*/
 }
 
 h1
@@ -256,3 +256,9 @@ input[type=number]:focus
 		margin-top: -35px;
 	}
 }
+.error
+	{
+		color:red;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}

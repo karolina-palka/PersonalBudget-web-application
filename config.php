@@ -3,5 +3,5 @@
 return ['host'=> 'localhost', 
 		'user' => 'root',
 		'password' => '',
-		'database'=> 'newsletter'
+		'database'=> 'personal_budget'
 ];	
