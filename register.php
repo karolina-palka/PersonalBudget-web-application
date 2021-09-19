@@ -8,6 +8,7 @@ session_start();
 //require_once "FetchDataManager.php";
 //echo FetchDataManager::getLogin();
 //echo $_SESSION['given_email'];
+echo $_SESSION['cos_tam'];
 ?>
 
 <!DOCTYPE html>

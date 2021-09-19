@@ -45,12 +45,12 @@
 					<div id="container" >
 						<article>
 							
-								<form  action="login.php" method="post">
+								<form  action="mainMenu.php" method="post">
 									<div class="d-flex flex-column">
-										<div class="d-flex justify-content-center"><input class="d-flex justify-content-center" type="text" placeholder="login" onfocus="this.placeholder=''" onblur="this.placeholder='login'">
+										<div class="d-flex justify-content-center"><input class="d-flex justify-content-center" type="email" placeholder="e-mail" name="email" onfocus="this.placeholder=''" onblur="this.placeholder='login'">
 										</div>
 										<div class="d-flex justify-content-center">
-										<input class="d-flex justify-content-center" type="password" placeholder="password" onfocus="this.placeholder=''" onblur="this.placeholder='password'"></div>
+										<input class="d-flex justify-content-center" type="password" placeholder="password" onfocus="this.placeholder=''" name="password" onblur="this.placeholder='password'"></div>
 										
 										<div class="d-flex justify-content-center">
 										<input class="d-flex justify-content-center" type="submit" value="Submit"></div>

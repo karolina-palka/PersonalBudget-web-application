@@ -1,3 +1,37 @@
+<?php
+
+require_once "UserManager.php";
+
+if (!isset($_POST['email'])) {
+	header("Location: index.php");
+} else {
+	$email = UserManager::getEmail();
+	$password = UserManager::getPassword();
+	
+	require_once 'database.php';
+	$userQuery = $db->prepare('SELECT id, password FROM admins WHERE email=:email');
+		$userQuery->bindValue(':email', $email, PDO::PARAM_STR);
+		$userQuery->execute();
+		
+		$user = $userQuery->fetch();
+		
+		if($user && password_verify($password, $user['password'])) {
+			$_SESSION['logged_id'] = $user['id'];
+			unset($_SESSION['bad_attempt']);
+		} else {
+			
+			$_SESSION['bad_attempt'] = true;
+			$_SESSION['given_login'] = $_POST['login'];
+			header('Location: admin.php');
+			exit();
+		}
+		
+}
+	
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>

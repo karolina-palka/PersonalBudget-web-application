@@ -1,35 +1,38 @@
 <?php
 session_start();
 	
-require_once "FetchDataManager.php";
+require_once "UserManager.php";
 	
 
 	if (!isset($_POST['email'])) {
 		header('Location: register.php');
 	} else {
 	
-		$login = FetchDataManager::getLogin();
-		$password = FetchDataManager::getPassword();
-		$email = FetchDataManager::getEmail();
-		$name = FetchDataManager::getName();
-		$surname = FetchDataManager::getSurname();
-		$phone_number = FetchDataManager::getPhoneNumber();
+		$userManager = new UserManager();
+		$userData = $userManager->getUserData();
 		
+		$login = $userData->getLogin();
+		$password = $userData->getPassword();
+		$email = $userData->getEmail();
+		$name = $userData->getName();
+		$surname = $userData->getSurname();
+		$phone_number = $userData->getPhoneNumber();
 		
+		//$_SESSION['cos_tam'] =  $userData->getLogin();
 		$isSafeToConnect = true;
 			if ((strlen($login)<3) || (strlen($login)>20))
 		{
 			$isSafeToConnect = false;
 			$_SESSION['e_login'] = "Login must be 3 to 20 characters long!";
-			FetchDataManager::saveDataInSession();
 			
+			$userManager->saveDataInSession();
 			header('Location: register.php');
 		}
 		if (ctype_alnum($login)==false)
 		{
 			$isSafeToConnect = false;
 			$_SESSION['e_login'] = "Login can only consist of letters and numbers";
-			FetchDataManager::saveDataInSession();
+			$userManager->saveDataInSession();
 			header('Location: register.php');
 		}
 		
@@ -39,7 +42,7 @@ require_once "FetchDataManager.php";
 		{
 			$isSafeToConnect = false;
 			$_SESSION['e_email'] = "Please specify your e-mail address appropriately.";
-			FetchDataManager::saveDataInSession();
+			$userManager->saveDataInSession();
 			header('Location: register.php');
 		}
 		
@@ -47,28 +50,26 @@ require_once "FetchDataManager.php";
 		{
 			$isSafeToConnect = false;
 			$_SESSION['e_password'] = "Password must be 8 to 20 characters long!";
-			FetchDataManager::saveDataInSession();
+			$userManager->saveDataInSession();
 			header('Location: register.php');
 		}
 		$pass_hash = password_hash($password, PASSWORD_DEFAULT);
-		//$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
 		
 		if ($isSafeToConnect) {
 			
 		require_once 'database.php';
-			$result = $db->query("SELECT * FROM users WHERE email='$email'");
-			if ($result->rowCount()) {
-				$_SESSION['e_email'] = "The given e-mail address already exists. Please, specify different.";
-				FetchDataManager::saveDataInSession();
-				header('Location: register.php');
-			} else {
-				$user = $result->fetch();
-				$_SESSION['polaczenie'] =  "It works!";
-				$query = $db->prepare('INSERT INTO users VALUES (NULL, :username, :password, :email, :name, :surname, :phone_number )');
-				//$query->bindValue(':email', ':username', $email, $login, PDO::PARAM_STR);
-				$query->execute([$login, $pass_hash, $email, $name, $surname, $phone_number ]);
-				
-			}
+		$result = $db->query("SELECT * FROM users WHERE email='$email'");
+		if ($result->rowCount()) {
+			$_SESSION['e_email'] = "The given e-mail address already exists. Please, specify different.";
+			$userManager->saveDataInSession();
+			header('Location: register.php');
+		} else {
+			$user = $result->fetch();
+			$query = $db->prepare('INSERT INTO users VALUES (NULL, :username, :password, :email, :name, :surname, :phone_number )');
+			//$query->bindValue(':email', ':username', $email, $login, PDO::PARAM_STR);
+			$query->execute([$login, $pass_hash, $email, $name, $surname, $phone_number ]);
+			
+		}
 		}
 	}
 ?>
@@ -93,10 +94,7 @@ require_once "FetchDataManager.php";
 	<link rel="stylesheet" href = "css/fontello.css" type="text/css"/>
 
 	<link href="https://fonts.googleapis.com/css2?family=Encode+Sans+SC&family=Zen+Loop:ital@1&display=swap" rel="stylesheet">
-	
-	<!--[if lt IE 9]>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-	<![endif]-->
+
 	
 </head>
 
@@ -119,13 +117,8 @@ require_once "FetchDataManager.php";
 					<div id="container">
 						<article>
 							Thank you for the registration!
-							<?php 
-							if (isset($_SESSION['polaczenie'])) {
-								echo $_SESSION['polaczenie'];
-							}
-							
-							?>
-							<p><a href="mainMenu.php">Go to main menu</a></p>
+
+							<p><a style="text-decoration:none;" href="login.php">Log in</a></p>
 						</article>
 					</div>
 				</div>
