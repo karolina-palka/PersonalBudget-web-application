@@ -151,6 +151,7 @@ input[type=submit]
 	margin-top: 20px;
 	border: none;
 	border-radius: 5px;
+	
 	cursor:pointer;
 	letter-spacing: 2px;
 	outline: none;
@@ -168,7 +169,7 @@ input[type=button]:hover
 	-moz-box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
 	box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
 }
-a:link
+a.link
 {
 	color: #ffffff;
 	text-decoration: none;
@@ -231,7 +232,8 @@ input[type=text],
 input[type=email],
 input[type=number],
 input[type=password],
-input[type=date]
+input[type=date],
+select
 {
 	width: 300px;
 	background-color: #efefef;
@@ -250,7 +252,8 @@ input[type=text]:focus,
 input[type=password]:focus,
 input[type=email]:focus,
 input[type=number]:focus,
-input[type=date]:focus
+input[type=date]:focus,
+select:focus
 {
 	-webkit-box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
 	-moz-box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
@@ -407,10 +410,11 @@ ol > li:hover > ul,
 	
 }
 
-/*label {
-  display: flex;
-  align-items: center;
-}*/
+.label-margin {
+  
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
 
 span
 {
@@ -419,7 +423,6 @@ span
 
 span::after {
   padding-left: 5px;
-  
   
 }
 
@@ -511,4 +514,31 @@ input[type=date]:valid+span::after {
 .dropdown-menu
 {
 	background-color: #aeeaea;
+}
+#comment
+{
+	resize: none;
+	margin-top: 10px;
+	/*margin-bottom: 10px;*/
+	padding: 10px;
+	border-radius: 5px;
+}
+.error
+{
+		color:red;
+		margin-top: 10px;
+		margin-bottom: 10px;
+}
+/*a
+{
+	text-decoration: none;
+}*/
+.communication 
+{
+	padding: 40px;
+	font-size: 22px;
+}
+a.dark-link
+{
+	text-decoration: none;
 }

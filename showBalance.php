@@ -67,9 +67,9 @@
 				<div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
 					<div class="btn-group btn-group-lg text-center navbar-nav">
 						
-						  <a class="btn btn-lg nav-link shadow-none" href="addFinance.html" role="button">Add new income</a>
+						  <a class="btn btn-lg nav-link shadow-none" href="addFinance.php" role="button">Add new income</a>
 						 
-						   <a class="btn btn-lg nav-link shadow-none" href="addFinance.html" role="button">Add new expense</a>
+						   <a class="btn btn-lg nav-link shadow-none" href="addFinance.php" role="button">Add new expense</a>
 						
 						 <div class="btn-group btn-group-lg text-center navbar-nav" >
 						  <button id="btnGroupDrop1" type="submit" class="btn btn-lg bg-custom nav-link dropdown-toggle shadow-none active" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Show balance</button>
@@ -82,9 +82,9 @@
 						<div class="btn-group btn-group-lg text-center navbar-nav" >
 						  <button id="btnGroupDrop1" type="submit" class="btn btn-lg bg-custom nav-link dropdown-toggle shadow-none active" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Your profile</button>
 							<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-							  <a class="dropdown-item" href="showBalance.html"><i class="icon-user"></i>Edit your profile</a>
+							  <a class="dropdown-item" href="showBalance.php"><i class="icon-user"></i>Edit your profile</a>
 							  <a class="dropdown-item" href="#"><i class="icon-cog"></i>Change your password</a>
-							  <a class="dropdown-item" href="#"><i class="icon-logout"></i>Log out</a>
+							  <a class="dropdown-item" href="logout.php"><i class="icon-logout"></i>Log out</a>
 							</div>
 						</div>
 					</div>
@@ -99,7 +99,7 @@
 				<div class="col-12 col-md-3 ml-md-n3 mx-sm-auto mx-md-0" >
 					<div id="sideNav">
 
-						<div class="optionL"><a href="mainMenu.html" class="link" target= "_blank">Home</a></div>
+						<div class="optionL"><a href="mainMenu.php" class="link" target= "_blank">Home</a></div>
 						<div class="optionL"><a href="#" class="link" target= "_blank">Saved reports</a></div>
 						<div class="optionL"><a href="#" class="link" target= "_blank">Links</a></div>
 						<div class="optionL"><a href="#" class="link" target= "_blank">Contact</a></div>
@@ -155,7 +155,7 @@
 					
 									<div class="d-flex justify-content-center" id="browseButton" ><input id="browse" type="submit" value="Browse" onclick="checkTimePeriod()"></div>
 								 
-								</div>
+							</div>
 								
 						</div>
 						
