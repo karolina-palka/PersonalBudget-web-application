@@ -1,35 +1,46 @@
 <?php
 
+session_start();
+
 require_once "UserManager.php";
 
-if (!isset($_POST['email'])) {
-	header("Location: index.php");
-} else {
-	$email = UserManager::getEmail();
-	$password = UserManager::getPassword();
+	if (!isset($_SESSION['logged_id'])){
 	
-	require_once 'database.php';
-	$userQuery = $db->prepare('SELECT id, password FROM admins WHERE email=:email');
-		$userQuery->bindValue(':email', $email, PDO::PARAM_STR);
-		$userQuery->execute();
+	if (!isset($_POST['email'])) {
+		header("Location: index.php");
+		exit();
+	} else {
 		
-		$user = $userQuery->fetch();
+		unset ($_SESSION['given_email']);
+		$userManager = new UserManager();
+		$userData = $userManager->getUserData();
+		$email = $userData->getEmail();
+		$pass = $userData->getPassword();
 		
-		if($user && password_verify($password, $user['password'])) {
+		require_once 'database.php';
+		$result = $db->prepare('SELECT * FROM users WHERE email=:email');
+		$result->bindValue(':email', $email, PDO::PARAM_STR);
+		$result->execute();
+		//$result = $db->query("SELECT * FROM users WHERE email='$email'");
+	
+		$user = $result->fetch();
+		
+		if($user && password_verify($pass, $user['password'])) {
 			$_SESSION['logged_id'] = $user['id'];
+			$_SESSION['name'] = $user['name'];
 			unset($_SESSION['bad_attempt']);
+			
 		} else {
 			
-			$_SESSION['bad_attempt'] = true;
-			$_SESSION['given_login'] = $_POST['login'];
-			header('Location: admin.php');
+			$_SESSION['bad_attempt'] = "E-mail or password are incorrect. Please, specify them correctly.";
+			$_SESSION['given_email'] = $_POST['email'];
+			header('Location: login.php');
 			exit();
 		}
+	}
 		
-}
+} 
 	
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -127,7 +138,7 @@ if (!isset($_POST['email'])) {
 							<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 							  <a class="dropdown-item" href="showBalance.html"><i class="icon-user"></i>Edit your profile</a>
 							  <a class="dropdown-item" href="#"><i class="icon-cog"></i>Change your password</a>
-							  <a class="dropdown-item" href="#"><i class="icon-logout"></i>Log out</a>
+							  <a class="dropdown-item" href="logout.php"><i class="icon-logout"></i>Log out</a>
 							</div>
 						</div>
 					</div>
@@ -151,7 +162,7 @@ if (!isset($_POST['email'])) {
 				</div>
 				<div  id="custom-container" class="col-12 col-md-8">
 					<article>
-						<h3>Welcome to the Personal Budget!</h3>
+						<h3>Welcome <?= isset($_SESSION['name']) ? $_SESSION['name'].'!' : ' to the Personal Budget!' ?></h3>
 						
 						This app helps you deal with your personal budget. No longer need to use sticky notes because all the knowledge about your finances are at one place. As a logged in user you can use the following functions: add new income, add new expense, show balance from the current month, previous month or the chosen period of time. You can also browse your records sorted by date.</br>
 						Have a nice visit!

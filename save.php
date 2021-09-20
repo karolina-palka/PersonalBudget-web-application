@@ -18,7 +18,6 @@ require_once "UserManager.php";
 		$surname = $userData->getSurname();
 		$phone_number = $userData->getPhoneNumber();
 		
-		//$_SESSION['cos_tam'] =  $userData->getLogin();
 		$isSafeToConnect = true;
 			if ((strlen($login)<3) || (strlen($login)>20))
 		{
@@ -57,19 +56,19 @@ require_once "UserManager.php";
 		
 		if ($isSafeToConnect) {
 			
-		require_once 'database.php';
-		$result = $db->query("SELECT * FROM users WHERE email='$email'");
-		if ($result->rowCount()) {
-			$_SESSION['e_email'] = "The given e-mail address already exists. Please, specify different.";
-			$userManager->saveDataInSession();
-			header('Location: register.php');
-		} else {
-			$user = $result->fetch();
-			$query = $db->prepare('INSERT INTO users VALUES (NULL, :username, :password, :email, :name, :surname, :phone_number )');
-			//$query->bindValue(':email', ':username', $email, $login, PDO::PARAM_STR);
-			$query->execute([$login, $pass_hash, $email, $name, $surname, $phone_number ]);
-			
-		}
+			require_once 'database.php';
+			$result = $db->query("SELECT * FROM users WHERE email='$email'");
+			if ($result->rowCount()) {
+				$_SESSION['e_email'] = "The given e-mail address already exists. Please, specify different.";
+				$userManager->saveDataInSession();
+				header('Location: register.php');
+			} else {
+				$user = $result->fetch();
+				$query = $db->prepare('INSERT INTO users VALUES (NULL, :username, :password, :email, :name, :surname, :phone_number )');
+				//$query->bindValue(':email', ':username', $email, $login, PDO::PARAM_STR);
+				$query->execute([$login, $pass_hash, $email, $name, $surname, $phone_number ]);
+				
+			}
 		}
 	}
 ?>
