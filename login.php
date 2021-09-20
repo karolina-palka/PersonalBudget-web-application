@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+
+if (isset($_SESSION['logged_id'])) {
+	header("Location: mainMenu.php");
+	exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -46,8 +57,15 @@
 						<article>
 							
 								<form  action="mainMenu.php" method="post">
+								<?php
+									if (isset($_SESSION['bad_attempt'])) {
+										//echo $_SESSION['bad_attempt'];
+										echo '<div class="error">'.$_SESSION['bad_attempt'].'</div>';
+										unset ($_SESSION['bad_attempt']);
+									}
+								?>
 									<div class="d-flex flex-column">
-										<div class="d-flex justify-content-center"><input class="d-flex justify-content-center" type="email" placeholder="e-mail" name="email" onfocus="this.placeholder=''" onblur="this.placeholder='login'">
+										<div class="d-flex justify-content-center"><input class="d-flex justify-content-center" type="email" placeholder="e-mail" name="email" onfocus="this.placeholder=''" onblur="this.placeholder='login'" <?= isset($_SESSION['given_email']) ? 'value="' . $_SESSION['given_email']. '"' : '' ?>>
 										</div>
 										<div class="d-flex justify-content-center">
 										<input class="d-flex justify-content-center" type="password" placeholder="password" onfocus="this.placeholder=''" name="password" onblur="this.placeholder='password'"></div>

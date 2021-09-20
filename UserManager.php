@@ -7,14 +7,8 @@
 			private $surname;
 			private $phone_number;
 			
-		
-			/*function setLogin() {
-				$this->login =  filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
-			}*/
-			
 			function getLogin() {
 				$this->login =  filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
-				//$this->setLogin();
 				return $this->login;
 			}
 			function getPassword() {

@@ -62,7 +62,7 @@ session_start();
 							<form class="d-flex justify-content-center" name="register" action="register.php" method="post">	
 								<input class="d-flex justify-content-center" type="submit" value="Register">
 							</form>
-							<form class="d-flex justify-content-center" action="login.html" method="post">	
+							<form class="d-flex justify-content-center" action="login.php" method="post">	
 								<input class="d-flex justify-content-center" type="submit" value="Log in">
 							</form>
 						</div>
