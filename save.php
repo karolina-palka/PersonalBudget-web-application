@@ -67,7 +67,7 @@ require_once "UserManager.php";
 				$query = $db->prepare('INSERT INTO users VALUES (NULL, :username, :password, :email, :name, :surname, :phone_number )');
 				//$query->bindValue(':email', ':username', $email, $login, PDO::PARAM_STR);
 				$query->execute([$login, $pass_hash, $email, $name, $surname, $phone_number ]);
-				
+				$userManager->unsaveDataInSession();
 			}
 		}
 	}
