@@ -31,9 +31,11 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<![endif]-->
 	
+
 </head>
 
 <body>
+
 	
 	<div class="paper" style="transform: rotate(15deg) translateX(-10px) translateY(15px);"> 
 		<i class="icon-pin"></i>
