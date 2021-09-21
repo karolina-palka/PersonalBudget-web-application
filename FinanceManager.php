@@ -4,6 +4,7 @@
 			protected $amount;
 			protected $finance_date;
 			protected $comment;
+			protected $currency;
 			
 			function getUsername() {
 				$this->login =  $_SESSION['username'];
@@ -29,7 +30,18 @@
 				$this->comment =  filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_STRING);
 				return $this->comment;
 			}
-			
+			function getCurrencyCat() {
+				$this->currency_category =  filter_input(INPUT_POST, 'currency_category', FILTER_SANITIZE_STRING);
+				return $this->currency_category;
+			}
+			function getCurrencyNewCat() {
+				$this->new_currency =  filter_input(INPUT_POST, 'add_currency_cat', FILTER_SANITIZE_STRING);
+				return $this->new_currency;
+			}
+			function getCurrencyNewName() {
+				$this->new_currency_name =  filter_input(INPUT_POST, 'add_currency_name', FILTER_SANITIZE_STRING);
+				return $this->new_currency_name;
+			}
 		};
 		
 		

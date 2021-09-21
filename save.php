@@ -63,10 +63,30 @@ require_once "UserManager.php";
 				$userManager->saveDataInSession();
 				header('Location: register.php');
 			} else {
-				//$user = $result->fetch();
+				
 				$query = $db->prepare('INSERT INTO users VALUES (NULL, :username, :password, :email, :name, :surname, :phone_number )');
-				//$query->bindValue(':email', ':username', $email, $login, PDO::PARAM_STR);
 				$query->execute([$login, $pass_hash, $email, $name, $surname, $phone_number ]);
+			
+				$user_id = $db->query("SELECT id FROM users WHERE email='$email'");
+				$user1 = $user_id->fetchColumn();
+				
+				$table_name = "currency_assigned_to_".$user1;
+				
+				$db->query("CREATE TABLE $table_name ( id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, acronym VARCHAR(11) NOT NULL, name VARCHAR(50) NOT NULL)");
+				$db->query("INSERT INTO $table_name SELECT * FROM currency_default");
+				
+				$table_name = "incomes_category_assigned_to_".$user1;
+				$db->query("CREATE TABLE $table_name ( id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50) NOT NULL)");
+				$db->query("INSERT INTO $table_name SELECT * FROM incomes_category_default");
+				
+				$table_name = "expenses_category_assigned_to_".$user1;
+				$db->query("CREATE TABLE $table_name LIKE expenses_category_default");
+				$db->query("INSERT INTO $table_name SELECT * FROM expenses_category_default");
+				
+				$table_name = "payment_methods_assigned_to_".$user1;
+				$db->query("CREATE TABLE $table_name ( id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50) NOT NULL)");
+				$db->query("INSERT INTO $table_name SELECT * FROM payment_methods_default");
+
 				$userManager->unsaveDataInSession();
 			}
 		}

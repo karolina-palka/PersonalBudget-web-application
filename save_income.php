@@ -13,18 +13,39 @@ require_once "FinanceManager.php";
 	
 	if (($_POST['finance_date'])!="") {
 		
+		require_once "database.php";
+		
 		$incomeData = $incomeManager->getIncomeData();
 		$user_id = $_SESSION['logged_id'];
 		$amount = $incomeData->getAmount();
 		$income_date = $incomeData->getFinanceDate();
 		$comment = $incomeData->getComment();
 		$category = $incomeData->getIncomeCategory();
+		$currency_category = $incomeData->getCurrencyCat();
+		if (isset($_POST['add_currency_cat'])) {
+			$new_currency = $incomeData-> getCurrencyNewCat();
+			$new_currency_name = $incomeData->getCurrencyNewName();
+			
+			$result = $db->query("SELECT * FROM currency_assigned_to_users WHERE acronym='$new_currency'");
+			if ($result->rowCount()) {
+				$_SESSION['e_email'] = "The given currency address already exists. Please, specify different.";
+				$incomeManager->saveDataInSession();
+				header('Location: addIncome.php');
+			} else {
+				$queryCurrency = $db->prepare('INSERT INTO currency_assigned_to_users VALUES (NULL, :user_id, :acronym)');
+				$queryCurrency->execute([ $user_id, $new_currency ]);
+				$queryIncomes = $db->prepare('INSERT INTO incomes VALUES (NULL, :user_id, :income_category_assigned_to_user_id, :amount, :currency, :date_of_income, :income_comment )');
+				$queryIncomes->execute([ $user_id, $category, $amount, $currency_category, $income_date, $comment ]);
+				$_SESSION['done'] = "Your income has been successfully saved.";
+				$incomeManager->unsaveDataInSession();
+			}
+		} else {
 		
-		require_once "database.php";
-		$query = $db->prepare('INSERT INTO incomes VALUES (NULL, :user_id, :income_category_assigned_to_user_id, :amount, :date_of_income, :income_comment )');
-		$query->execute([ $user_id, $category, $amount, $income_date, $comment ]);
-		$_SESSION['done'] = "Your income has been successfully saved.";
-		$incomeManager->unsaveDataInSession();
+			$query = $db->prepare('INSERT INTO incomes VALUES (NULL, :user_id, :income_category_assigned_to_user_id, :amount, :currency, :date_of_income, :income_comment )');
+			$query->execute([ $user_id, $category, $amount, $currency_category, $income_date, $comment ]);
+			$_SESSION['done'] = "Your income has been successfully saved.";
+			$incomeManager->unsaveDataInSession();
+		}
 	} else {
 		$_SESSION['e_date'] = "Please specify correct date!";
 		$incomeManager->saveDataInSession();
