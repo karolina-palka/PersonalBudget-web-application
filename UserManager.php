@@ -53,6 +53,13 @@
 				$_SESSION['given_surname'] = $this->user->getSurname();
 				$_SESSION['given_ph_number'] = $this->user->getPhoneNumber();
 			}
+			function unsaveDataInSession() {
+				if (isset($_SESSION['given_login'])) unset($_SESSION['given_login']);
+				if (isset($_SESSION['given_email'])) unset($_SESSION['given_email']);
+				if (isset($_SESSION['given_name'])) unset($_SESSION['given_name']);
+				if (isset($_SESSION['given_surname'])) unset($_SESSION['given_surname']);
+				if (isset($_SESSION['given_ph_number'])) unset($_SESSION['given_ph_number']);
+			}
 	};
 
 
