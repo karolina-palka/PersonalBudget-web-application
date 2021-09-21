@@ -80,7 +80,7 @@
 						 <div class="btn-group btn-group-lg text-center navbar-nav" >
 						  <button id="btnGroupDrop1" type="submit" class="btn btn-lg bg-custom nav-link dropdown-toggle shadow-none active" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Show balance</button>
 							<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-							  <a class="dropdown-item" href="showBalance.php"><i class="icon-ok"></i>From the current month</a>
+							  <a class="dropdown-item" href="currentMonthBalance.php"><i class="icon-ok"></i>From the current month</a>
 							  <a class="dropdown-item" href="showBalance.php"><i class="icon-ok"></i>From the previous month</a>
 							  <a class="dropdown-item" href="showBalance.php"><i class="icon-ok"></i>From the chosen period</a>
 							</div>

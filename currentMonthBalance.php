@@ -18,6 +18,7 @@
 		$expenses = $expensesQuery->fetchAll();
 		$total_income = 0;
 		$total_expense = 0;
+		$row_number = 0;
 		
 			 
 		/*if ($result->rowCount()) {
@@ -33,10 +34,12 @@
 }
 	 
  
+ 
+ 
  require_once "common_main.php";
 ?>
 	<main>
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row mt-1 ">
 				<div class="col-12 col-md-3 ml-md-n3 mx-sm-auto mx-md-0" >
 					<div id="sideNav">
@@ -55,20 +58,20 @@
 						<div class ="d-sm-inline-block d-md-block d-xl-inline-block ">
 								
 								<div class="d-flex mb-2 form-check">
-								  <input class=" form-check-input" type="radio" name="flexRadioDefault" id="current" checked onclick="checkDate()">
+								  <input class=" form-check-input" type="radio" name="flexRadioDefault" id="current" checked onclick="setCurrentMonth()">
 								  <label class="form-check-label" for="current">
 									<span>current month</span>
 								  </label>
 								</div>
 								<div class="d-flex mb-2 form-check">
-								  <input class=" pb-1 form-check-input" type="radio" name="flexRadioDefault" id="previous"  onclick="checkDate()">
+								  <input class=" pb-1 form-check-input" type="radio" name="flexRadioDefault" id="previous" disabled onclick="checkDate()">
 								  <label class="form-check-label" for="previous">
 									<span>previous month</span>
 								  </label>
 								</div>
 								
 								<div class="d-flex mb-2 form-check">
-								  <input class=" form-check-input" type="radio" name="flexRadioDefault" id="chosen" onclick="checkDate()">
+								  <input class=" form-check-input" type="radio" name="flexRadioDefault" id="chosen" disabled onclick="checkDate()">
 								  <label class="form-check-label text-end" for="chosen">
 									<span>chosen period:</span>
 								  </label>
@@ -83,16 +86,16 @@
 							<div class="d-flex flex-column">
 								
 									<label>from:</label><div class="d-flex justify-content-center">
-									<input id="calendar1" type="date" name="balance_date1" <?= isset($_SESSION['balance_date1']) ? 'value="' . $_SESSION['balance_date1']. '"' : '' ?>> 
+									<input id="calendar1" type="date" onchange="checkTimePeriod()" name="balance_date1" <?= isset($_SESSION['balance_date1']) ? 'value="' . $_SESSION['balance_date1']. '"' : '' ?>> 
 									</div>
 								</div>
 							
 							<div class="d-flex flex-column">
 									
 									<label>to:</label><div class="d-flex justify-content-center">
-									<input id="calendar2" type="date" name="balance_date2"></div>
+									<input id="calendar2" type="date" onchange="checkTimePeriod()" name="balance_date2"></div>
 					
-									<div class="d-flex justify-content-center" id="browseButton" ><input id="browse" type="submit" value="Browse" onclick="checkTimePeriod()" <?= isset($_SESSION['balance_date2']) ? 'value="' . $_SESSION['balance_date2']. '"' : '' ?>></div>
+									<div class="d-flex justify-content-center" id="browseButton" ><input id="browse" type="submit" value="Browse" onchange="checkTimePeriod()" <?= isset($_SESSION['balance_date2']) ? 'value="' . $_SESSION['balance_date2']. '"' : '' ?>></div>
 								 
 							</div>
 								
@@ -101,45 +104,50 @@
 					<?php
 					
 					if (isset($_POST['balance_date1'])) {
-					echo '<table class="label-margin" style="text-align: center;">
+					echo '<table class="label-margin" >
 							<thead>
-								<tr><th colspan="4">Total records: '. $incomesQuery->rowCount().'</th></tr>
-								<tr><th>Date</th><th>Amount</th><th>Income category</th></tr>
+								<tr><th colspan="4">Incomes</th></tr>
+								<tr><th>No</th><th>Date</th><th>Amount</th><th>Income category</th></tr>
 							</thead>
 							<tbody>';
-						//<?php
 						if (isset($_SESSION['bad_attempt'])) {
 							echo $_SESSION['bad_attempt'];
 							unset ($_SESSION['bad_attempt']);
 						} else {
 							foreach($incomes as $income){
 								$total_income += $income['amount'];
-								echo "<tr><td>{$income['date_of_income']}</td><td>{$income['amount']}</td><td>{$income['name']}</td></tr>";
+								$row_number +=1;
+								echo "<tr><td>{$row_number}</td><td>{$income['date_of_income']}</td><td>{$income['amount']}</td><td>{$income['name']}</td></tr>";
 							}
+							echo '<tr><td colspan="4">Total records: ' . $incomesQuery->rowCount()."</td><tr>";
+							echo '<tr><td colspan="4" class="incomes"> Total incomes: ' . $total_income.'</td><tr>';
 							
 						echo '</tbody>
 						</table>';
+						$row_number=0;
 						}
 					}
 					if (isset($_POST['balance_date1'])) {
-						echo '<table class="label-margin" style="text-align: center;">
+						echo '<table class="label-margin" >
 							<thead>
-								<tr><th colspan="4">Total records:'.$expensesQuery->rowCount().'</th></tr>
-								<tr><th>Date</th><th>Amount</th><th>Expense category</th></tr>
+								<tr><th colspan="4" >Expenses </th></tr>
+								<tr><th>No</th><th>Date</th><th>Amount</th><th>Expense category</th></tr>
 							</thead>
 							<tbody>';
 							foreach ($expenses as $expense) {
 								$total_expense += $expense['amount'];
-								echo "<tr><td>{$expense['date_of_expense']}</td><td>{$expense['amount']}</td><td>{$expense['name']}</td></tr>";
+								$row_number +=1;
+								echo "<tr><td>{$row_number}</td><td>{$expense['date_of_expense']}</td><td>{$expense['amount']}</td><td>{$expense['name']}</td></tr>";
 							}
 							$total_balance = $total_income - $total_expense;
-							echo '<tr><td colspan="3">Total balance:</td><td>'.$total_balance.'</td></tr>';
+							echo '<tr><td colspan="4">Total records: ' . $expensesQuery->rowCount().'</td><tr>';
+							echo '<tr><td colspan="4" class="expenses">Total expenses: ' . $total_expense.'</td><tr>';
+							echo '<tr><td colspan="4" class="summary">Total balance: '.$total_balance.'</td></tr>';
 						//}
 
 						echo '</tbody>
 						</table>';
 					} 				
-//END;
 						?>
 				</div>
 			</div>
@@ -200,6 +208,18 @@
 					document.getElementById('calendar1').readOnly = true;
 					document.getElementById('calendar2').readOnly = true;
 				}
+				
+				
+				function setCurrentMonth() {
+					var today= new Date();
+					var year = today.getFullYear();
+					var month = today.getMonth() + 1;
+					var day = today.getDate();
+					setDatePeriod(month, day);
+				}
+				 window.onload = function() {
+					 setCurrentMonth();
+				 }
 
 				function checkDate()
 				{
