@@ -1,98 +1,8 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title>Personal Budget</title>
-	<meta name="description" content="Take control of your personal budget!">
-	<meta name="keywords" content="budget, finances, savings ">
-	<meta name="author" content="Karolina Pałka">
-	
-	<meta http-equiv="X-Ua-Compatible" content="IE=edge">
-  
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-  
-  
-	<link rel="stylesheet"  href="bootstrap-5.1.0-dist/bootstrap-5.1.0-dist/css" type="text/css">
-  
-	<link rel="stylesheet"  href="mainMenu.css" type="text/css">
-	<link rel="stylesheet" href = "css/fontello.css" type="text/css"/>
-
-	<link href="https://fonts.googleapis.com/css2?family=Encode+Sans+SC&family=Zen+Loop:ital@1&display=swap" rel="stylesheet">
-	
-	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
-	
-	<!--[if lt IE 9]>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-	<![endif]-->
-	
-</head>
-
-<body>
-	
-	<div class="paper" style="transform: rotate(15deg) translateX(-10px) translateY(15px);"> 
-		<i class="icon-pin"></i>
-		<h1><i class="icon-lightbulb"> KEEP CALM & </i> </h1>
-		<h2>Take control of your personal budget</h2>
-		<div id="person" ><i class="icon-pitch"></i></div>
-	</div>
-				
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<div id="airplane" class="d-none d-md-inline-block">
-						<i class="icon-airport"></i>
-				</div>
-				<div class="logo d-flex ">
-					<div id="tree1" class="d-none d-md-block align-self-end"><i class="icon-tree-1"></i></div>
-					<div id="gift" class="d-none d-md-block align-self-end"><i class="icon-gift"></i></div>
-					<div id="child" class="d-none d-md-block align-self-end"><i class="icon-child"></i></div>
-					<div id="bicycle" class="d-none d-md-block align-self-end"><i class="icon-bicycle"></i></div>
-					<div id="flower" class="d-none d-md-block align-self-end"><i class="icon-garden"></i></div>
-					<div id="tree2" class="d-none d-xl-block align-self-end"><i class="icon-tree-2"></i></div>
-				</div>
-			</div>
-		</div>
-	</div>	
-
-	<header class="sticky-top">
-		<nav class="navbar navbar-expand-lg bg-custom navbar-dark">
-			 <div class="container-fluid">
-			<a class="navbar-brand ml-3" href="mainMenu.html"><i class="icon-lightbulb"></i>Home </a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-				<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
-					<div class="btn-group btn-group-lg text-center navbar-nav">
-						
-						  <a class="btn btn-lg nav-link shadow-none" href="addFinance.php" role="button">Add new income</a>
-						 
-						   <a class="btn btn-lg nav-link shadow-none" href="addFinance.php" role="button">Add new expense</a>
-						
-						 <div class="btn-group btn-group-lg text-center navbar-nav" >
-						  <button id="btnGroupDrop1" type="submit" class="btn btn-lg bg-custom nav-link dropdown-toggle shadow-none active" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Show balance</button>
-							<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-							  <a class="dropdown-item" href="showBalance.html"><i class="icon-ok"></i>From the current month</a>
-							  <a class="dropdown-item" href="showBalance.html"><i class="icon-ok"></i>From the previous month</a>
-							  <a class="dropdown-item" href="showBalance.html"><i class="icon-ok"></i>From the chosen period</a>
-							</div>
-							</div>
-						<div class="btn-group btn-group-lg text-center navbar-nav" >
-						  <button id="btnGroupDrop1" type="submit" class="btn btn-lg bg-custom nav-link dropdown-toggle shadow-none active" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Your profile</button>
-							<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-							  <a class="dropdown-item" href="showBalance.php"><i class="icon-user"></i>Edit your profile</a>
-							  <a class="dropdown-item" href="#"><i class="icon-cog"></i>Change your password</a>
-							  <a class="dropdown-item" href="logout.php"><i class="icon-logout"></i>Log out</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</nav>
-		
-	</header>
+<?php
+ session_start();
+ 
+ require_once "common_main.php";
+?>
 	<main>
 		<div class="container-fluid">
 			<div class="row mt-1 ">
@@ -167,7 +77,6 @@
 			</div>
 		</div>
 			
-			
 			<script>	
 
 				function getEndDayOfActualMonth(month, year)
@@ -234,9 +143,7 @@
 						var month = today.getMonth() + 1;
 						var day = today.getDate();
 						setDatePeriod(month, day);
-						//$('browseButton').removeClass('ml-n3'); 
-						/*var element = document.getElementById('browseButton');
-						element.classList.add('ml-n3');*/
+
 					}
 
 					else if (document.getElementById('previous').checked)
@@ -244,9 +151,6 @@
 						var month = today.getMonth();
 						var days = getEndDayOfActualMonth(month, year);
 						setDatePeriod(month, days);
-						/*var element = document.getElementById('browseButton');
-						element.classList.add('ml-n3');*/
-						/*document.getElementById('result').innerHTML = days;*/
 					}
 					else 
 					{
@@ -261,10 +165,6 @@
 					{
 						var period1 = document.getElementById("calendar1").value;
 						document.getElementById('calendar2').min = period1;
-						/*var element = document.getElementById('browseButton');
-						element.classList.add('ml-n5');*/
-						/*$("#browseButton").removeClass('d-flex justify-content-center');
-						$("#browseButton").addClass('d-flex justify-content-center ml-n3');*/
 						
 					}
 				}

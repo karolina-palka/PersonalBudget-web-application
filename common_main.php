@@ -1,6 +1,10 @@
 
 <?php
- echo '	<meta charset="utf-8">
+ echo '	
+ <!DOCTYPE html>
+<html lang="pl">
+<head>
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>Personal Budget</title>
@@ -60,23 +64,25 @@
 	<header class="sticky-top">
 		<nav class="navbar navbar-expand-lg bg-custom navbar-dark">
 			 <div class="container-fluid">
-				<a class="navbar-brand ml-3" href="mainMenu.html"><i class="icon-lightbulb"></i>Home </a>
+				<a class="navbar-brand ml-3" href="mainMenu.php"><i class="icon-lightbulb"></i>Home </a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
 				<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
 					<div class="btn-group btn-group-lg text-center navbar-nav">
-						
-						  <a class="btn btn-lg nav-link shadow-none" href="addFinance.php" role="button">Add new income</a>
-						 
-						   <a class="btn btn-lg nav-link shadow-none" href="addFinance.php" role="button">Add new expense</a>
-						
+						<!--<form action="addFinance.php" method="post">-->
+						  <a class="btn btn-lg nav-link shadow-none" name="income" href="addIncome.php" role="button">Add new income</a>
+						  <!--<input class="btn btn-lg nav-link shadow-none" style="margin:0;" type="submit" name="income" id="submit" value="Add new income">-->
+						 <!--</form>-->
+						 <!--<form action="addFinance.php" method="post">-->
+						   <a class="btn btn-lg nav-link shadow-none" name="expense" href="addExpense.php" role="button">Add new expense</a>
+						<!--</form>-->
 						 <div class="btn-group btn-group-lg text-center navbar-nav" >
 						  <button id="btnGroupDrop1" type="submit" class="btn btn-lg bg-custom nav-link dropdown-toggle shadow-none active" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Show balance</button>
 							<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-							  <a class="dropdown-item" href="showBalance.html"><i class="icon-ok"></i>From the current month</a>
-							  <a class="dropdown-item" href="showBalance.html"><i class="icon-ok"></i>From the previous month</a>
-							  <a class="dropdown-item" href="showBalance.html"><i class="icon-ok"></i>From the chosen period</a>
+							  <a class="dropdown-item" href="showBalance.php"><i class="icon-ok"></i>From the current month</a>
+							  <a class="dropdown-item" href="showBalance.php"><i class="icon-ok"></i>From the previous month</a>
+							  <a class="dropdown-item" href="showBalance.php"><i class="icon-ok"></i>From the chosen period</a>
 							</div>
 						</div>
 						<div class="btn-group btn-group-lg text-center navbar-nav" >

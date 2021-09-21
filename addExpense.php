@@ -2,13 +2,6 @@
 
 session_start();
 
-
-?>
-
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-<?php
 require_once "common_main.php";
 ?>
 
@@ -26,42 +19,65 @@ require_once "common_main.php";
 					</div>
 				</div>
 				<div  id="custom-container" class="col-12 col-md-8">
-		
 					
-					<form action="save_income.php" method="post">
+					<form action="save_expense.php" method="post">
 					
-						<!--<div class ="d-sm-inline-block d-md-block d-xl-inline-block mx-4">-->
-						<div class="error" id="result"></div>
+						<div class="error" id="result">
+						<?php
+							if(isset($_SESSION['e_date'])) {
+								echo '<div class="error">'.$_SESSION['e_date'].'</div>';
+								unset ($_SESSION['e_date']);
+							}							 
+						?> </div>
 						<div class ="d-sm-inline-block d-md-block d-xl-inline-block mx-4 ">
 						
 							<div class=" d-flex mb-2 form-check">
-								  <input class=" form-check-input" type="radio" name="flexRadioDefault" id="current" checked>
+								  <input class=" form-check-input" type="radio" name="flexRadioDefault" id="current" disabled>
 								  <label class="form-check-label" for="current">
 									<span>Income</span>
 								  </label>
 								</div>
 							<div class="d-flex mb-2 form-check">
-								  <input class=" pb-1 form-check-input" type="radio" name="flexRadioDefault" id="previous" >
+								  <input class=" pb-1 form-check-input" type="radio" name="flexRadioDefault" id="previous" checked >
 								  <label class="form-check-label" for="previous">
 									<span>Expense</span>
 								  </label>
 							</div>
-							<!--<div class="d-flex mb-2">-->
+
 								<label class="label-margin">Enter the amount:</label>
-									  <div class="d-flex justify-content-center"><input type="number" step="0.01" name="amount" ></div>
+									  <div class="d-flex justify-content-center"><input type="number" step="0.01" name="amount" <?= isset($_SESSION['amount']) ? 'value="' . $_SESSION['amount']. '"' : '' ?> > </div>
 								
-							<!--</div>-->
-							<!--<div class="d-flex mb-2">-->
-								<label class="label-margin">Choose the category:</label>
+								<label class="label-margin">Choose category:</label>
 									  <div class="d-flex justify-content-center"><select id="category" name="category" >
-										<option value="1"> Salary</option>
-										<option value="2"> Interest </option>
-										<option value="3">Allegro </option>
-										<option value="4">Another </option>
+										<option value="1"> Transport</option>
+										<option value="2"> Books </option>
+										<option value="3"> Food </option>
+										<option value="4"> Apartments </option>
+										<option value="5"> Telecommunication </option>
+										<option value="6"> Health </option>
+										<option value="7"> Clothes </option>
+										<option value="8"> Hygiene </option>
+										<option value="9"> Cosmetics </option>
+										<option value="10"> Medicines </option>
+										<option value="11"> Kids </option>
+										<option value="12"> Recreation </option>
+										<option value="13"> Trip </option>
+										<option value="14"> Savings </option>
+										<option value="15"> Debt Repayment </option>
+										<option value="16"> For Retirement </option>
+										<option value="17"> Gift </option>
+										<option value="17"> Another </option>
 									  </select>
 									  </div>
+								  <label class="label-margin">Choose payment method:</label>
+								  <div class="d-flex justify-content-center"><select id="payment_method" name="payment_method" >
+									<option value="1"> Cash</option>
+									<option value="2"> Debit Card </option>
+									<option value="3"> Credit Card </option>
+								  </select>
+								  </div>
 							</div>
-						<!--</div>-->
+
 						<div class ="d-sm-inline-block d-md-block d-xl-inline-block mx-4 ">
 							<div class="d-flex flex-column">
 								<label class="label-margin">Enter the date:</label>
@@ -70,7 +86,7 @@ require_once "common_main.php";
 							
 							</div>
 							<label class="label-margin">Comments:</label>
-									  <div class="d-flex justify-content-center"><textarea id="comment"  name="comment" rows="4" cols="40"></textarea></div>
+									  <div class="d-flex justify-content-center"><textarea id="comment"  name="comment" rows="4" cols="40"><?= isset($_SESSION['comment']) ? $_SESSION['comment']: '' ?></textarea></div>
 							
 							<div class="d-flex justify-content-center"><input type="submit" id="submit" value="Submit"></div>
 							
@@ -92,9 +108,9 @@ require_once "common_main.php";
 				if ( day < 10)  padDay = padDay + "0";
 				var fullToday = year+ padMonth + month + padDay + day;
 				var userDate = document.getElementById("calendar").value;
-				//document.getElementById('result').innerHTML = fullToday; 
+				document.getElementById('result').innerHTML = fullToday; 
 				
-				if (fullToday < userDate) {
+				if (fullToday < userDate){
 					document.getElementById('submit').disabled = true;
 					document.getElementById('result').innerHTML = "Please specify correct date!"; 
 				} else {

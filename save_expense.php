@@ -4,33 +4,32 @@ session_start();
 
 require_once "FinanceManager.php";
 
-/*if (!isset($_POST['amount'])) {
-	header('Location: addIncome.php');
-	exit();
-} else {*/
-
-	$incomeManager = new IncomeManager();
+	$expenseManager = new ExpenseManager();
 	
-	if (($_POST['finance_date'])!="") {
-		
-		$incomeData = $incomeManager->getIncomeData();
-		$user_id = $_SESSION['logged_id'];
-		$amount = $incomeData->getAmount();
-		$income_date = $incomeData->getFinanceDate();
-		$comment = $incomeData->getComment();
-		$category = $incomeData->getIncomeCategory();
-		
-		require_once "database.php";
-		$query = $db->prepare('INSERT INTO incomes VALUES (NULL, :user_id, :income_category_assigned_to_user_id, :amount, :date_of_income, :income_comment )');
-		$query->execute([ $user_id, $category, $amount, $income_date, $comment ]);
-		$_SESSION['done'] = "Your income has been successfully saved.";
-		$incomeManager->unsaveDataInSession();
-	} else {
-		$_SESSION['e_date'] = "Please specify correct date!";
-		$incomeManager->saveDataInSession();
-		header('Location: addIncome.php');
-		exit();
-	}
+if (($_POST['finance_date'])!="") {
+	
+	$expenseData = $expenseManager->getExpenseData();
+	$user_id = $_SESSION['logged_id'];
+	$amount = $expenseData->getAmount();
+	$expense_date = $expenseData->getFinanceDate();
+
+	$comment = $expenseData->getComment();
+	$category = $expenseData->getExpenseCategory();
+	$payment_method = $expenseData->getPaymentMethod();
+	//$id = 2;
+	
+	require_once "database.php";
+	$query = $db->prepare('INSERT INTO expenses VALUES (NULL, :user_id, :expense_category_assigned_to_user_id, :payment_method_assigned_to_user_id, :amount, :date_of_expense, :expense_expense )');
+	$query->execute([ $user_id, $category, $payment_method, $amount, $expense_date, $comment ]);
+	$_SESSION['done'] = "Your expense has been successfully saved.";
+	$expenseManager->unsaveDataInSession();
+	
+} else {
+	$_SESSION['e_date'] = "Please specify correct date!";
+	$expenseManager->saveDataInSession();
+	header('Location: addExpense.php');
+	exit();
+}
 	
 
 
@@ -54,12 +53,12 @@ require_once "common_main.php";
 					<?php
 							if (isset($_SESSION['done'])) {
 	
-								echo '<div class="communication">'.$_SESSION['done'].'<p><a class="dark-link" href="addIncome.php">Add another income >></a></p></div>';
+								echo '<div class="communication">'.$_SESSION['done'].'<p><a class="dark-link" href="addExpense.php">Add another expense >></a></p></div>';
 								unset ($_SESSION['done']);
 								
 							} else {
 								echo '<div class="text-center label-margin ">'."Something has gone wrong".'</div>';
-								echo '<p><a class="dark-link" href="addIncome.php">Add another income >></a></p>';
+								echo '<p><a class="dark-link" href="addExpense.php">Add another expense >></a></p>';
 							}
 						
 						?>
