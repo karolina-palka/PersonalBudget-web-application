@@ -266,6 +266,15 @@ input[type=number]:focus
 		margin-top: 5px;
 		margin-bottom: 5px;
 	}
-	a {
+	/*a {
 		text-decoration: none;
-	}
+	}*/
+.communication 
+{
+	padding: 40px;
+	font-size: 22px;
+}
+a.dark-link
+{
+	text-decoration: none;
+}

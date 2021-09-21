@@ -63,11 +63,11 @@ require_once "UserManager.php";
 				$userManager->saveDataInSession();
 				header('Location: register.php');
 			} else {
-				$user = $result->fetch();
+				//$user = $result->fetch();
 				$query = $db->prepare('INSERT INTO users VALUES (NULL, :username, :password, :email, :name, :surname, :phone_number )');
 				//$query->bindValue(':email', ':username', $email, $login, PDO::PARAM_STR);
 				$query->execute([$login, $pass_hash, $email, $name, $surname, $phone_number ]);
-				
+				$userManager->unsaveDataInSession();
 			}
 		}
 	}
@@ -115,9 +115,9 @@ require_once "UserManager.php";
 				<div class="col-sm-12 col-md-8 col-lg-12 me-auto ms-auto" >
 					<div id="container">
 						<article>
-							Thank you for the registration!
+							<div class="communication">Thank you for the registration!
 
-							<p><a style="text-decoration:none;" href="login.php">Log in</a></p>
+							<p><a class="dark-link" href="login.php">Log in</a></p></div>
 						</article>
 					</div>
 				</div>
