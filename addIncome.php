@@ -71,7 +71,7 @@ require_once "common_main.php";
 								
 							<label class="label-margin">Currency:</label>
 							<div class="d-flex justify-content-center">
-								<input type="text" id="add_currency" name="add_currency_cat" disabled <?= isset($_SESSION['add_currency']) ? 'value="' . $_SESSION['add_currency']. '"' : '' ?> >
+								<input type="text" id="add_currency" name="currency_cat" disabled <?= isset($_SESSION['add_currency']) ? 'value="' . $_SESSION['add_currency']. '"' : '' ?> >
 							</div>
 							<label class="label-margin">Name (optionally):</label>
 							<div class="d-flex justify-content-center">

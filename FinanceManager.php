@@ -35,11 +35,11 @@
 				return $this->currency_category;
 			}
 			function getCurrencyNewCat() {
-				$this->new_currency =  filter_input(INPUT_POST, 'add_currency_cat', FILTER_SANITIZE_STRING);
+				$this->new_currency =  filter_input(INPUT_POST, 'currency_cat', FILTER_SANITIZE_STRING);
 				return $this->new_currency;
 			}
 			function getCurrencyNewName() {
-				$this->new_currency_name =  filter_input(INPUT_POST, 'add_currency_name', FILTER_SANITIZE_STRING);
+				$this->new_currency_name =  filter_input(INPUT_POST, 'currency_name', FILTER_SANITIZE_STRING);
 				return $this->new_currency_name;
 			}
 		};

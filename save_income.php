@@ -22,21 +22,25 @@ require_once "FinanceManager.php";
 		$comment = $incomeData->getComment();
 		$category = $incomeData->getIncomeCategory();
 		$currency_category = $incomeData->getCurrencyCat();
-		if (isset($_POST['add_currency_cat'])) {
+		
+		if (isset($_POST['currency_cat'])) {
 			$new_currency = $incomeData-> getCurrencyNewCat();
 			$new_currency_name = $incomeData->getCurrencyNewName();
 			
-			$result = $db->query("SELECT * FROM currency_assigned_to_users WHERE acronym='$new_currency'");
+			$result = $db->query("SELECT * FROM currency_assigned_to_$user_id WHERE acronym='$new_currency'");
 			if ($result->rowCount()) {
-				$_SESSION['e_email'] = "The given currency address already exists. Please, specify different.";
+				$_SESSION['e_email'] = "The given currency already exists. Please, specify different.";
 				$incomeManager->saveDataInSession();
 				header('Location: addIncome.php');
 			} else {
-				$queryCurrency = $db->prepare('INSERT INTO currency_assigned_to_users VALUES (NULL, :user_id, :acronym)');
-				$queryCurrency->execute([ $user_id, $new_currency ]);
+				$queryCurrency = $db->prepare("INSERT INTO currency_assigned_to_$user_id VALUES (NULL, :acronym, :name)");
+				$queryCurrency->execute([ $new_currency, $new_currency_name ]);
+				$queryCurrencyId = $db->query("SELECT id FROM currency_assigned_to_$user_id WHERE acronym='$new_currency'");
+				$currency_id = $queryCurrencyId->fetchColumn();
+				
 				$queryIncomes = $db->prepare('INSERT INTO incomes VALUES (NULL, :user_id, :income_category_assigned_to_user_id, :amount, :currency, :date_of_income, :income_comment )');
-				$queryIncomes->execute([ $user_id, $category, $amount, $currency_category, $income_date, $comment ]);
-				$_SESSION['done'] = "Your income has been successfully saved.";
+				$queryIncomes->execute([ $user_id, $category, $amount, $currency_id, $income_date, $comment ]);
+				$_SESSION['done'] = "Your income and new currency has been successfully saved.";
 				$incomeManager->unsaveDataInSession();
 			}
 		} else {
