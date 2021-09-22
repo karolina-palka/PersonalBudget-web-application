@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -53,18 +59,13 @@
 					<article>
 
 						<div class="d-flex flex-column">
-							<form class="d-flex justify-content-center" action="register.html" method="get">	
+							<form class="d-flex justify-content-center" name="register" action="register.php" method="post">	
 								<input class="d-flex justify-content-center" type="submit" value="Register">
 							</form>
-							<form class="d-flex justify-content-center" action="login.html" method="get">	
+							<form class="d-flex justify-content-center" action="login.php" method="post">	
 								<input class="d-flex justify-content-center" type="submit" value="Log in">
 							</form>
 						</div>
-					
-					<!--<div class="d-flex flex-column">
-					<a class="btn btn-lg bg-custom d-flex justify-content-center" href="addFinance.html" role="button">Register</a>
-					<a class="btn btn-lg bg-custom d-flex justify-content-center" href="login.html" role="button">Log in</a>
-					</div>-->
 				
 					</article>
 				</div>

@@ -1,7 +1,9 @@
-<!DOCTYPE html>
+
+<?php
+ echo '	
+ <!DOCTYPE html>
 <html lang="pl">
 <head>
-
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -15,7 +17,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
   
   
-	<link rel="stylesheet"  href="bootstrap-5.1.0-dist/bootstrap-5.1.0-dist/css" type="text/css">
+	<link rel="stylesheet"  href="bootstrap-5.1.0-dist/bootstrap-5.1.0-dist/css" >
   
 	
 	<link rel="stylesheet"  href="mainMenu.css" type="text/css">
@@ -29,9 +31,11 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<![endif]-->
 	
+
 </head>
 
 <body>
+
 	
 	<div class="paper" style="transform: rotate(15deg) translateX(-10px) translateY(15px);"> 
 		<i class="icon-pin"></i>
@@ -62,31 +66,33 @@
 	<header class="sticky-top">
 		<nav class="navbar navbar-expand-lg bg-custom navbar-dark">
 			 <div class="container-fluid">
-				<a class="navbar-brand ml-3" href="mainMenu.html"><i class="icon-lightbulb"></i>Home </a>
+				<a class="navbar-brand ml-3" href="mainMenu.php"><i class="icon-lightbulb"></i>Home </a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
 				<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
 					<div class="btn-group btn-group-lg text-center navbar-nav">
-						
-						  <a class="btn btn-lg nav-link shadow-none" href="addFinance.html" role="button">Add new income</a>
-						 
-						   <a class="btn btn-lg nav-link shadow-none" href="addFinance.html" role="button">Add new expense</a>
-						
+						<!--<form action="addFinance.php" method="post">-->
+						  <a class="btn btn-lg nav-link shadow-none" name="income" href="addIncome.php" role="button">Add new income</a>
+						  <!--<input class="btn btn-lg nav-link shadow-none" style="margin:0;" type="submit" name="income" id="submit" value="Add new income">-->
+						 <!--</form>-->
+						 <!--<form action="addFinance.php" method="post">-->
+						   <a class="btn btn-lg nav-link shadow-none" name="expense" href="addExpense.php" role="button">Add new expense</a>
+						<!--</form>-->
 						 <div class="btn-group btn-group-lg text-center navbar-nav" >
 						  <button id="btnGroupDrop1" type="submit" class="btn btn-lg bg-custom nav-link dropdown-toggle shadow-none active" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Show balance</button>
 							<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-							  <a class="dropdown-item" href="showBalance.html"><i class="icon-ok"></i>From the current month</a>
-							  <a class="dropdown-item" href="showBalance.html"><i class="icon-ok"></i>From the previous month</a>
-							  <a class="dropdown-item" href="showBalance.html"><i class="icon-ok"></i>From the chosen period</a>
+							  <a class="dropdown-item" href="currentMonthBalance.php"><i class="icon-ok"></i>From the current month</a>
+							  <a class="dropdown-item" href="previousMonthBalance.php"><i class="icon-ok"></i>From the previous month</a>
+							  <a class="dropdown-item" href="chosenPeriodBalance.php"><i class="icon-ok"></i>From the chosen period</a>
 							</div>
 						</div>
 						<div class="btn-group btn-group-lg text-center navbar-nav" >
 						  <button id="btnGroupDrop1" type="submit" class="btn btn-lg bg-custom nav-link dropdown-toggle shadow-none active" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Your profile</button>
 							<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-							  <a class="dropdown-item" href="showBalance.html"><i class="icon-user"></i>Edit your profile</a>
+							  <a class="dropdown-item" href="#"><i class="icon-user"></i>Edit your profile</a>
 							  <a class="dropdown-item" href="#"><i class="icon-cog"></i>Change your password</a>
-							  <a class="dropdown-item" href="#"><i class="icon-logout"></i>Log out</a>
+							  <a class="dropdown-item" href="logout.php"><i class="icon-logout"></i>Log out</a>
 							</div>
 						</div>
 					</div>
@@ -94,53 +100,5 @@
 			</div>
 		</nav>
 		
-	</header>
-	<main>
-		<div class="container-fluid">
-			<div class="row mt-1 no-gutters">
-				<div class="col-12 col-md-3 ml-md-n3 mx-sm-auto mx-md-0" >
-					<div id="sideNav">
-
-						<div class="optionL"><a href="mainMenu.html" class="link" target= "_blank">Home</a></div>
-						<div class="optionL"><a href="#" class="link" target= "_blank">Saved reports</a></div>
-						<div class="optionL"><a href="#" class="link" target= "_blank">Links</a></div>
-						<div class="optionL"><a href="#" class="link" target= "_blank">Contact</a></div>
-				
-					</div>
-				</div>
-				<div  id="custom-container" class="col-12 col-md-8">
-		
-					
-					<form action="addFinance.php" method="post">
-					
-						<div class ="d-sm-inline-block d-md-block d-xl-inline-block mx-4">
-							<div class=" d-flex mb-2 form-check">
-								  <input class=" form-check-input" type="radio" name="flexRadioDefault" id="current" checked>
-								  <label class="form-check-label" for="current">
-									<span>Income</span>
-								  </label>
-								</div>
-							<div class="d-flex mb-2 form-check">
-								  <input class=" pb-1 form-check-input" type="radio" name="flexRadioDefault" id="previous" >
-								  <label class="form-check-label" for="previous">
-									<span>Expense</span>
-								  </label>
-							</div>
-						</div>
-						<div class ="d-sm-inline-block d-md-block d-xl-inline-block mx-4">	
-							<div class="d-flex flex-column">
-								<label>Enter the date:</label>
-								<div class=" d-flex justify-content-center"><input type="date" name="finance_date"></div>
-							
-							<div class="d-flex justify-content-center"><input type="submit" value="Submit"></div>
-							</div>
-						</div>
-					</form>	
-				</div>
-			</div>
-		</div>
-	</main>
-	<div id="footer"> All rights reserved &copy; 2021</div>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-</body>
-</html>
+	</header>';
+	?>
