@@ -1,4 +1,7 @@
 <?php
+
+require_once "Database.php";
+
 		Class User {
 			private $login;
 			private $password;
@@ -38,9 +41,21 @@
 		Class UserManager {
 		
 			private $user;
+			private $isSafeToConnect;
+			private $pass_hash;
+			private $login;
+			private $password;
+			private $email;
+			private $name;
+			private $surname;
+			private $phone_number;
+			private $connection;
 			
 			public function __construct() {
 				$this->user = new User;
+				$this->isSafeToConnect = true;
+				$db = new Database();
+				$this->connection = $db->createConnection();
 			}
 			function getUserData() {
 				return $this->user;
@@ -60,7 +75,114 @@
 				if (isset($_SESSION['given_surname'])) unset($_SESSION['given_surname']);
 				if (isset($_SESSION['given_ph_number'])) unset($_SESSION['given_ph_number']);
 			}
-	};
+			function getDataFromForm() {
+				$this->login = $this->user->getLogin();
+				$this->password = $this->user->getEmail();
+				$this->email = $this->user->getEmail();
+				$this->name = $this->user->getName();
+				$this->surname = $this->user->getSurname();
+				$this->phone_number = $this->user->getPhoneNumber();
+				
+			}
+			
+			function validateLogin() {
+				
+				if ((strlen($this->user->getLogin())<3) || (strlen($this->user->getLogin())>20))
+				{
+					$this->isSafeToConnect = false;
+					$_SESSION['e_login'] = "Login must be 3 to 20 characters long!";
+					
+					$this->saveDataInSession();
+					header('Location: register.php');
+				}
+				if (ctype_alnum($this->user->getLogin())==false)
+				{
+					$this->isSafeToConnect = false;
+					$_SESSION['e_login'] = "Login can only consist of letters and numbers";
+					$this->saveDataInSession();
+					header('Location: register.php');
+				}
+			}
+			
+			function validateEmail() {
+				$emailB = filter_var($this->user->getEmail(), FILTER_SANITIZE_EMAIL);
+				
+				if ((filter_var($emailB, FILTER_VALIDATE_EMAIL)==false) ||($emailB!=$this->user->getEmail()))
+				{
+					$this->isSafeToConnect = false;
+					$_SESSION['e_email'] = "Please specify your e-mail address appropriately.";
+					$this->saveDataInSession();
+					header('Location: register.php');
+				}
+				
+			}
+			
+			function validatePassword() {
+				if ((strlen($this->user->getPassword())<8) || (strlen($this->user->getPassword())>20))
+				{
+					$this->isSafeToConnect = false;
+					$_SESSION['e_password'] = "Password must be 8 to 20 characters long!";
+					$this->saveDataInSession();
+					header('Location: register.php');
+				}
+						
+				$this->pass_hash = password_hash($this->user->getPassword(), PASSWORD_DEFAULT);
+				
+			}
+			
+			function checkIfEmailAlreadyExists() {
+				
+				if ($this->isSafeToConnect) {
+					$email = $this->user->getEmail();
+					$result = $this->connection->query("SELECT * FROM users WHERE email='$email'");
+						if ($result->rowCount()) {
+							$_SESSION['e_email'] = "The given e-mail address already exists. Please, specify different.";
+							
+							$this->saveDataInSession();
+							header('Location: register.php');
+							return true;
+					} else {
+						return false;
+					}
+					
+				}
+			}
+			
+			function saveUserToDatabase() {
+				
+				if ($this->isSafeToConnect) {
+					
+					if (!($this->checkIfEmailAlreadyExists())) {
+						
+					$query = $this->connection->prepare('INSERT INTO users VALUES (NULL, :username, :password, :email, :name, :surname, :phone_number )');
+					$query->execute([$this->user->getLogin(), $this->pass_hash, $this->user->getEmail(), $this->user->getName(), $this->user->getSurname(), $this->user->getPhoneNumber() ]);
+				
+					$user_id = $this->connection->query("SELECT id FROM users WHERE email='$this->email'");
+					$user1 = $user_id->fetchColumn();
+					
+					$table_name = "currency_assigned_to_".$user1;
+					
+					$this->connection->query("CREATE TABLE $table_name ( id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, acronym VARCHAR(11) NOT NULL, name VARCHAR(50) NOT NULL)");
+					$this->connection->query("INSERT INTO $table_name SELECT * FROM currency_default");
+					
+					$table_name = "incomes_category_assigned_to_".$user1;
+					$this->connection->query("CREATE TABLE $table_name ( id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50) NOT NULL)");
+					$this->connection->query("INSERT INTO $table_name SELECT * FROM incomes_category_default");
+					
+					$table_name = "expenses_category_assigned_to_".$user1;
+					$this->connection->query("CREATE TABLE $table_name LIKE expenses_category_default");
+					$this->connection->query("INSERT INTO $table_name SELECT * FROM expenses_category_default");
+					
+					$table_name = "payment_methods_assigned_to_".$user1;
+					$this->connection->query("CREATE TABLE $table_name ( id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50) NOT NULL)");
+					$this->connection->query("INSERT INTO $table_name SELECT * FROM payment_methods_default");
 
+					$this->unsaveDataInSession();
+					}
+					
+				}
+			}
+		}
+	
 
 ?>
