@@ -76,6 +76,16 @@ require_once "common_main.php";
 									<option value="3"> Credit Card </option>
 								  </select>
 								  </div>
+								  <label class="label-margin">Choose currency:</label>
+								<div class="d-flex justify-content-center">
+									<select id="currency_category" name="currency_category">
+										<option value="1"> PLN </option>
+										<option value="2"> EUR </option>
+										<option value="3"> USD </option>
+										<option value="4"> GBP </option>
+										<option value="0"> Add another currency </option>
+									</select>
+								</div>
 							</div>
 
 						<div class ="d-sm-inline-block d-md-block d-xl-inline-block mx-4 ">
