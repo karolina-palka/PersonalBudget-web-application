@@ -1,7 +1,7 @@
 <?php
  session_start();
- $_SESSION['current'] = "checked";
- $_SESSION['previous'] = "disabled";
+ $_SESSION['current'] = "disabled";
+ $_SESSION['previous'] = "checked";
  $_SESSION['chosen'] = "disabled";
  
  header('Location: showBalance.php');
