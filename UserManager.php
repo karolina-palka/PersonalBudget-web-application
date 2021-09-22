@@ -158,23 +158,23 @@ require_once "Database.php";
 					$query = $this->connection->prepare('INSERT INTO users VALUES (NULL, :username, :password, :email, :name, :surname, :phone_number )');
 					$query->execute([$this->user->getLogin(), $this->pass_hash, $this->user->getEmail(), $this->user->getName(), $this->user->getSurname(), $this->user->getPhoneNumber() ]);
 				
-					$user_id = $this->connection->query("SELECT id FROM users WHERE email='$this->email'");
-					$user1 = $user_id->fetchColumn();
+					$userQuery = $this->connection->query("SELECT id FROM users WHERE email='$this->email'");
+					$user_id = $userQuery->fetchColumn();
 					
-					$table_name = "currency_assigned_to_".$user1;
+					$table_name = "currency_assigned_to_".$user_id;
 					
 					$this->connection->query("CREATE TABLE $table_name ( id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, acronym VARCHAR(11) NOT NULL, name VARCHAR(50) NOT NULL)");
 					$this->connection->query("INSERT INTO $table_name SELECT * FROM currency_default");
 					
-					$table_name = "incomes_category_assigned_to_".$user1;
+					$table_name = "incomes_category_assigned_to_".$user_id;
 					$this->connection->query("CREATE TABLE $table_name ( id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50) NOT NULL)");
 					$this->connection->query("INSERT INTO $table_name SELECT * FROM incomes_category_default");
 					
-					$table_name = "expenses_category_assigned_to_".$user1;
+					$table_name = "expenses_category_assigned_to_".$user_id;
 					$this->connection->query("CREATE TABLE $table_name LIKE expenses_category_default");
 					$this->connection->query("INSERT INTO $table_name SELECT * FROM expenses_category_default");
 					
-					$table_name = "payment_methods_assigned_to_".$user1;
+					$table_name = "payment_methods_assigned_to_".$user_id;
 					$this->connection->query("CREATE TABLE $table_name ( id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50) NOT NULL)");
 					$this->connection->query("INSERT INTO $table_name SELECT * FROM payment_methods_default");
 
