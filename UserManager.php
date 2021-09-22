@@ -54,6 +54,7 @@ require_once "Database.php";
 			public function __construct() {
 				$this->user = new User;
 				$this->isSafeToConnect = true;
+				//$this->connection = DatabaseManager::connect();
 				$db = new Database();
 				$this->connection = $db->createConnection();
 			}
@@ -77,7 +78,7 @@ require_once "Database.php";
 			}
 			function getDataFromForm() {
 				$this->login = $this->user->getLogin();
-				$this->password = $this->user->getEmail();
+				$this->password = $this->user->getPassword();
 				$this->email = $this->user->getEmail();
 				$this->name = $this->user->getName();
 				$this->surname = $this->user->getSurname();
@@ -182,7 +183,31 @@ require_once "Database.php";
 					
 				}
 			}
+			
+			function logIn() {
+				
+			$result = $this->connection->prepare('SELECT * FROM users WHERE email=:email');
+			$result->bindValue(':email', $this->user->getEmail(), PDO::PARAM_STR);
+			$result->execute();
+			//$result = $db->query("SELECT * FROM users WHERE email='$email'");
+		
+			$user = $result->fetch();
+			
+			if($user && password_verify($this->user->getPassword(), $user['password'])) {
+				$_SESSION['logged_id'] = $user['id'];
+				$_SESSION['name'] = $user['name'];
+				$_SESSION['login'] = $user['username'];
+				unset($_SESSION['bad_attempt']);
+				
+			} else {
+				
+				$_SESSION['bad_attempt'] = "E-mail or password are incorrect. Please, specify them correctly.";
+				$_SESSION['given_email'] = $_POST['email'];
+				header('Location: login.php');
+				exit();
+			}
 		}
+	}
 	
 
 ?>
