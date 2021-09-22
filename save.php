@@ -9,87 +9,16 @@ require_once "UserManager.php";
 	} else {
 	
 		$userManager = new UserManager();
-		$userData = $userManager->getUserData();
 		
-		$login = $userData->getLogin();
-		$password = $userData->getPassword();
-		$email = $userData->getEmail();
-		$name = $userData->getName();
-		$surname = $userData->getSurname();
-		$phone_number = $userData->getPhoneNumber();
+		//$userManager->getDataFromForm();
 		
-		$isSafeToConnect = true;
-			if ((strlen($login)<3) || (strlen($login)>20))
-		{
-			$isSafeToConnect = false;
-			$_SESSION['e_login'] = "Login must be 3 to 20 characters long!";
-			
-			$userManager->saveDataInSession();
-			header('Location: register.php');
-		}
-		if (ctype_alnum($login)==false)
-		{
-			$isSafeToConnect = false;
-			$_SESSION['e_login'] = "Login can only consist of letters and numbers";
-			$userManager->saveDataInSession();
-			header('Location: register.php');
-		}
+		$userManager->validateLogin();
 		
-		$emailB = filter_var($email, FILTER_SANITIZE_EMAIL);
+		$userManager->validateEmail();
+		$userManager->validatePassword();
 		
-		if ((filter_var($emailB, FILTER_VALIDATE_EMAIL)==false) ||($emailB!=$email))
-		{
-			$isSafeToConnect = false;
-			$_SESSION['e_email'] = "Please specify your e-mail address appropriately.";
-			$userManager->saveDataInSession();
-			header('Location: register.php');
-		}
+		$userManager->saveUserToDatabase();
 		
-		if ((strlen($password)<8) || (strlen($password)>20))
-		{
-			$isSafeToConnect = false;
-			$_SESSION['e_password'] = "Password must be 8 to 20 characters long!";
-			$userManager->saveDataInSession();
-			header('Location: register.php');
-		}
-		$pass_hash = password_hash($password, PASSWORD_DEFAULT);
-		
-		if ($isSafeToConnect) {
-			
-			require_once 'database.php';
-			$result = $db->query("SELECT * FROM users WHERE email='$email'");
-			if ($result->rowCount()) {
-				$_SESSION['e_email'] = "The given e-mail address already exists. Please, specify different.";
-				$userManager->saveDataInSession();
-				header('Location: register.php');
-			} else {
-				
-				$query = $db->prepare('INSERT INTO users VALUES (NULL, :username, :password, :email, :name, :surname, :phone_number )');
-				$query->execute([$login, $pass_hash, $email, $name, $surname, $phone_number ]);
-			
-				$user_id = $db->query("SELECT id FROM users WHERE email='$email'");
-				$user1 = $user_id->fetchColumn();
-				
-				$table_name = "currency_assigned_to_".$user1;
-				
-				$db->query("CREATE TABLE $table_name ( id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, acronym VARCHAR(11) NOT NULL, name VARCHAR(50) NOT NULL)");
-				$db->query("INSERT INTO $table_name SELECT * FROM currency_default");
-				
-				$table_name = "incomes_category_assigned_to_".$user1;
-				$db->query("CREATE TABLE $table_name ( id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50) NOT NULL)");
-				$db->query("INSERT INTO $table_name SELECT * FROM incomes_category_default");
-				
-				$table_name = "expenses_category_assigned_to_".$user1;
-				$db->query("CREATE TABLE $table_name LIKE expenses_category_default");
-				$db->query("INSERT INTO $table_name SELECT * FROM expenses_category_default");
-				
-				$table_name = "payment_methods_assigned_to_".$user1;
-				$db->query("CREATE TABLE $table_name ( id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50) NOT NULL)");
-				$db->query("INSERT INTO $table_name SELECT * FROM payment_methods_default");
-
-				$userManager->unsaveDataInSession();
-			}
-		}
 	}
 ?>
 
