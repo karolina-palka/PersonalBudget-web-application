@@ -1,48 +1,25 @@
 <?php
  session_start();
  
+ if ((!isset($_SESSION['logged_in'])) && (!isset($_SESSION['current']))){
+	header('Location: index.php');
+	exit();
+} else {
  
-  if((isset($_POST['balance_date1'])) && (!isset($_SESSION['bad_attempt']))){
- 
-	 if (($_POST['balance_date1']!="") && ($_POST['balance_date2']!="")) {
-		 require_once "database.php";
-		 $from = $_POST['balance_date1'];
-		 $to = $_POST['balance_date2'];
-		 $user_id = $_SESSION['logged_id'];
+	 require_once "BalanceManager.php";
+	 
+	  if((isset($_POST['balance_date1'])) && (!isset($_SESSION['bad_attempt']))){
+		  
+		  $balanceManager = new BalanceManager();
+		  $balanceManager->showBalance();
+		  $incomesQuery = $balanceManager->incomesQuery;
+		  $expensesQuery = $balanceManager->expensesQuery;
+		  $incomes = $incomesQuery->fetchAll();
+		  $expenses = $expensesQuery->fetchAll();
 		 
-		if (isset ($_POST['category'])) {
-			  $category = $_POST['category'];
-			  $sqlIncomesQuery = "SELECT * FROM incomes as inc LEFT OUTER JOIN incomes_category_assigned_to_$user_id as ass ON inc.income_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND ass.id = '$category' AND date_of_income BETWEEN '$from' AND '$to' ORDER BY date_of_income ";
-			  $sqlIncomesQuery = "SELECT * FROM expenses as exp LEFT OUTER JOIN expenses_category_assigned_to_$user_id as ass ON exp.expense_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND ass.id = '$category' AND date_of_expense BETWEEN '$from' AND '$to' ORDER BY date_of_expense ";
-		 }
-		else {
-			$sqlIncomesQuery ="SELECT * FROM incomes as inc LEFT OUTER JOIN incomes_category_assigned_to_$user_id as ass ON inc.income_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND date_of_income BETWEEN '$from' AND '$to'  ORDER BY date_of_income ";
-			$sqlIncomesQuery = "SELECT * FROM expenses as exp LEFT OUTER JOIN expenses_category_assigned_to_$user_id as ass ON exp.expense_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND date_of_expense BETWEEN '$from' AND '$to' ORDER BY date_of_expense ";
-		}
-		 $incomesQuery = $db->query($sqlIncomesQuery);
-		 $expensesQuery = $db->query($sqlIncomesQuery);
-		 
-		 
-		/*$incomesQuery = $db->query("SELECT * FROM incomes as inc LEFT OUTER JOIN incomes_category_assigned_to_$user_id as ass ON inc.income_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND date_of_income BETWEEN '$from' AND '$to'  ORDER BY date_of_income ");
-
-		$expensesQuery = $db->query("SELECT * FROM expenses as exp LEFT OUTER JOIN expenses_category_assigned_to_$user_id as ass ON exp.expense_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND date_of_expense BETWEEN '$from' AND '$to' ORDER BY date_of_expense ");*/
-		
-		$incomes = $incomesQuery->fetchAll();
-		$expenses = $expensesQuery->fetchAll();
-		$total_income = 0;
-		$total_expense = 0;
-		$row_number = 0;
-		 }
-		 
-	else {
-		
-		$_SESSION['bad_attempt'] = "Bad attempt. Please specify correct date!";
-	
 	}
 	 
 }
-	 
-
  require_once "common_main.php";
 ?>
 	<main>
@@ -91,7 +68,7 @@
 								  </label>
 								  
 								</div>
-								<div class="d-flex flex-column">
+								<!--<div class="d-flex flex-column">
 								
 									<label>Choose the category (optionally):</label><div class="d-flex justify-content-center">
 									<select id="category" name="category" >
@@ -115,7 +92,7 @@
 										<option value="17"> Another </option>
 									  </select>
 									</div>
-								</div>
+								</div>-->
 						</div>	
 						
 						<div class ="d-sm-inline-block d-md-block d-xl-inline-block mx-4 ">
@@ -139,7 +116,9 @@
 						</div>
 					</form>
 					<?php
-					
+					$total_income = 0;
+					$total_expense = 0;
+					$row_number = 0;
 					if (isset($_POST['balance_date1'])) {
 					echo '<table class="label-margin" >
 							<thead>
@@ -172,7 +151,7 @@
 									 unset($_SESSION['no_incomes']);
 								}
 						}
-					//}
+					
 					if (isset($_POST['balance_date1'])) {
 						echo '<table class="label-margin" >
 							<thead>
@@ -308,7 +287,8 @@
 					}
 					while ( document.getElementById('calendar2').value < document.getElementById('calendar1').value) {
 						document.getElementById('calendar1').value = document.getElementById('calendar2').value;
-						//document.getElementById('calendar2').min = document.getElementById('calendar1').value;
+						document.getElementById('calendar2').min = document.getElementById('calendar1').value;
+						//document.getElementById('calendar1').value = document.getElementById('calendar2').value;
 					}
 				 }
 			 
