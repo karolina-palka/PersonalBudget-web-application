@@ -31,6 +31,8 @@ Class BalanceManager {
 				  $category = $_POST['category'];
 				  $sqlIncomesQuery = "SELECT * FROM incomes as inc LEFT OUTER JOIN incomes_category_assigned_to_$user_id as ass ON inc.income_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND ass.id = '$category' AND date_of_income BETWEEN '$from' AND '$to' ORDER BY date_of_income ";
 				  $sqlExpensesQuery = "SELECT * FROM expenses as exp LEFT OUTER JOIN expenses_category_assigned_to_$user_id as ass ON exp.expense_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND ass.id = '$category' AND date_of_expense BETWEEN '$from' AND '$to' ORDER BY date_of_expense ";
+				  
+				  //$_SESSION['category'] = "checked";
 			 }
 			else {
 				$sqlIncomesQuery ="SELECT * FROM incomes as inc LEFT OUTER JOIN incomes_category_assigned_to_$user_id as ass ON inc.income_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND date_of_income BETWEEN '$from' AND '$to'  ORDER BY date_of_income ";

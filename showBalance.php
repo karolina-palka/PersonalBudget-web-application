@@ -42,7 +42,7 @@
 						<?php
 							if(isset($_SESSION['bad_attempt'])) {
 								echo '<div class="error">'.$_SESSION['bad_attempt'].'</div>';
-								//unset ($_SESSION['bad_attempt']);
+								unset ($_SESSION['bad_attempt']);
 							}							 
 						?> </div>
 					
@@ -68,10 +68,13 @@
 								  </label>
 								  
 								</div>
-								<!--<div class="d-flex flex-column">
-								
-									<label>Choose the category (optionally):</label><div class="d-flex justify-content-center">
-									<select id="category" name="category" >
+								<div class="d-flex flex-column">
+								<div class="form-check form-check-inline">
+								  <input class="form-check-input" type="checkbox" id="balance_category" value="option1" onclick="setCategory()" >
+								  <label class="form-check-label" for="balance_category">Choose the category (optionally):</label>
+								</div>
+									<div class="d-flex justify-content-center">
+									<select id="category" name="category" disabled >
 										<option value="1"> Transport</option>
 										<option value="2"> Books </option>
 										<option value="3"> Food </option>
@@ -92,27 +95,26 @@
 										<option value="17"> Another </option>
 									  </select>
 									</div>
-								</div>-->
+								</div>
 						</div>	
 						
 						<div class ="d-sm-inline-block d-md-block d-xl-inline-block mx-4 ">
 					
 							<div class="d-flex flex-column">
 								
-									<label>from:</label><div class="d-flex justify-content-center">
-									<input id="calendar1" type="date" onchange="validateAndSetDate()" name="balance_date1" <?= isset($_POST['balance_date1']) ? 'value="' . $_POST['balance_date1']. '"' : '' ?>> 
-									</div>
+								<label>from:</label>
+								<div class="d-flex justify-content-center">
+									<input id="calendar1" type="date" onchange="validateDate()" name="balance_date1" <?= isset($_POST['balance_date1']) ? 'value="' . $_POST['balance_date1']. '"' : '' ?>> 
 								</div>
-							
-							<div class="d-flex flex-column">
-									
-									<label>to:</label><div class="d-flex justify-content-center">
-									<input id="calendar2" type="date" onchange="checkDate()" name="balance_date2" <?= isset($_POST['balance_date2']) ? 'value="' . $_POST['balance_date2']. '"' : '' ?>></div>
-					
-									<div class="d-flex justify-content-center" id="browseButton" ><input id="browse" type="submit" value="Browse" disabled></div>
-								 
 							</div>
 								
+							<div class="d-flex flex-column">
+								<label>to:</label>
+								<div class="d-flex justify-content-center">
+									<input id="calendar2" type="date" onchange="validateDate()" name="balance_date2" <?= isset($_POST['balance_date2']) ? 'value="' . $_POST['balance_date2']. '"' : '' ?>>
+								</div>
+								<div class="d-flex justify-content-center" id="browseButton" ><input id="browse" type="submit" value="Browse" disabled></div>
+							</div>	
 						</div>
 					</form>
 					<?php
@@ -253,6 +255,7 @@
 						var month = today.getMonth() + 1;
 						var day = today.getDate();
 						setDatePeriod(month, day);
+						document.getElementById('browse').disabled = false;
 					
 				}
 
@@ -262,35 +265,21 @@
 						var month = today.getMonth();
 						var days = getEndDayOfActualMonth(month, year);
 						setDatePeriod(month, days);
+						document.getElementById('browse').disabled = false;
 					
 				}
 				 window.onload = function() {
 					 if ( document.getElementById('previous').checked) {
 					 setPreviousMonth();
-					 validateAndSetDate();
+					
 					 } else if ( document.getElementById('current').checked) {
 						setCurrentMonth(); 
-						validateAndSetDate();
-					 } 
+					
+					 } else {
+						validateDate();
+					 }
 				 }
 				 
-			function checkDate() {
-					 var period1 = document.getElementById("calendar1").value;
-					document.getElementById('calendar2').min = period1;
-					 var period2 = document.getElementById("calendar2").value;
-					document.getElementById('calendar1').max = period2;
-					var fullToday = getFullToday();
-					if ((fullToday < period2) ) {
-						document.getElementById('calendar2').value = fullToday;
-						document.getElementById('calendar1').max = fullToday;
-						
-					}
-					while ( document.getElementById('calendar2').value < document.getElementById('calendar1').value) {
-						document.getElementById('calendar1').value = document.getElementById('calendar2').value;
-						document.getElementById('calendar2').min = document.getElementById('calendar1').value;
-						//document.getElementById('calendar1').value = document.getElementById('calendar2').value;
-					}
-				 }
 			 
 			 function getFullToday() {
 				 var today = new Date();
@@ -305,24 +294,51 @@
 				return fullToday;
 			 }
 		
-			function validateAndSetDate() {
+			function validateDate() {
 				
 				var fullToday = getFullToday();
 				
 				var userDate1 = document.getElementById("calendar1").value;
 				var userDate2 = document.getElementById("calendar2").value;
-				//document.getElementById('result').innerHTML = fullToday; 
+				/*if (!userDate2) {
+				document.getElementById('result').innerHTML = "empty"; 
+				} else {
+					document.getElementById('result').innerHTML = userDate2; 
+				}*/
 				
-				if ((fullToday < userDate1) ){
+				if ((fullToday < userDate1) && (userDate2) && (userDate1)){
 					document.getElementById('browse').disabled = true;
 					document.getElementById('result').innerHTML = "Please specify correct date!"; 
 					document.getElementById('calendar2').value = fullToday;
-				} else if ((fullToday >= userDate1) ){
+				} 
+					else if ((fullToday >= userDate1)&&(userDate2) && (userDate1)){
+					document.getElementById('calendar2').min =  userDate1;
+					document.getElementById('calendar1').max = userDate2;
 					document.getElementById('browse').disabled = false;
-					
 					document.getElementById('result').innerHTML = " ";
 					
+					var fullToday = getFullToday();
+					if ((fullToday < userDate2) ) {
+						document.getElementById('calendar2').value = fullToday;
+						document.getElementById('calendar1').max = fullToday;
+						
+					}
+					while ( document.getElementById('calendar2').value < document.getElementById('calendar1').value) {
+						document.getElementById('calendar1').value = document.getElementById('calendar2').value;
+						document.getElementById('calendar2').min = document.getElementById('calendar1').value;
+					
+					}
 				}
+			}
+			
+			function setCategory() {
+				if (document.getElementById('balance_category').checked) {
+					document.getElementById('category').disabled = false;
+					
+				} else {
+					document.getElementById('category').disabled = true;
+				}
+				
 			}
 			</script>
 		
