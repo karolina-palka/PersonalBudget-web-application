@@ -4,31 +4,23 @@ session_start();
 
 require_once "FinanceManager.php";
 
-	$expenseManager = new ExpenseManager();
-	
-if (($_POST['finance_date'])!="") {
-	
-	$expenseData = $expenseManager->getExpenseData();
-	$user_id = $_SESSION['logged_id'];
-	$amount = $expenseData->getAmount();
-	$expense_date = $expenseData->getFinanceDate();
-
-	$comment = $expenseData->getComment();
-	$category = $expenseData->getExpenseCategory();
-	$payment_method = $expenseData->getPaymentMethod();
-	$currency_category = $expenseData->getCurrencyCat();
-	
-	require_once "database.php";
-	$query = $db->prepare('INSERT INTO expenses VALUES (NULL, :user_id, :expense_category_assigned_to_user_id, :payment_method_assigned_to_user_id, :amount, :currency_category, :date_of_expense, :comment )');
-	$query->execute([ $user_id, $category, $payment_method, $amount, $currency_category, $expense_date, $comment ]);
-	$_SESSION['done'] = "Your expense has been successfully saved.";
-	$expenseManager->unsaveDataInSession();
-	
-} else {
-	$_SESSION['e_date'] = "Please specify correct date!";
-	$expenseManager->saveDataInSession();
-	header('Location: addExpense.php');
+if ((!isset($_SESSION['logged_in'])) && (!isset($_POST['amount']))){
+	header('Location: index.php');
 	exit();
+} else {
+
+	$expenseManager = new ExpenseManager();
+		
+	if (($_POST['finance_date'])!="") {
+		
+		$expenseManager->addNewExpense();
+		
+	} else {
+		$_SESSION['e_date'] = "Please specify correct date!";
+		$expenseManager->saveDataInSession();
+		header('Location: addExpense.php');
+		exit();
+	}
 }
 	
 

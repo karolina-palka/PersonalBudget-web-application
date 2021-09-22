@@ -2,11 +2,7 @@
 	
 Class Database {
 	
-	public $db;
-	/*function __construct() {
-		
-		$this->db = $db;
-	}*/
+	private $db;
 	
 	 function createConnection() {
 		 
@@ -26,13 +22,3 @@ Class Database {
 	
 };
 
-	/*Class DatabaseManager {
-		public static $connection;
-		
-		static function connect() {
-			$db = new Database();
-			self::$connection = $db->createConnection();
-			return self::$connection;
-		}
-		
-	}*/

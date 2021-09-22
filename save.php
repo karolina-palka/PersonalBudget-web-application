@@ -10,7 +10,7 @@ require_once "UserManager.php";
 	
 		$userManager = new UserManager();
 		
-		$userManager->getDataFromForm();
+		//$userManager->getDataFromForm();
 		
 		$userManager->validateLogin();
 		

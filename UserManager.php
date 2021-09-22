@@ -43,12 +43,12 @@ require_once "Database.php";
 			private $user;
 			private $isSafeToConnect;
 			private $pass_hash;
-			private $login;
+			/*private $login;
 			private $password;
 			private $email;
 			private $name;
 			private $surname;
-			private $phone_number;
+			private $phone_number;*/
 			private $connection;
 			
 			public function __construct() {
@@ -76,7 +76,7 @@ require_once "Database.php";
 				if (isset($_SESSION['given_surname'])) unset($_SESSION['given_surname']);
 				if (isset($_SESSION['given_ph_number'])) unset($_SESSION['given_ph_number']);
 			}
-			function getDataFromForm() {
+			/*function getDataFromForm() {
 				$this->login = $this->user->getLogin();
 				$this->password = $this->user->getPassword();
 				$this->email = $this->user->getEmail();
@@ -84,7 +84,7 @@ require_once "Database.php";
 				$this->surname = $this->user->getSurname();
 				$this->phone_number = $this->user->getPhoneNumber();
 				
-			}
+			}*/
 			
 			function validateLogin() {
 				
@@ -186,10 +186,10 @@ require_once "Database.php";
 			
 			function logIn() {
 				
+			$this->unsaveDataInSession();
 			$result = $this->connection->prepare('SELECT * FROM users WHERE email=:email');
 			$result->bindValue(':email', $this->user->getEmail(), PDO::PARAM_STR);
 			$result->execute();
-			//$result = $db->query("SELECT * FROM users WHERE email='$email'");
 		
 			$user = $result->fetch();
 			
@@ -198,6 +198,7 @@ require_once "Database.php";
 				$_SESSION['name'] = $user['name'];
 				$_SESSION['login'] = $user['username'];
 				unset($_SESSION['bad_attempt']);
+				$this->unsaveDataInSession();
 				
 			} else {
 				
