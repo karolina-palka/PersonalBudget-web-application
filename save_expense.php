@@ -16,11 +16,11 @@ if (($_POST['finance_date'])!="") {
 	$comment = $expenseData->getComment();
 	$category = $expenseData->getExpenseCategory();
 	$payment_method = $expenseData->getPaymentMethod();
-	//$id = 2;
+	$currency_category = $expenseData->getCurrencyCat();
 	
 	require_once "database.php";
-	$query = $db->prepare('INSERT INTO expenses VALUES (NULL, :user_id, :expense_category_assigned_to_user_id, :payment_method_assigned_to_user_id, :amount, :date_of_expense, :expense_expense )');
-	$query->execute([ $user_id, $category, $payment_method, $amount, $expense_date, $comment ]);
+	$query = $db->prepare('INSERT INTO expenses VALUES (NULL, :user_id, :expense_category_assigned_to_user_id, :payment_method_assigned_to_user_id, :amount, :currency_category, :date_of_expense, :comment )');
+	$query->execute([ $user_id, $category, $payment_method, $amount, $currency_category, $expense_date, $comment ]);
 	$_SESSION['done'] = "Your expense has been successfully saved.";
 	$expenseManager->unsaveDataInSession();
 	

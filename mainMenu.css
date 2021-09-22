@@ -445,20 +445,6 @@ input[type=date]:valid+span::after {
 }
 
 
-
-/*@media(min-width: 576x)
-{
-.smallSize
-	{
-		margin: auto;
-		
-	}
-	.custom-row
-	{
-		text-align: center;
-	}
-}*/
-
 @media(min-width: 768px)
 {
 	.logo
@@ -466,23 +452,8 @@ input[type=date]:valid+span::after {
 		margin-top: -93px;
 		
 	}
-	/*	.row
-	{
-		margin-bottom: -7px;
-	}*/
-/*.paper
-	{
-		margin-bottom: -85px;
-	}*/
-}
-/*@media(max-width: 1200px)
-{
-	.custom-row
-	{
-		text-align: center;
-	}
-}*/	
 
+}
 @media(min-width: 1200px) 
 {
 .logo
@@ -490,25 +461,14 @@ input[type=date]:valid+span::after {
 		margin-top: -200px;
 
 	}
-/*.paper
-	{
-		/*margin-bottom: -85px;*/
-		/*margin-top: 40px;*/
-	/*}*/
-	/*.row
-	{
-		margin-bottom: -7px;
-	}*/
-}
 
+}
 .bg-custom
 {
-	background-color:#00bbbb;
+	/*background-color:#00bbbb;*/
 	background-color: #00cccc;
 	/*background-color: #47d1d1;*/
-	
-	color: white;
-	
+	color: white;	
 }
 
 .dropdown-menu
@@ -529,10 +489,7 @@ input[type=date]:valid+span::after {
 		margin-top: 10px;
 		margin-bottom: 10px;
 }
-/*a
-{
-	text-decoration: none;
-}*/
+
 .communication 
 {
 	padding: 40px;
@@ -541,4 +498,32 @@ input[type=date]:valid+span::after {
 a.dark-link
 {
 	text-decoration: none;
+}
+th, td
+{
+	border: 1px solid black;
+	padding: 10px;
+	/*width: 75%;*/
+	text-align: center;
+	/*width: 100%;*/
+	margin: auto;
+}
+table
+{
+	margin-left: auto;
+	margin-right: auto;
+}
+.incomes 
+{
+	color: #00b300;
+	font-weight: 700;
+}
+.expenses 
+{
+	color: red;
+	font-weight: 700;
+}
+.summary
+{
+	font-weight: 700;
 }
