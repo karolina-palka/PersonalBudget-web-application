@@ -6,13 +6,15 @@ require_once "FinanceManager.php";
 Class BalanceManager {
 	
 	private $connection;
+	private $finance;
 	public $incomesQuery;
 	public $expensesQuery;
+	public $currency_acronym;
 	
 	function __construct() {
 		$db = new Database();
 		$this->connection = $db->createConnection();
-		
+		$this->finance = new Finance();
 	}
 	function returnResultsFromToDatabase($sqlQuery) {
 		 $queryResult = $this->connection->query($sqlQuery);
@@ -26,19 +28,25 @@ Class BalanceManager {
 			 $from = $_POST['balance_date1'];
 			 $to = $_POST['balance_date2'];
 			 $user_id = $_SESSION['logged_id'];
+			 $currency = $this->finance->getCurrencyCat();
 			 
 			if (isset ($_POST['category'])) {
 				  $category = $_POST['category'];
-				  $sqlIncomesQuery = "SELECT * FROM incomes as inc LEFT OUTER JOIN incomes_category_assigned_to_$user_id as ass ON inc.income_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND ass.id = '$category' AND date_of_income BETWEEN '$from' AND '$to' ORDER BY date_of_income ";
-				  $sqlExpensesQuery = "SELECT * FROM expenses as exp LEFT OUTER JOIN expenses_category_assigned_to_$user_id as ass ON exp.expense_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND ass.id = '$category' AND date_of_expense BETWEEN '$from' AND '$to' ORDER BY date_of_expense ";
+				  $sqlIncomesQuery = "SELECT * FROM incomes as inc LEFT OUTER JOIN incomes_category_assigned_to_$user_id as ass ON inc.income_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND ass.id = '$category' AND date_of_income BETWEEN '$from' AND '$to' AND currency = '$currency' ORDER BY date_of_income ";
+				  $sqlExpensesQuery = "SELECT * FROM expenses as exp LEFT OUTER JOIN expenses_category_assigned_to_$user_id as ass ON exp.expense_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND ass.id = '$category' AND date_of_expense BETWEEN '$from' AND '$to' AND currency = '$currency' ORDER BY date_of_expense ";
+					
+				
+					
 			 }
 			else {
-				$sqlIncomesQuery ="SELECT * FROM incomes as inc LEFT OUTER JOIN incomes_category_assigned_to_$user_id as ass ON inc.income_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND date_of_income BETWEEN '$from' AND '$to'  ORDER BY date_of_income ";
-				$sqlExpensesQuery = "SELECT * FROM expenses as exp LEFT OUTER JOIN expenses_category_assigned_to_$user_id as ass ON exp.expense_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND date_of_expense BETWEEN '$from' AND '$to' ORDER BY date_of_expense ";
+				$sqlIncomesQuery ="SELECT * FROM incomes as inc LEFT OUTER JOIN incomes_category_assigned_to_$user_id as ass ON inc.income_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND date_of_income BETWEEN '$from' AND '$to' AND currency = '$currency' ORDER BY date_of_income ";
+				$sqlExpensesQuery = "SELECT * FROM expenses as exp LEFT OUTER JOIN expenses_category_assigned_to_$user_id as ass ON exp.expense_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND date_of_expense BETWEEN '$from' AND '$to' AND currency = '$currency' ORDER BY date_of_expense ";
 			}
+			$currencyQuery = "SELECT acronym FROM currency_assigned_to_$user_id WHERE id='$currency'";
 			 //$incomesQuery = $this->connection->query($sqlIncomesQuery);
- 			$this->incomesQuery= $this->returnResultsFromToDatabase($sqlIncomesQuery);
+ 			$this->incomesQuery = $this->returnResultsFromToDatabase($sqlIncomesQuery);
 			$this->expensesQuery = $this->returnResultsFromToDatabase($sqlExpensesQuery);
+			$this->currency_acronym = $this->returnResultsFromToDatabase($currencyQuery)->fetchColumn();
 			//$expensesQuery = $this->connection->query($sqlIncomesQuery);
 			 
 			 

@@ -10,13 +10,13 @@
 	 
 	  if((isset($_POST['balance_date1'])) && (!isset($_SESSION['bad_attempt']))){
 		  
-		  $balanceManager = new BalanceManager();
-		  $balanceManager->showBalance();
-		  $incomesQuery = $balanceManager->incomesQuery;
-		  $expensesQuery = $balanceManager->expensesQuery;
-		  $incomes = $incomesQuery->fetchAll();
-		  $expenses = $expensesQuery->fetchAll();
-		 
+		$balanceManager = new BalanceManager();
+		$balanceManager->showBalance();
+		$incomesQuery = $balanceManager->incomesQuery;
+		$expensesQuery = $balanceManager->expensesQuery;
+		$incomes = $incomesQuery->fetchAll();
+		$expenses = $expensesQuery->fetchAll();
+		$currency_acronym = $balanceManager->currency_acronym;
 	}
 	 
 }
@@ -42,7 +42,7 @@
 						<?php
 							if(isset($_SESSION['bad_attempt'])) {
 								echo '<div class="error">'.$_SESSION['bad_attempt'].'</div>';
-								//unset ($_SESSION['bad_attempt']);
+								unset ($_SESSION['bad_attempt']);
 							}							 
 						?> </div>
 					
@@ -68,10 +68,12 @@
 								  </label>
 								  
 								</div>
-								<!--<div class="d-flex flex-column">
-								
-									<label>Choose the category (optionally):</label><div class="d-flex justify-content-center">
-									<select id="category" name="category" >
+								<div class="d-flex flex-column">
+									<div class="form-check form-check-inline">
+									  <input class="form-check-input" type="checkbox" id="balance_category" value="option1" onclick="setCategory()" >
+									  <label class="form-check-label" for="balance_category">Choose the category (optionally):</label>
+									</div>
+									<select id="category" name="category" disabled >
 										<option value="1"> Transport</option>
 										<option value="2"> Books </option>
 										<option value="3"> Food </option>
@@ -91,28 +93,36 @@
 										<option value="17"> Gift </option>
 										<option value="17"> Another </option>
 									  </select>
-									</div>
-								</div>-->
+
+									<label class="label-margin">Choose currency:</label>
+								
+									<select id="currency_category" name="currency_category" >
+										<option value="1"> PLN</option>
+										<option value="2"> EUR </option>
+										<option value="3"> USD </option>
+										<option value="4"> GBP </option>
+									  </select>
+								</div>
+
 						</div>	
 						
 						<div class ="d-sm-inline-block d-md-block d-xl-inline-block mx-4 ">
 					
 							<div class="d-flex flex-column">
 								
-									<label>from:</label><div class="d-flex justify-content-center">
-									<input id="calendar1" type="date" onchange="validateAndSetDate()" name="balance_date1" <?= isset($_POST['balance_date1']) ? 'value="' . $_POST['balance_date1']. '"' : '' ?>> 
-									</div>
+								<label>from:</label>
+								<div class="d-flex justify-content-center">
+									<input id="calendar1" type="date" onchange="validateDate()" name="balance_date1" <?= isset($_POST['balance_date1']) ? 'value="' . $_POST['balance_date1']. '"' : '' ?>> 
 								</div>
-							
-							<div class="d-flex flex-column">
-									
-									<label>to:</label><div class="d-flex justify-content-center">
-									<input id="calendar2" type="date" onchange="checkDate()" name="balance_date2" <?= isset($_POST['balance_date2']) ? 'value="' . $_POST['balance_date2']. '"' : '' ?>></div>
-					
-									<div class="d-flex justify-content-center" id="browseButton" ><input id="browse" type="submit" value="Browse" disabled></div>
-								 
 							</div>
 								
+							<div class="d-flex flex-column">
+								<label>to:</label>
+								<div class="d-flex justify-content-center">
+									<input id="calendar2" type="date" onchange="validateDate()" name="balance_date2" <?= isset($_POST['balance_date2']) ? 'value="' . $_POST['balance_date2']. '"' : '' ?>>
+								</div>
+								<div class="d-flex justify-content-center" id="browseButton" ><input id="browse" type="submit" value="Browse" disabled></div>
+							</div>	
 						</div>
 					</form>
 					<?php
@@ -123,7 +133,7 @@
 					echo '<table class="label-margin" >
 							<thead>
 								<tr><th colspan="5">Incomes</th></tr>
-								<tr><th>No</th><th>Date</th><th>Amount</th><th>Income category</th><th>Comment</th></tr>
+								<tr><th>No</th><th>Date</th><th>Amount ['.$currency_acronym.']</th><th>Income category</th><th>Comment</th></tr>
 							</thead>
 							<tbody>';
 						if (isset($_SESSION['bad_attempt'])) {
@@ -140,7 +150,7 @@
 									}										
 								}
 								echo '<tr><td colspan="5">Total records: ' . $incomesQuery->rowCount()."</td><tr>";
-								echo '<tr><td colspan="5" class="incomes"> Total incomes: ' . $total_income.'</td><tr>';
+								echo '<tr><td colspan="5" class="incomes"> Total incomes: '. $total_income. ' '.$currency_acronym. '</td><tr>';
 								
 							echo '</tbody>
 							</table>';
@@ -156,7 +166,7 @@
 						echo '<table class="label-margin" >
 							<thead>
 								<tr><th colspan="5" >Expenses </th></tr>
-								<tr><th>No</th><th>Date</th><th>Amount</th><th>Expense category</th><th>Comment</th></tr>
+								<tr><th>No</th><th>Date</th><th>Amount ['.$currency_acronym.']</th><th>Expense category</th><th>Comment</th></tr>
 							</thead>
 							<tbody>';
 							if (isset($_SESSION['bad_attempt'])) {
@@ -174,8 +184,8 @@
 							}
 							$total_balance = $total_income - $total_expense;
 							echo '<tr><td colspan="5">Total records: ' . $expensesQuery->rowCount().'</td><tr>';
-							echo '<tr><td colspan="5" class="expenses">Total expenses: ' . $total_expense.'</td><tr>';
-							echo '<tr><td colspan="5" class="summary">Total balance: '.$total_balance.'</td></tr>';
+							echo '<tr><td colspan="5" class="expenses">Total expenses: ' . $total_expense. ' '.$currency_acronym.'</td><tr>';
+							echo '<tr><td colspan="5" class="summary">Total balance: '.$total_balance. ' ' .$currency_acronym.'</td></tr>';
 
 						echo '</tbody>
 						</table>';
@@ -253,6 +263,7 @@
 						var month = today.getMonth() + 1;
 						var day = today.getDate();
 						setDatePeriod(month, day);
+						document.getElementById('browse').disabled = false;
 					
 				}
 
@@ -262,35 +273,21 @@
 						var month = today.getMonth();
 						var days = getEndDayOfActualMonth(month, year);
 						setDatePeriod(month, days);
+						document.getElementById('browse').disabled = false;
 					
 				}
 				 window.onload = function() {
 					 if ( document.getElementById('previous').checked) {
 					 setPreviousMonth();
-					 validateAndSetDate();
+					
 					 } else if ( document.getElementById('current').checked) {
 						setCurrentMonth(); 
-						validateAndSetDate();
-					 } 
+					
+					 } else {
+						validateDate();
+					 }
 				 }
 				 
-			function checkDate() {
-					 var period1 = document.getElementById("calendar1").value;
-					document.getElementById('calendar2').min = period1;
-					 var period2 = document.getElementById("calendar2").value;
-					document.getElementById('calendar1').max = period2;
-					var fullToday = getFullToday();
-					if ((fullToday < period2) ) {
-						document.getElementById('calendar2').value = fullToday;
-						document.getElementById('calendar1').max = fullToday;
-						
-					}
-					while ( document.getElementById('calendar2').value < document.getElementById('calendar1').value) {
-						document.getElementById('calendar1').value = document.getElementById('calendar2').value;
-						document.getElementById('calendar2').min = document.getElementById('calendar1').value;
-						//document.getElementById('calendar1').value = document.getElementById('calendar2').value;
-					}
-				 }
 			 
 			 function getFullToday() {
 				 var today = new Date();
@@ -305,24 +302,51 @@
 				return fullToday;
 			 }
 		
-			function validateAndSetDate() {
+			function validateDate() {
 				
 				var fullToday = getFullToday();
 				
 				var userDate1 = document.getElementById("calendar1").value;
 				var userDate2 = document.getElementById("calendar2").value;
-				//document.getElementById('result').innerHTML = fullToday; 
+				/*if (!userDate2) {
+				document.getElementById('result').innerHTML = "empty"; 
+				} else {
+					document.getElementById('result').innerHTML = userDate2; 
+				}*/
 				
-				if ((fullToday < userDate1) ){
+				if ((fullToday < userDate1) && (userDate2) && (userDate1)){
 					document.getElementById('browse').disabled = true;
 					document.getElementById('result').innerHTML = "Please specify correct date!"; 
 					document.getElementById('calendar2').value = fullToday;
-				} else if ((fullToday >= userDate1) ){
+				} 
+					else if ((fullToday >= userDate1)&&(userDate2) && (userDate1)){
+					document.getElementById('calendar2').min =  userDate1;
+					document.getElementById('calendar1').max = userDate2;
 					document.getElementById('browse').disabled = false;
-					
 					document.getElementById('result').innerHTML = " ";
 					
+					var fullToday = getFullToday();
+					if ((fullToday < userDate2) ) {
+						document.getElementById('calendar2').value = fullToday;
+						document.getElementById('calendar1').max = fullToday;
+						
+					}
+					while ( document.getElementById('calendar2').value < document.getElementById('calendar1').value) {
+						document.getElementById('calendar1').value = document.getElementById('calendar2').value;
+						document.getElementById('calendar2').min = document.getElementById('calendar1').value;
+					
+					}
 				}
+			}
+			
+			function setCategory() {
+				if (document.getElementById('balance_category').checked) {
+					document.getElementById('category').disabled = false;
+					
+				} else {
+					document.getElementById('category').disabled = true;
+				}
+				
 			}
 			</script>
 		
