@@ -7,6 +7,7 @@ Class BalanceManager {
 	
 	private $connection;
 	private $finance;
+	private $user_id;
 	public $incomesQuery;
 	public $expensesQuery;
 	public $currency_acronym;
@@ -15,6 +16,7 @@ Class BalanceManager {
 		$db = new Database();
 		$this->connection = $db->createConnection();
 		$this->finance = new Finance();
+		$this->user_id = $_SESSION['logged_id'];
 	}
 	function returnResultsFromToDatabase($sqlQuery) {
 		 $queryResult = $this->connection->query($sqlQuery);
@@ -32,17 +34,17 @@ Class BalanceManager {
 			 
 			if (isset ($_POST['category'])) {
 				  $category = $_POST['category'];
-				  $sqlIncomesQuery = "SELECT * FROM incomes as inc LEFT OUTER JOIN incomes_category_assigned_to_$user_id as ass ON inc.income_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND ass.id = '$category' AND date_of_income BETWEEN '$from' AND '$to' AND currency = '$currency' ORDER BY date_of_income ";
-				  $sqlExpensesQuery = "SELECT * FROM expenses as exp LEFT OUTER JOIN expenses_category_assigned_to_$user_id as ass ON exp.expense_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND ass.id = '$category' AND date_of_expense BETWEEN '$from' AND '$to' AND currency = '$currency' ORDER BY date_of_expense ";
+				  $sqlIncomesQuery = "SELECT * FROM incomes as inc LEFT OUTER JOIN incomes_category_assigned_to_users as ass ON inc.income_category_assigned_to_user_id = ass.id WHERE ass.user_id='$user_id' AND ass.id = '$category' AND date_of_income BETWEEN '$from' AND '$to' AND currency = '$currency' ORDER BY date_of_income ";
+				  $sqlExpensesQuery = "SELECT * FROM expenses as exp LEFT OUTER JOIN expenses_category_assigned_to_users as ass ON exp.expense_category_assigned_to_user_id = ass.id WHERE ass.user_id='$user_id' AND ass.id = '$category' AND date_of_expense BETWEEN '$from' AND '$to' AND currency = '$currency' ORDER BY date_of_expense ";
 					
 				
 					
 			 }
 			else {
-				$sqlIncomesQuery ="SELECT * FROM incomes as inc LEFT OUTER JOIN incomes_category_assigned_to_$user_id as ass ON inc.income_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND date_of_income BETWEEN '$from' AND '$to' AND currency = '$currency' ORDER BY date_of_income ";
-				$sqlExpensesQuery = "SELECT * FROM expenses as exp LEFT OUTER JOIN expenses_category_assigned_to_$user_id as ass ON exp.expense_category_assigned_to_user_id = ass.id WHERE user_id='$user_id' AND date_of_expense BETWEEN '$from' AND '$to' AND currency = '$currency' ORDER BY date_of_expense ";
+				$sqlIncomesQuery ="SELECT * FROM incomes as inc LEFT OUTER JOIN incomes_category_assigned_to_users as ass ON inc.income_category_assigned_to_user_id = ass.id WHERE ass.user_id='$user_id' AND date_of_income BETWEEN '$from' AND '$to' AND currency = '$currency' ORDER BY date_of_income ";
+				$sqlExpensesQuery = "SELECT * FROM expenses as exp LEFT OUTER JOIN expenses_category_assigned_to_users as ass ON exp.expense_category_assigned_to_user_id = ass.id WHERE ass.user_id='$user_id' AND date_of_expense BETWEEN '$from' AND '$to' AND currency = '$currency' ORDER BY date_of_expense ";
 			}
-			$currencyQuery = "SELECT acronym FROM currency_assigned_to_$user_id WHERE id='$currency'";
+			$currencyQuery = "SELECT acronym FROM currency_category_assigned_to_users WHERE id='$currency'";
 			 //$incomesQuery = $this->connection->query($sqlIncomesQuery);
  			$this->incomesQuery = $this->returnResultsFromToDatabase($sqlIncomesQuery);
 			$this->expensesQuery = $this->returnResultsFromToDatabase($sqlExpensesQuery);
@@ -64,7 +66,31 @@ Class BalanceManager {
 		
 	}
 	
-
+		function getUserExpenseCategories() {
+			$categories = $this->getUserCategories('expenses_category_assigned_to_users');
+			return $categories;
+		}
+		
+		function getUserIncomeCategories() {
+			$categories = $this->getUserCategories('incomes_category_assigned_to_users');
+			return $categories;
+		}
+		
+		function getUserPaymentCategories() {
+			$categories = $this->getUserCategories('payment_methods_assigned_to_users');
+			return $categories;
+		}
+		function getUserCurrencyCategories() {
+			$categories = $this->getUserCategories('currency_category_assigned_to_users');
+			return $categories;
+		}
+		
+		function getUserCategories($table_name) {
+			$user_id = $this->user_id;
+			$updateQuery = $this->connection->query("SELECT * FROM $table_name WHERE user_id='$user_id'");
+			$categories = $updateQuery->fetchAll();
+			return $categories;
+		}
 	
 };
 

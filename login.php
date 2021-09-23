@@ -71,7 +71,7 @@ if (isset($_SESSION['logged_id'])) {
 										<input class="d-flex justify-content-center" type="password" placeholder="password" onfocus="this.placeholder=''" name="password" onblur="this.placeholder='password'"></div>
 										
 										<div class="d-flex justify-content-center">
-										<input class="d-flex justify-content-center" type="submit" value="Submit"></div>
+										<input class="d-flex justify-content-center" type="submit" value="Log in"></div>
 									</div>
 									
 								</form>

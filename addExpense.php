@@ -3,6 +3,15 @@
 session_start();
 
 require_once "common_main.php";
+require_once "FinanceManager.php";
+
+$financeManager = new ExpenseManager();
+
+$categories  = $financeManager->getUserExpenseCategories();
+$currency_categories = $financeManager->getUserCurrencyCategories();
+$payment_methods = $financeManager->getUserPaymentCategories();
+
+
 ?>
 
 	<main>
@@ -49,40 +58,46 @@ require_once "common_main.php";
 								
 								<label class="label-margin">Choose category:</label>
 									  <div class="d-flex justify-content-center"><select id="category" name="category" >
-										<option value="1"> Transport</option>
-										<option value="2"> Books </option>
-										<option value="3"> Food </option>
-										<option value="4"> Apartments </option>
-										<option value="5"> Telecommunication </option>
-										<option value="6"> Health </option>
-										<option value="7"> Clothes </option>
-										<option value="8"> Hygiene </option>
-										<option value="9"> Cosmetics </option>
-										<option value="10"> Medicines </option>
-										<option value="11"> Kids </option>
-										<option value="12"> Recreation </option>
-										<option value="13"> Trip </option>
-										<option value="14"> Savings </option>
-										<option value="15"> Debt Repayment </option>
-										<option value="16"> For Retirement </option>
-										<option value="17"> Gift </option>
-										<option value="17"> Another </option>
+										<?php 
+										foreach ($categories as $category) {
+											echo '<option ';
+											if (isset($category['id'])) {
+												echo 'value="' . $category['id']. '" >'.$category['name'].'</option>';
+											}
+										}
+										?>
 									  </select>
 									  </div>
 								  <label class="label-margin">Choose payment method:</label>
 								  <div class="d-flex justify-content-center"><select id="payment_method" name="payment_method" >
-									<option value="1"> Cash</option>
-									<option value="2"> Debit Card </option>
-									<option value="3"> Credit Card </option>
+									<!--<option value="Cash"> Cash</option>
+									<option value="Debit Card"> Debit Card </option>
+									<option value="Credit Card"> Credit Card </option>-->
+									<?php 
+										foreach ($payment_methods as $payment_method) {
+											echo '<option ';
+											if (isset($payment_method['id'])) {
+												echo 'value="' . $payment_method['id']. '" >'.$payment_method['name'].'</option>';
+											}
+										}
+									?>
 								  </select>
 								  </div>
 								  <label class="label-margin">Choose currency:</label>
 								<div class="d-flex justify-content-center">
 									<select id="currency_category" name="currency_category">
-										<option value="1"> PLN </option>
-										<option value="2"> EUR </option>
-										<option value="3"> USD </option>
-										<option value="4"> GBP </option>
+										<!--<option value="PLN"> PLN </option>
+										<option value="EUR"> EUR </option>
+										<option value="USD"> USD </option>
+										<option value="GBP"> GBP </option>-->
+										<?php 
+										foreach ($currency_categories as $currency_category) {
+											echo '<option ';
+											if (isset($currency_category['id'])) {
+												echo 'value="' . $currency_category['id']. '" >'.$currency_category['acronym'].'</option>';
+											}
+										}
+										?>
 										<option value="0"> Add another currency </option>
 									</select>
 								</div>

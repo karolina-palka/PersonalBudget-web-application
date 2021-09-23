@@ -7,18 +7,23 @@
 } else {
  
 	 require_once "BalanceManager.php";
+	 $balanceManager = new BalanceManager();
 	 
 	  if((isset($_POST['balance_date1'])) && (!isset($_SESSION['bad_attempt']))){
 		  
-		$balanceManager = new BalanceManager();
+		
 		$balanceManager->showBalance();
 		$incomesQuery = $balanceManager->incomesQuery;
 		$expensesQuery = $balanceManager->expensesQuery;
 		$incomes = $incomesQuery->fetchAll();
 		$expenses = $expensesQuery->fetchAll();
 		$currency_acronym = $balanceManager->currency_acronym;
+		
+		
 	}
-	 
+	$categories = $balanceManager->getUserExpenseCategories();
+	$currency_categories = $balanceManager->getUserCurrencyCategories();
+
 }
  require_once "common_main.php";
 ?>
@@ -74,33 +79,49 @@
 									  <label class="form-check-label" for="balance_category">Choose the category (optionally):</label>
 									</div>
 									<select id="category" name="category" disabled >
-										<option value="1"> Transport</option>
-										<option value="2"> Books </option>
-										<option value="3"> Food </option>
-										<option value="4"> Apartments </option>
-										<option value="5"> Telecommunication </option>
-										<option value="6"> Health </option>
-										<option value="7"> Clothes </option>
-										<option value="8"> Hygiene </option>
-										<option value="9"> Cosmetics </option>
-										<option value="10"> Medicines </option>
-										<option value="11"> Kids </option>
-										<option value="12"> Recreation </option>
-										<option value="13"> Trip </option>
-										<option value="14"> Savings </option>
-										<option value="15"> Debt Repayment </option>
-										<option value="16"> For Retirement </option>
-										<option value="17"> Gift </option>
-										<option value="17"> Another </option>
+										<!--<option value="Transport"> Transport</option>
+										<option value="Books"> Books </option>
+										<option value="Food"> Food </option>
+										<option value="Apartments"> Apartments </option>
+										<option value="Telecommunication"> Telecommunication </option>
+										<option value="Health"> Health </option>
+										<option value="Clothes"> Clothes </option>
+										<option value="Hygiene"> Hygiene </option>
+										<option value="Cosmetics"> Cosmetics </option>
+										<option value="Medicines"> Medicines </option>
+										<option value="Kids"> Kids </option>
+										<option value="Recreation"> Recreation </option>
+										<option value="Trip"> Trip </option>
+										<option value="Savings"> Savings </option>
+										<option value="Debt Repayment"> Debt Repayment </option>
+										<option value="For Retirement"> For Retirement </option>
+										<option value="Gift"> Gift </option>
+										<option value="Another"> Another </option>-->
+										<?php 
+										foreach ($categories as $category) {
+											echo '<option ';
+											if (isset($category['id'])) {
+												echo 'value="' . $category['id']. '" >'.$category['name'].'</option>';
+											}
+										}
+										?>
 									  </select>
 
 									<label class="label-margin">Choose currency:</label>
 								
 									<select id="currency_category" name="currency_category" >
-										<option value="1"> PLN</option>
-										<option value="2"> EUR </option>
-										<option value="3"> USD </option>
-										<option value="4"> GBP </option>
+										<!--<option value="PLN"> PLN</option>
+										<option value="EUR"> EUR </option>
+										<option value="USD"> USD </option>
+										<option value="GBP"> GBP </option>-->
+										<?php 
+										foreach ($currency_categories as $currency_category) {
+											echo '<option ';
+											if (isset($currency_category['id'])) {
+												echo 'value="' . $currency_category['id']. '" >'.$currency_category['acronym'].'</option>';
+											}
+										}
+										?>
 									  </select>
 								</div>
 
