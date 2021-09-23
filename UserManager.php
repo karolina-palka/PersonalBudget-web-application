@@ -149,6 +149,23 @@ require_once "Database.php";
 				}
 			}
 			
+			function copyDefaultCategoriesToAssignedToUsers( $table_name1, $table_name2) {
+				$email = $this->user->getEmail();
+				$userQuery = $this->connection->query("SELECT id FROM users WHERE email='$email'");
+				$user_id = $userQuery->fetchColumn();
+				
+				
+				$resultQuery = $this->connection->query("SELECT name FROM $table_name1");
+				$names = $resultQuery->fetchAll();
+				
+				foreach ($names as $name) {
+					$name_cat = $name['name'];
+			
+					$this->connection->query("INSERT INTO $table_name2 VALUES(NULL, '$user_id', '$name_cat')");
+				}
+				
+			}
+			
 			function saveUserToDatabase() {
 				
 				if ($this->isSafeToConnect) {
@@ -157,26 +174,26 @@ require_once "Database.php";
 						
 					$query = $this->connection->prepare('INSERT INTO users VALUES (NULL, :username, :password, :email, :name, :surname, :phone_number )');
 					$query->execute([$this->user->getLogin(), $this->pass_hash, $this->user->getEmail(), $this->user->getName(), $this->user->getSurname(), $this->user->getPhoneNumber() ]);
-				
-					$userQuery = $this->connection->query("SELECT id FROM users WHERE email='$this->email'");
+					
+					$this->copyDefaultCategoriesToAssignedToUsers( 'expenses_category_default', 'expenses_category_assigned_to_users');
+					$this->copyDefaultCategoriesToAssignedToUsers( 'incomes_category_default', 'incomes_category_assigned_to_users');
+					$this->copyDefaultCategoriesToAssignedToUsers('payment_methods_default', 'payment_methods_assigned_to_users');
+					//$this->copyDefaultCategoriesToAssignedToUsers("acronym", "currency_category_default", "currency_category_assigned_to_users");
+					
+					$email = $this->user->getEmail();
+					$userQuery = $this->connection->query("SELECT id FROM users WHERE email='$email'");
 					$user_id = $userQuery->fetchColumn();
 					
-					$table_name = "currency_assigned_to_".$user_id;
 					
-					$this->connection->query("CREATE TABLE $table_name ( id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, acronym VARCHAR(11) NOT NULL, name VARCHAR(50) NOT NULL)");
-					$this->connection->query("INSERT INTO $table_name SELECT * FROM currency_default");
-					
-					$table_name = "incomes_category_assigned_to_".$user_id;
-					$this->connection->query("CREATE TABLE $table_name ( id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50) NOT NULL)");
-					$this->connection->query("INSERT INTO $table_name SELECT * FROM incomes_category_default");
-					
-					$table_name = "expenses_category_assigned_to_".$user_id;
-					$this->connection->query("CREATE TABLE $table_name LIKE expenses_category_default");
-					$this->connection->query("INSERT INTO $table_name SELECT * FROM expenses_category_default");
-					
-					$table_name = "payment_methods_assigned_to_".$user_id;
-					$this->connection->query("CREATE TABLE $table_name ( id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50) NOT NULL)");
-					$this->connection->query("INSERT INTO $table_name SELECT * FROM payment_methods_default");
+					$resultQuery = $this->connection->query("SELECT acronym, name FROM currency_category_default");
+					$names = $resultQuery->fetchAll();
+				
+					foreach ($names as $name) {
+						$acronym = $name['acronym'];
+						$name_cat = $name['name'];
+						
+						$this->connection->query("INSERT INTO currency_category_assigned_to_users VALUES(NULL, '$user_id', '$acronym', '$name_cat')");
+					}
 
 					$this->unsaveDataInSession();
 					}

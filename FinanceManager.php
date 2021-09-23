@@ -110,15 +110,15 @@ require_once "Database.php";
 				$new_currency = $this->income->getCurrencyNewCat();
 				$new_currency_name = $this->income->getCurrencyNewName();
 				
-				$result = $this->connection->query("SELECT * FROM currency_assigned_to_$user_id WHERE acronym='$new_currency'");
+				$result = $this->connection->query("SELECT * FROM currency_category_assigned_to_users WHERE acronym='$new_currency' AND user_id='$user_id'");
 					if ($result->rowCount()) {
 						$_SESSION['e_email'] = "The given currency already exists. Please, specify different.";
 						$this->saveDataInSession();
 						header('Location: addIncome.php');
 					} else {
-						$queryCurrency = $this->connection->prepare("INSERT INTO currency_assigned_to_$user_id VALUES (NULL, :acronym, :name)");
-						$queryCurrency->execute([ $new_currency, $new_currency_name ]);
-						$queryCurrencyId =$this->connection->query("SELECT id FROM currency_assigned_to_$user_id WHERE acronym='$new_currency'");
+						$queryCurrency = $this->connection->prepare("INSERT INTO currency_assigned_to_users VALUES (NULL, :user_id, :acronym, :name)");
+						$queryCurrency->execute([ $user_id, $new_currency, $new_currency_name ]);
+						$queryCurrencyId =$this->connection->query("SELECT id FROM currency_assigned_to_users WHERE acronym='$new_currency' AND user_id='$user_id'");
 						$currency_id = $queryCurrencyId->fetchColumn();
 						
 						$queryIncomes = $this->connection->prepare('INSERT INTO incomes VALUES (NULL, :user_id, :income_category_assigned_to_user_id, :amount, :currency, :date_of_income, :income_comment )');
@@ -140,10 +140,13 @@ require_once "Database.php";
 		
 		private $expense;
 		private $connection;
+		private $user_id;
+		
 		function __construct() {
 			$this->expense = new Expense();
 			$db = new Database();
 			$this->connection = $db->createConnection();
+			$this->user_id = $_SESSION['logged_id'];
 		}
 		function getExpenseData() {
 				return $this->expense;
@@ -162,18 +165,46 @@ require_once "Database.php";
 			
 		}
 		
+		function getUserExpenseCategories() {
+			$categories = $this->getUserCategories('expenses_category_assigned_to_users');
+			return $categories;
+		}
+		
+		function getUserIncomeCategories() {
+			$categories = $this->getUserCategories('incomes_category_assigned_to_users');
+			return $categories;
+		}
+		
+		function getUserPaymentCategories() {
+			$categories = $this->getUserCategories('payment_methods_assigned_to_users');
+			return $categories;
+		}
+		function getUserCurrencyCategories() {
+			$categories = $this->getUserCategories('currency_category_assigned_to_users');
+			return $categories;
+		}
+		
+		function getUserCategories($table_name) {
+			$user_id = $this->user_id;
+			$updateQuery = $this->connection->query("SELECT * FROM $table_name WHERE user_id='$user_id'");
+			$categories = $updateQuery->fetchAll();
+			return $categories;
+		}
+		
+		
 		function addNewExpense() {
 			
-			$user_id = $_SESSION['logged_id'];
+			$user_id = $this->user_id;
 			$amount = $this->expense->getAmount();
 			$expense_date = $this->expense->getFinanceDate();
 			$comment = $this->expense->getComment();
-			$category = $this->expense->getExpenseCategory();
-			$payment_method =$this->expense->getPaymentMethod();
-			$currency_category = $this->expense->getCurrencyCat();
+			$category_id = $this->expense->getExpenseCategory();
+			$payment_id =$this->expense->getPaymentMethod();
+			$currency_id = $this->expense->getCurrencyCat();
+			
 			
 			$query = $this->connection->prepare('INSERT INTO expenses VALUES (NULL, :user_id, :expense_category_assigned_to_user_id, :payment_method_assigned_to_user_id, :amount, :currency_category, :date_of_expense, :comment )');
-			$query->execute([ $user_id, $category, $payment_method, $amount, $currency_category, $expense_date, $comment ]);
+			$query->execute([ $user_id, $category_id, $payment_id, $amount, $currency_id, $expense_date, $comment ]);
 			$_SESSION['done'] = "Your expense has been successfully saved.";
 			$this->unsaveDataInSession();
 			

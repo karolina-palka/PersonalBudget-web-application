@@ -39,11 +39,12 @@
 	
 	<div class="paper" style="transform: rotate(15deg) translateX(-10px) translateY(15px);"> 
 		<i class="icon-pin"></i>
+		
 		<h1><i class="icon-lightbulb"> KEEP CALM & </i> </h1>
 		<h2>Take control of your personal budget</h2>
 		<div id="person" ><i class="icon-pitch"></i></div>
 	</div>
-				
+			
 	<div class="container">
 		<div class="row mb-md-n2 ">
 			<div class="col-12">
@@ -52,6 +53,7 @@
 				</div>
 				<div class="logo d-flex ">
 					<div id="tree1" class="d-none d-md-block align-self-end"><i class="icon-tree-1"></i></div>
+					
 					<div id="gift" class="d-none d-md-block align-self-end"><i class="icon-gift"></i></div>
 					
 					<div id="child" class="d-none d-md-block align-self-end"><i class="icon-child"></i></div>

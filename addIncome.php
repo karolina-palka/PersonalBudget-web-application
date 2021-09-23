@@ -1,7 +1,12 @@
 <?php
 
 session_start();
+require_once "FinanceManager.php";
 
+$financeManager = new ExpenseManager();
+
+$categories  = $financeManager->getUserIncomeCategories();
+$currency_categories = $financeManager->getUserCurrencyCategories();
 
 require_once "common_main.php";
 ?>
@@ -45,27 +50,33 @@ require_once "common_main.php";
 									<span>Expense</span>
 								  </label>
 							</div>
-							<!--<div class="d-flex mb-2">-->
-								
-							<!--</div>-->
-							<!--<div class="d-flex mb-2">-->
+
 							<label class="label-margin">Choose category:</label>
 							<div class="d-flex justify-content-center">
 								<select id="category" name="category" >
-									<option value="1"> Salary</option>
-									<option value="2"> Interest </option>
-									<option value="3"> Allegro </option>
-									<option value="4"> Another </option>
+								
+									<?php 
+										foreach ($categories as $category) {
+											echo '<option ';
+											if (isset($category['id'])) {
+												echo 'value="' . $category['id']. '" >'.$category['name'].'</option>';
+											}
+										}
+									?>
 								</select>
 							</div>
 							<label class="label-margin">Choose currency:</label>
 							<div class="d-flex justify-content-center">
 								<select id="currency_category" name="currency_category" onchange="addCurrencyIfNeeded()">
-									<option value="1"> PLN </option>
-									<option value="2"> EUR </option>
-									<option value="3"> USD </option>
-									<option value="4"> GBP </option>
-									<option value="0"> Add another currency </option>
+								
+									<?php 
+										foreach ($currency_categories as $currency_category) {
+											echo '<option ';
+											if (isset($currency_category['id'])) {
+												echo 'value="' . $currency_category['id']. '" >'.$currency_category['acronym'].'</option>';
+											}
+										}
+									?>
 								</select>
 							</div>
 								
