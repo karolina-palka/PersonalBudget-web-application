@@ -145,7 +145,6 @@ require_once "Database.php";
 					} else {
 						return false;
 					}
-					
 				}
 			}
 			
@@ -225,6 +224,22 @@ require_once "Database.php";
 				exit();
 			}
 		}
+		function valideReCaptcha() {
+			
+			$secret = "6LeFMg8cAAAAAJLFBRVCVHAZaSm_GkuHmpyPnECM";
+			$check = file_get_contents('https://google.com./recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
+			
+			$answer = json_decode($check);
+			
+			if ($answer->success==false)
+			{
+				$this->isSafeToConnect = false;
+				$_SESSION['e_bot'] = "Please verify that you are a human!";
+				header('Location: register.php');
+				exit();
+			}
+		}
+		
 	}
 	
 
