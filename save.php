@@ -10,16 +10,16 @@ require_once "UserManager.php";
 	
 		$userManager = new UserManager();
 		
-		//$userManager->getDataFromForm();
-		
 		$userManager->validateLogin();
 		
 		$userManager->validateEmail();
 		$userManager->validatePassword();
-		
+		$userManager->valideReCaptcha();
 		$userManager->saveUserToDatabase();
 		
 	}
+	
+
 ?>
 
 <!DOCTYPE html>

@@ -145,7 +145,6 @@ require_once "Database.php";
 					} else {
 						return false;
 					}
-					
 				}
 			}
 			
@@ -178,7 +177,7 @@ require_once "Database.php";
 					$this->copyDefaultCategoriesToAssignedToUsers( 'expenses_category_default', 'expenses_category_assigned_to_users');
 					$this->copyDefaultCategoriesToAssignedToUsers( 'incomes_category_default', 'incomes_category_assigned_to_users');
 					$this->copyDefaultCategoriesToAssignedToUsers('payment_methods_default', 'payment_methods_assigned_to_users');
-					//$this->copyDefaultCategoriesToAssignedToUsers("acronym", "currency_category_default", "currency_category_assigned_to_users");
+					//$this->copyDefaultCategoriesToAssignedToUsers("acronym", "currency_category_default", "currency_assigned_to_users");
 					
 					$email = $this->user->getEmail();
 					$userQuery = $this->connection->query("SELECT id FROM users WHERE email='$email'");
@@ -192,7 +191,7 @@ require_once "Database.php";
 						$acronym = $name['acronym'];
 						$name_cat = $name['name'];
 						
-						$this->connection->query("INSERT INTO currency_category_assigned_to_users VALUES(NULL, '$user_id', '$acronym', '$name_cat')");
+						$this->connection->query("INSERT INTO currency_assigned_to_users VALUES(NULL, '$user_id', '$acronym', '$name_cat')");
 					}
 
 					$this->unsaveDataInSession();
@@ -225,6 +224,22 @@ require_once "Database.php";
 				exit();
 			}
 		}
+		function valideReCaptcha() {
+			
+			$secret = "6LeFMg8cAAAAAJLFBRVCVHAZaSm_GkuHmpyPnECM";
+			$check = file_get_contents('https://google.com./recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
+			
+			$answer = json_decode($check);
+			
+			if ($answer->success==false)
+			{
+				$this->isSafeToConnect = false;
+				$_SESSION['e_bot'] = "Please verify that you are a human!";
+				header('Location: register.php');
+				exit();
+			}
+		}
+		
 	}
 	
 
