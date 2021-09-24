@@ -14,7 +14,7 @@ require_once "UserManager.php";
 		
 		$userManager->validateEmail();
 		$userManager->validatePassword();
-		$userManager->valideReCaptcha();
+		//$userManager->valideReCaptcha();
 		$userManager->saveUserToDatabase();
 		
 	}

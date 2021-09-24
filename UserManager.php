@@ -226,7 +226,7 @@ require_once "Database.php";
 		}
 		function valideReCaptcha() {
 			
-			$secret = "6LeFMg8cAAAAAJLFBRVCVHAZaSm_GkuHmpyPnECM";
+			$secret = "#";
 			$check = file_get_contents('https://google.com./recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
 			
 			$answer = json_decode($check);
