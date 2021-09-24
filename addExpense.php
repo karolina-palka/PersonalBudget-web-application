@@ -82,7 +82,7 @@ $payment_methods = $financeManager->getUserPaymentCategories();
 										}
 									}
 									?>
-									<option value="0"> Add another currency </option>
+									<option value="0"> Add new currency </option>
 								</select>
 							</div>
 							<label class="label-margin">or type in new one:</label>
@@ -93,15 +93,14 @@ $payment_methods = $financeManager->getUserPaymentCategories();
 								<div class="d-flex justify-content-center">
 									<input type="text" id="currency_name"  name="currency_name" disabled <?= isset($_SESSION['currency_name']) ? 'value="' . $_SESSION['currency_name']. '"' : '' ?> >
 								</div>
-						</div>
-
-							<div class ="d-sm-inline-block d-md-block d-xl-inline-block mx-4 ">
-							<label class="label-margin">Enter the amount:</label>
+								<label class="label-margin">Enter the amount:</label>
 									  <div class="d-flex justify-content-center"><input type="number" step="0.01" name="amount" <?= isset($_SESSION['amount']) ? 'value="' . $_SESSION['amount']. '"' : '' ?> > </div>
-								
+						</div>
+							<div class ="d-sm-inline-block d-md-block d-xl-inline-block mx-4 ">
+							
 							<label class="label-margin">Choose category:</label>
 							  <div class="d-flex justify-content-center">
-							  <select id="category" name="category" >
+							  <select id="category" name="category" onchange="addCategoryIfNeeded()">
 								<?php 
 								foreach ($categories as $category) {
 									echo '<option ';
@@ -110,8 +109,12 @@ $payment_methods = $financeManager->getUserPaymentCategories();
 									}
 								}
 								?>
-								<option value="0"> Add another currency </option>
+								<option value="0"> Add new category </option>
 								</select>
+							</div>
+							<label class="label-margin">or type in new one:</label>
+							<div class="d-flex justify-content-center">
+								<input type="text" id="add_category" name="new_category" disabled <?= isset($_SESSION['add_category']) ? 'value="' . $_SESSION['add_category']. '"' : '' ?> >
 							</div>
 							<div class="d-flex flex-column">
 								<label class="label-margin">Enter the date:</label>
@@ -160,6 +163,16 @@ $payment_methods = $financeManager->getUserPaymentCategories();
 					document.getElementById("add_currency").disabled = true;
 					document.getElementById("currency_name").disabled = true;
 				}
+			}
+			
+			function addCategoryIfNeeded() {
+			
+			if (document.getElementById("category").value == "0") {
+				document.getElementById("add_category").disabled = false;
+			} else {
+				document.getElementById("add_category").disabled = true;
+
+			}
 			}
 		</script>
 	</main>

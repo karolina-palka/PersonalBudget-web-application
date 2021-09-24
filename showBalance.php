@@ -79,42 +79,22 @@
 									  <input class="form-check-input" type="checkbox" id="balance_category" value="option1" onclick="setCategory()" >
 									  <label class="form-check-label" for="balance_category">Choose the category (optionally):</label>
 									</div>
-									<select id="category" name="category" disabled >
-										<!--<option value="Transport"> Transport</option>
-										<option value="Books"> Books </option>
-										<option value="Food"> Food </option>
-										<option value="Apartments"> Apartments </option>
-										<option value="Telecommunication"> Telecommunication </option>
-										<option value="Health"> Health </option>
-										<option value="Clothes"> Clothes </option>
-										<option value="Hygiene"> Hygiene </option>
-										<option value="Cosmetics"> Cosmetics </option>
-										<option value="Medicines"> Medicines </option>
-										<option value="Kids"> Kids </option>
-										<option value="Recreation"> Recreation </option>
-										<option value="Trip"> Trip </option>
-										<option value="Savings"> Savings </option>
-										<option value="Debt Repayment"> Debt Repayment </option>
-										<option value="For Retirement"> For Retirement </option>
-										<option value="Gift"> Gift </option>
-										<option value="Another"> Another </option>-->
-										<?php 
-										foreach ($categories as $category) {
-											echo '<option ';
-											if (isset($category['id'])) {
-												echo 'value="' . $category['id']. '" >'.$category['name'].'</option>';
+									<div class="d-flex justify-content-center">
+										<select id="category" name="category" disabled >
+											<?php 
+											foreach ($categories as $category) {
+												echo '<option ';
+												if (isset($category['id'])) {
+													echo 'value="' . $category['id']. '" >'.$category['name'].'</option>';
+												}
 											}
-										}
-										?>
-									  </select>
-
+											?>
+										  </select>
+									</div>
+									
 									<label class="label-margin">Choose currency:</label>
-								
+									<div class="d-flex justify-content-center">
 									<select id="currency_category" name="currency_category" >
-										<!--<option value="PLN"> PLN</option>
-										<option value="EUR"> EUR </option>
-										<option value="USD"> USD </option>
-										<option value="GBP"> GBP </option>-->
 										<?php 
 										foreach ($currency_categories as $currency_category) {
 											echo '<option ';
@@ -124,6 +104,7 @@
 										}
 										?>
 									  </select>
+									 </div>
 								</div>
 
 						</div>	

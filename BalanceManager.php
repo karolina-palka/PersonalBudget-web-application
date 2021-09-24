@@ -50,7 +50,7 @@ Class BalanceManager {
 				$sqlIncomesQuery ="SELECT * FROM incomes as inc LEFT OUTER JOIN incomes_category_assigned_to_users as ass ON inc.income_category_assigned_to_user_id = ass.id WHERE ass.user_id='$user_id' AND date_of_income BETWEEN '$from' AND '$to' AND currency = '$currency' ORDER BY date_of_income ";
 				$sqlExpensesQuery = "SELECT * FROM expenses as exp LEFT OUTER JOIN expenses_category_assigned_to_users as ass ON exp.expense_category_assigned_to_user_id = ass.id WHERE ass.user_id='$user_id' AND date_of_expense BETWEEN '$from' AND '$to' AND currency = '$currency' ORDER BY date_of_expense ";
 			}
-			$currencyQuery = "SELECT acronym FROM currency_category_assigned_to_users WHERE id='$currency'";
+			$currencyQuery = "SELECT acronym FROM currency_assigned_to_users WHERE id='$currency'";
 			 //$incomesQuery = $this->connection->query($sqlIncomesQuery);
  			$this->incomesQuery = $this->returnResultsFromToDatabase($sqlIncomesQuery);
 			$this->expensesQuery = $this->returnResultsFromToDatabase($sqlExpensesQuery);
@@ -87,7 +87,7 @@ Class BalanceManager {
 			return $categories;
 		}
 		function getUserCurrencyCategories() {
-			$categories = $this->getUserCategories('currency_category_assigned_to_users');
+			$categories = $this->getUserCategories('currency_assigned_to_users');
 			return $categories;
 		}
 		

@@ -178,7 +178,7 @@ require_once "Database.php";
 					$this->copyDefaultCategoriesToAssignedToUsers( 'expenses_category_default', 'expenses_category_assigned_to_users');
 					$this->copyDefaultCategoriesToAssignedToUsers( 'incomes_category_default', 'incomes_category_assigned_to_users');
 					$this->copyDefaultCategoriesToAssignedToUsers('payment_methods_default', 'payment_methods_assigned_to_users');
-					//$this->copyDefaultCategoriesToAssignedToUsers("acronym", "currency_category_default", "currency_category_assigned_to_users");
+					//$this->copyDefaultCategoriesToAssignedToUsers("acronym", "currency_category_default", "currency_assigned_to_users");
 					
 					$email = $this->user->getEmail();
 					$userQuery = $this->connection->query("SELECT id FROM users WHERE email='$email'");
@@ -192,7 +192,7 @@ require_once "Database.php";
 						$acronym = $name['acronym'];
 						$name_cat = $name['name'];
 						
-						$this->connection->query("INSERT INTO currency_category_assigned_to_users VALUES(NULL, '$user_id', '$acronym', '$name_cat')");
+						$this->connection->query("INSERT INTO currency_assigned_to_users VALUES(NULL, '$user_id', '$acronym', '$name_cat')");
 					}
 
 					$this->unsaveDataInSession();
