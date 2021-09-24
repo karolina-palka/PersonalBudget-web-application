@@ -20,7 +20,7 @@ $payment_methods = $financeManager->getUserPaymentCategories();
 				<div class="col-12 col-md-3 ml-md-n3 mx-sm-auto mx-md-0" >
 					<div id="sideNav">
 
-						<div class="optionL"><a href="mainMenu.php" class="link" target= "_blank">Home</a></div>
+						<!--<div class="optionL"><a href="mainMenu.php" class="link" target= "_blank">Home</a></div>-->
 						<div class="optionL"><a href="#" class="link" target= "_blank">Saved reports</a></div>
 						<div class="optionL"><a href="#" class="link" target= "_blank">Links</a></div>
 						<div class="optionL"><a href="#" class="link" target= "_blank">Contact</a></div>

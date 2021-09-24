@@ -22,7 +22,8 @@
 		
 	}
 	
-	$categories = $balanceManager->getUserExpenseCategories();
+	$exp_categories = $balanceManager->getUserExpenseCategories();
+	$inc_categories = $balanceManager->getUserIncomeCategories();
 	$currency_categories = $balanceManager->getUserCurrencyCategories();
 
 }
@@ -34,7 +35,7 @@
 				<div class="col-12 col-md-3 ml-md-n3 mx-sm-auto mx-md-0" >
 					<div id="sideNav">
 
-						<div class="optionL"><a href="mainMenu.php" class="link" target= "_blank">Home</a></div>
+						<!--<div class="optionL"><a href="mainMenu.php" class="link" target= "_blank">Home</a></div>-->
 						<div class="optionL"><a href="#" class="link" target= "_blank">Saved reports</a></div>
 						<div class="optionL"><a href="#" class="link" target= "_blank">Links</a></div>
 						<div class="optionL"><a href="#" class="link" target= "_blank">Contact</a></div>
@@ -76,16 +77,42 @@
 								</div>
 								<div class="d-flex flex-column">
 									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" id="balance_category" value="option1" onclick="setCategory()" >
-									  <label class="form-check-label" for="balance_category">Choose the category (optionally):</label>
+									  <input class="form-check-input" type="checkbox" id="choose_exp_category" value="option1" onclick="setExpenseCategory()" <?= isset($_SESSION['exp_category']) ? 'checked' : '' ?>>
+									  <label class="form-check-label" for="choose_exp_category">Choose the expense category (optionally):</label>
 									</div>
 									<div class="d-flex justify-content-center">
-										<select id="category" name="category" disabled >
+										<select id="exp_category" name="exp_category" disabled >
 											<?php 
-											foreach ($categories as $category) {
+											foreach ($exp_categories as $exp_category) {
 												echo '<option ';
-												if (isset($category['id'])) {
-													echo 'value="' . $category['id']. '" >'.$category['name'].'</option>';
+												if (isset($exp_category['id'])) {
+													if ((isset($_SESSION['exp_category'])) && ($_SESSION['exp_category']==($exp_category['id']))) {
+														echo 'selected value="' . $exp_category['id']. '"  >'.$exp_category['name'].'</option>';
+														unset ($_SESSION['exp_category']);
+													} else {
+													echo 'value="' . $exp_category['id']. '" >'.$exp_category['name'].'</option>';
+													}
+												}
+											}
+											?>
+										  </select>
+									</div>
+									<div class="form-check form-check-inline">
+									  <input class="form-check-input" type="checkbox" id="choose_inc_category" value="option1" onclick="setIncomeCategory()" <?= isset($_SESSION['inc_category']) ? 'checked' : '' ?>>
+									  <label class="form-check-label" for="choose_inc_category">Choose the income category (optionally):</label>
+									</div>
+									<div class="d-flex justify-content-center">
+										<select id="inc_category" name="inc_category" disabled >
+											<?php 
+											foreach ($inc_categories as $inc_category) {
+												echo '<option ';
+												if (isset($inc_category['id'])) {
+													if ((isset($_SESSION['inc_category'])) && ($_SESSION['inc_category']==($inc_category['id']))) {
+														echo 'selected value="' . $inc_category['id']. '"  >'.$inc_category['name'].'</option>';
+														unset ($_SESSION['inc_category']);
+													} else {
+													echo 'value="' . $inc_category['id']. '" >'.$inc_category['name'].'</option>';
+													}
 												}
 											}
 											?>
@@ -99,7 +126,12 @@
 										foreach ($currency_categories as $currency_category) {
 											echo '<option ';
 											if (isset($currency_category['id'])) {
-												echo 'value="' . $currency_category['id']. '" >'.$currency_category['acronym'].'</option>';
+												if ((isset($_SESSION['currency'])) && ($_SESSION['currency']==($currency_category['id']))) {
+												echo 'value="' . $currency_category['id']. '" selected>'.$currency_category['acronym'].'</option>';
+												unset($_SESSION['currency']);
+											} else {
+												echo 'value="' . $currency_category['id']. '">'.$currency_category['acronym'].'</option>';
+												}
 											}
 										}
 										?>
@@ -280,6 +312,8 @@
 					
 				}
 				 window.onload = function() {
+					 setIncomeCategory();
+					 setExpenseCategory();
 					 if ( document.getElementById('previous').checked) {
 					 setPreviousMonth();
 					
@@ -290,8 +324,7 @@
 						validateDate();
 					 }
 				 }
-				 
-			 
+
 			 function getFullToday() {
 				 var today = new Date();
 				var year = today.getFullYear();
@@ -342,12 +375,21 @@
 				}
 			}
 			
-			function setCategory() {
-				if (document.getElementById('balance_category').checked) {
-					document.getElementById('category').disabled = false;
+			function setExpenseCategory() {
+				if (document.getElementById('choose_exp_category').checked) {
+					document.getElementById('exp_category').disabled = false;
 					
 				} else {
-					document.getElementById('category').disabled = true;
+					document.getElementById('exp_category').disabled = true;
+				}
+				
+			}
+			function setIncomeCategory() {
+				if (document.getElementById('choose_inc_category').checked) {
+					document.getElementById('inc_category').disabled = false;
+					
+				} else {
+					document.getElementById('inc_category').disabled = true;
 				}
 				
 			}
