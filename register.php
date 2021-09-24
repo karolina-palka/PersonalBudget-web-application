@@ -91,14 +91,7 @@ unset($_SESSION['logged_id']);
 									</div>
 									
 								</div>
-								<div class="g-recaptcha " style="margin-right:auto; margin-left:auto;" data-sitekey="6LeFMg8cAAAAALuUfbPW-VKNtfs-nCc5MX_xhOYb"></div>
-								<?php
-									if(isset($_SESSION['e_bot']))
-									{
-										echo '<div class="error">'.$_SESSION['e_bot'].'</div>';
-										unset($_SESSION['e_bot']);
-									}
-								?>
+							
 								<div class="d-flex flex-column"><div class="d-flex justify-content-center"><input class="d-flex justify-content-center" type="submit" value="Submit"></div></div>
 								
 							</form>	
