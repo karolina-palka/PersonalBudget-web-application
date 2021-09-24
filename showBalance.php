@@ -21,6 +21,7 @@
 		
 		
 	}
+	
 	$categories = $balanceManager->getUserExpenseCategories();
 	$currency_categories = $balanceManager->getUserCurrencyCategories();
 

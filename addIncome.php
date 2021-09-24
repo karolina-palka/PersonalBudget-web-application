@@ -31,12 +31,17 @@ require_once "common_main.php";
 						if(isset($_SESSION['e_date'])) {
 							echo '<div class="error">'.$_SESSION['e_date'].'</div>';
 							unset ($_SESSION['e_date']);
-						}							 
+						}
+						if (isset($_SESSION['e_category'])) {
+							echo '<div class="error">'.$_SESSION['e_category'].'</div>';
+							unset($_SESSION['e_category']);
+						}
+												 
 					?></div>
 						<div class="error" id="result"></div>
 						<!--<div clas="d-inline-flex align-items-center">-->
 						<div class ="d-sm-inline-block d-md-block d-xl-inline-block mx-4 ">
-						
+							
 						
 							<div class=" d-flex mb-2 form-check">
 								  <input class=" form-check-input" type="radio" name="flexRadioDefault" id="current" checked>
@@ -53,7 +58,7 @@ require_once "common_main.php";
 
 							<label class="label-margin">Choose category:</label>
 							<div class="d-flex justify-content-center">
-								<select id="category" name="category" >
+								<select id="category" name="category" onchange="addCategoryIfNeeded()">
 								
 									<?php 
 										foreach ($categories as $category) {
@@ -63,7 +68,12 @@ require_once "common_main.php";
 											}
 										}
 									?>
+									<option value="0"> Add new category </option>
 								</select>
+							</div>
+							<label class="label-margin">or type in new one:</label>
+							<div class="d-flex justify-content-center">
+								<input type="text" id="add_category" name="new_category" disabled <?= isset($_SESSION['add_category']) ? 'value="' . $_SESSION['add_category']. '"' : '' ?> >
 							</div>
 							<label class="label-margin">Choose currency:</label>
 							<div class="d-flex justify-content-center">
@@ -77,10 +87,11 @@ require_once "common_main.php";
 											}
 										}
 									?>
+									<option value="0"> Add new currency </option>
 								</select>
 							</div>
 								
-							<label class="label-margin">Currency:</label>
+							<label class="label-margin">or type in new one:</label>
 							<div class="d-flex justify-content-center">
 								<input type="text" id="add_currency" name="currency_cat" disabled <?= isset($_SESSION['add_currency']) ? 'value="' . $_SESSION['add_currency']. '"' : '' ?> >
 							</div>
@@ -152,6 +163,15 @@ require_once "common_main.php";
 				} else {
 					document.getElementById("add_currency").disabled = true;
 					document.getElementById("currency_name").disabled = true;
+				}
+			}
+			function addCategoryIfNeeded() {
+				
+				if (document.getElementById("category").value == "0") {
+					document.getElementById("add_category").disabled = false;
+				} else {
+					document.getElementById("add_category").disabled = true;
+	
 				}
 			}
 	

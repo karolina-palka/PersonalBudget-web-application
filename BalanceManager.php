@@ -13,11 +13,17 @@ Class BalanceManager {
 	public $currency_acronym;
 	
 	function __construct() {
-		$db = new Database();
-		$this->connection = $db->createConnection();
+		
 		$this->finance = new Finance();
 		$this->user_id = $_SESSION['logged_id'];
+		$this->createConnection();
 	}
+	
+	function createConnection() {
+			$db = new Database();
+			$this->connection = $db->createConnection();
+	}
+		
 	function returnResultsFromToDatabase($sqlQuery) {
 		 $queryResult = $this->connection->query($sqlQuery);
 		 //$results = $queryResult->fetchAll();

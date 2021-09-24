@@ -52,66 +52,74 @@ $payment_methods = $financeManager->getUserPaymentCategories();
 									<span>Expense</span>
 								  </label>
 							</div>
+							 <label class="label-margin">Choose payment method:</label>
+							 <div class="d-flex justify-content-center"><select id="payment_method" name="payment_method" >
+								<!--<option value="Cash"> Cash</option>
+								<option value="Debit Card"> Debit Card </option>
+								<option value="Credit Card"> Credit Card </option>-->
+								<?php 
+									foreach ($payment_methods as $payment_method) {
+										echo '<option ';
+										if (isset($payment_method['id'])) {
+											echo 'value="' . $payment_method['id']. '" >'.$payment_method['name'].'</option>';
+										}
+									}
+								?>
+								</select>
+							 </div>
+							<label class="label-margin">Choose currency:</label>
+							<div class="d-flex justify-content-center">
+								<select id="currency_category" name="currency_category" onchange="addCurrencyIfNeeded()">
+									<!--<option value="PLN"> PLN </option>
+									<option value="EUR"> EUR </option>
+									<option value="USD"> USD </option>
+									<option value="GBP"> GBP </option>-->
+									<?php 
+									foreach ($currency_categories as $currency_category) {
+										echo '<option ';
+										if (isset($currency_category['id'])) {
+											echo 'value="' . $currency_category['id']. '" >'.$currency_category['acronym'].'</option>';
+										}
+									}
+									?>
+									<option value="0"> Add another currency </option>
+								</select>
+							</div>
+							<label class="label-margin">or type in new one:</label>
+								<div class="d-flex justify-content-center">
+									<input type="text" id="add_currency" name="currency_cat" disabled <?= isset($_SESSION['add_currency']) ? 'value="' . $_SESSION['add_currency']. '"' : '' ?> >
+								</div>
+								<label class="label-margin">Name (optionally):</label>
+								<div class="d-flex justify-content-center">
+									<input type="text" id="currency_name"  name="currency_name" disabled <?= isset($_SESSION['currency_name']) ? 'value="' . $_SESSION['currency_name']. '"' : '' ?> >
+								</div>
+						</div>
 
-								<label class="label-margin">Enter the amount:</label>
+							<div class ="d-sm-inline-block d-md-block d-xl-inline-block mx-4 ">
+							<label class="label-margin">Enter the amount:</label>
 									  <div class="d-flex justify-content-center"><input type="number" step="0.01" name="amount" <?= isset($_SESSION['amount']) ? 'value="' . $_SESSION['amount']. '"' : '' ?> > </div>
 								
-								<label class="label-margin">Choose category:</label>
-									  <div class="d-flex justify-content-center"><select id="category" name="category" >
-										<?php 
-										foreach ($categories as $category) {
-											echo '<option ';
-											if (isset($category['id'])) {
-												echo 'value="' . $category['id']. '" >'.$category['name'].'</option>';
-											}
-										}
-										?>
-									  </select>
-									  </div>
-								  <label class="label-margin">Choose payment method:</label>
-								  <div class="d-flex justify-content-center"><select id="payment_method" name="payment_method" >
-									<!--<option value="Cash"> Cash</option>
-									<option value="Debit Card"> Debit Card </option>
-									<option value="Credit Card"> Credit Card </option>-->
-									<?php 
-										foreach ($payment_methods as $payment_method) {
-											echo '<option ';
-											if (isset($payment_method['id'])) {
-												echo 'value="' . $payment_method['id']. '" >'.$payment_method['name'].'</option>';
-											}
-										}
-									?>
-								  </select>
-								  </div>
-								  <label class="label-margin">Choose currency:</label>
-								<div class="d-flex justify-content-center">
-									<select id="currency_category" name="currency_category">
-										<!--<option value="PLN"> PLN </option>
-										<option value="EUR"> EUR </option>
-										<option value="USD"> USD </option>
-										<option value="GBP"> GBP </option>-->
-										<?php 
-										foreach ($currency_categories as $currency_category) {
-											echo '<option ';
-											if (isset($currency_category['id'])) {
-												echo 'value="' . $currency_category['id']. '" >'.$currency_category['acronym'].'</option>';
-											}
-										}
-										?>
-										<option value="0"> Add another currency </option>
-									</select>
-								</div>
+							<label class="label-margin">Choose category:</label>
+							  <div class="d-flex justify-content-center">
+							  <select id="category" name="category" >
+								<?php 
+								foreach ($categories as $category) {
+									echo '<option ';
+									if (isset($category['id'])) {
+										echo 'value="' . $category['id']. '" >'.$category['name'].'</option>';
+									}
+								}
+								?>
+								<option value="0"> Add another currency </option>
+								</select>
 							</div>
-
-						<div class ="d-sm-inline-block d-md-block d-xl-inline-block mx-4 ">
 							<div class="d-flex flex-column">
 								<label class="label-margin">Enter the date:</label>
 								<div class=" d-flex justify-content-center"><input type="date" id="calendar" name="finance_date" onchange="validateDate()"></div>
-							
-							
+				
 							</div>
 							<label class="label-margin">Comments:</label>
-									  <div class="d-flex justify-content-center"><textarea id="comment"  name="comment" rows="4" cols="40"><?= isset($_SESSION['comment']) ? $_SESSION['comment']: '' ?></textarea></div>
+								<div class="d-flex justify-content-center"><textarea id="comment"  name="comment" rows="4" cols="40"><?= isset($_SESSION['comment']) ? $_SESSION['comment']: '' ?></textarea></div>
 							
 							<div class="d-flex justify-content-center"><input type="submit" id="submit" value="Submit"></div>
 							
@@ -141,6 +149,16 @@ $payment_methods = $financeManager->getUserPaymentCategories();
 				} else {
 					document.getElementById('submit').disabled = false;
 					document.getElementById('result').innerHTML = " ";
+				}
+			}
+			function addCurrencyIfNeeded() {
+				
+				if (document.getElementById("currency_category").value == "0") {
+					document.getElementById("add_currency").disabled = false;
+					document.getElementById("currency_name").disabled = false;
+				} else {
+					document.getElementById("add_currency").disabled = true;
+					document.getElementById("currency_name").disabled = true;
 				}
 			}
 		</script>
